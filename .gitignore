@@ -1,0 +1,12 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+.gitignore
+hzmc-weixin.iml
+hzmc-weixin-common/target/
+hzmc-weixin-mp/target/
+hzmc-weixin-admin/target/
+hzmc-weixin-pay/target/
+hzmc-weixin-common/hzmc-weixin-common.iml
+hzmc-weixin-admin/hzmc-weixin-admin.iml
+hzmc-weixin-mp/hzmc-weixin-mp.iml
+hzmc-weixin-pay/hzmc-weixin-pay.iml

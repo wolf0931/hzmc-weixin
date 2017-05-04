@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hzmc-weixin.iml" filepath="$PROJECT_DIR$/hzmc-weixin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hzmc-weixin-admin/hzmc-weixin-admin.iml" filepath="$PROJECT_DIR$/hzmc-weixin-admin/hzmc-weixin-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hzmc-weixin-common/hzmc-weixin-common.iml" filepath="$PROJECT_DIR$/hzmc-weixin-common/hzmc-weixin-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hzmc-weixin-mp/hzmc-weixin-mp.iml" filepath="$PROJECT_DIR$/hzmc-weixin-mp/hzmc-weixin-mp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hzmc-weixin-pay/hzmc-weixin-pay.iml" filepath="$PROJECT_DIR$/hzmc-weixin-pay/hzmc-weixin-pay.iml" />
+    </modules>
+  </component>
+</project>
