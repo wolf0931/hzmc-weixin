@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.hzmc.weixin</groupId>
+    <artifactId>hzmc-weixin</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+    <name>hzmc-weixin Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.compilerVersion>1.7</maven.compiler.compilerVersion>
+
+        <httpclient.version>4.5</httpclient.version>
+        <guava.version>18.0</guava.version>
+        <jackson.version>2.8.6</jackson.version>
+        <woodstox-core.version>5.0.3</woodstox-core.version>
+        <slf4j.version>1.7.12</slf4j.version>
+        <commons-io.version>2.4</commons-io.version>
+        <jsr105.version>1.0.1</jsr105.version>
+
+    </properties>
+
+    <modules>
+        <module>hzmc-weixin-common</module>
+        <module>hzmc-weixin-admin</module>
+        <module>hzmc-weixin-mp</module>
+        <module>hzmc-weixin-pay</module>
+    </modules>
+
+
+</project>
