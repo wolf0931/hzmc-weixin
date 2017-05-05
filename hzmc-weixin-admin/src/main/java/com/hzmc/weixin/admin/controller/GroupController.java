@@ -2,10 +2,12 @@ package com.hzmc.weixin.admin.controller;
 
 import com.hzmc.weixin.admin.base.Result;
 import com.hzmc.weixin.admin.constant.ResultConstant;
-import com.hzmc.weixin.mp.user.Groups;
-import com.hzmc.weixin.mp.user.bean.Group;
+import com.hzmc.weixin.admin.dao.model.Group;
+import com.hzmc.weixin.admin.dao.model.GroupExample;
+import com.hzmc.weixin.admin.service.GroupService;
 import io.swagger.annotations.Api;
 import org.apache.commons.collections.map.HashedMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,11 +23,16 @@ import java.util.Map;
 @RequestMapping("/group")
 public class GroupController {
 
+	@Autowired
+	private GroupService groupService;
+
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public Object getGroups() {
-		List<Group> list = Groups.defaultGroups().list();
-		Map<String,Object> result = new HashedMap();
-		result.put("groups",list);
+		GroupExample groupExample = new GroupExample();
+		List<Group> list = groupService.selectByExample(groupExample);
+		Map<String, Object> result = new HashedMap();
+		result.put("groups", list);
 		return new Result(ResultConstant.SUCCESS, result);
 	}
 

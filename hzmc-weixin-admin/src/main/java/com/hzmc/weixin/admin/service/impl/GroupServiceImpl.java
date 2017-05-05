@@ -12,16 +12,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
-* GroupService实现
-* Created by wph on 2017/5/4.
-*/
+ * GroupService实现
+ * Created by wph on 2017/5/4.
+ */
 @Service
 @Transactional
 public class GroupServiceImpl extends BaseServiceImpl<GroupMapper, Group, GroupExample> implements GroupService {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(GroupServiceImpl.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(GroupServiceImpl.class);
 
-    @Autowired
-    GroupMapper groupMapper;
+	@Autowired
+	GroupMapper groupMapper;
 
+	@Override
+	public Group getGroupByName(String name) {
+		return groupMapper.getGroupByName(name);
+	}
 }
