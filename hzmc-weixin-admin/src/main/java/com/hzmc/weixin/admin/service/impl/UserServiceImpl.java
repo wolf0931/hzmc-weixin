@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
 * UserService实现
 * Created by wph on 2017/4/24.
@@ -28,7 +26,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User, UserExamp
     private UserMapper mapper;
 
     @Override
-    public boolean isLogin(HttpServletRequest request) {
-        return false;
+    public User getUserByNameAndPwd(User user) {
+        return mapper.getUserByNameAndPwd(user);
     }
 }

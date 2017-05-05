@@ -248,4 +248,11 @@
       ctime = #{ctime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getUserByNameAndPwd" parameterType="com.hzmc.weixin.admin.dao.model.User">
+    select * from user
+    where username = #{username,jdbcType=VARCHAR}
+    AND password = #{password,jdbcType=VARCHAR},
+  </select>
+
 </mapper>
