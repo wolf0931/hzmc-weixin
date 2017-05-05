@@ -128,8 +128,6 @@ public class MybatisGeneratorUtil {
 		for (int i = 0; i < tables.size(); i++) {
 			String model = lineToHump(ObjectUtils.toString(tables.get(i).get("table_name")));
 			String service = servicePath + "/" + model + "Service.java";
-			deleteDir(new File(targetProject + "/src/main/java/" + package_name.replaceAll("\\.", "/") +
-					"/Controller/"+ model + "Controller.java"));
 			String serviceMock = servicePath + "/" + model + "ServiceMock.java";
 			String serviceImpl = serviceImplPath + "/" + model + "ServiceImpl.java";
 			String controller = controllerPath + "/" + model + "Controller.java";

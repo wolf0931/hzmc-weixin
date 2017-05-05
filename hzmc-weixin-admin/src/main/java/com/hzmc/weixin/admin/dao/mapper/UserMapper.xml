@@ -5,9 +5,10 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="type" jdbcType="INTEGER" property="type" />
     <result column="realname" jdbcType="VARCHAR" property="realname" />
     <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="ctime" jdbcType="VARCHAR" property="ctime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, type, realname, salt
+    id, username, password, type, realname, salt, ctime
   </sql>
   <select id="selectByExample" parameterType="com.hzmc.weixin.admin.dao.model.UserExample" resultMap="BaseResultMap">
     select
@@ -113,9 +114,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into user (username, password, type, 
-      realname, salt)
-    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
-      #{realname,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR})
+      realname, salt, ctime
+      )
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{realname,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{ctime,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.hzmc.weixin.admin.dao.model.User">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -138,6 +141,9 @@
       <if test="salt != null">
         salt,
       </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="username != null">
@@ -147,13 +153,16 @@
         #{password,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
-        #{type,jdbcType=TINYINT},
+        #{type,jdbcType=INTEGER},
       </if>
       <if test="realname != null">
         #{realname,jdbcType=VARCHAR},
       </if>
       <if test="salt != null">
         #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -176,13 +185,16 @@
         password = #{record.password,jdbcType=VARCHAR},
       </if>
       <if test="record.type != null">
-        type = #{record.type,jdbcType=TINYINT},
+        type = #{record.type,jdbcType=INTEGER},
       </if>
       <if test="record.realname != null">
         realname = #{record.realname,jdbcType=VARCHAR},
       </if>
       <if test="record.salt != null">
         salt = #{record.salt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -194,9 +206,10 @@
     set id = #{record.id,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=TINYINT},
+      type = #{record.type,jdbcType=INTEGER},
       realname = #{record.realname,jdbcType=VARCHAR},
-      salt = #{record.salt,jdbcType=VARCHAR}
+      salt = #{record.salt,jdbcType=VARCHAR},
+      ctime = #{record.ctime,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -211,13 +224,16 @@
         password = #{password,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
-        type = #{type,jdbcType=TINYINT},
+        type = #{type,jdbcType=INTEGER},
       </if>
       <if test="realname != null">
         realname = #{realname,jdbcType=VARCHAR},
       </if>
       <if test="salt != null">
         salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -226,9 +242,10 @@
     update user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      type = #{type,jdbcType=TINYINT},
+      type = #{type,jdbcType=INTEGER},
       realname = #{realname,jdbcType=VARCHAR},
-      salt = #{salt,jdbcType=VARCHAR}
+      salt = #{salt,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

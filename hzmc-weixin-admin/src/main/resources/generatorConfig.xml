@@ -51,8 +51,11 @@
         <javaClientGenerator targetPackage="com.hzmc.weixin.admin.dao.mapper" targetProject="hzmc-weixin-admin/src/main/java" type="XMLMAPPER" />
 
         <!-- 需要映射的表 -->
-                                                                                <table tableName="user" domainObjectName="User">
+                                                                                <table tableName="group" domainObjectName="Group"></table>
+                                                                                                                                <table tableName="tag" domainObjectName="Tag"></table>
+                                                                                                                                <table tableName="user" domainObjectName="User">
                             <generatedKey column="id" sqlStatement="MySql" identity="true" />
                         </table>
+                                                                                                                                <table tableName="wx_user" domainObjectName="WxUser"></table>
                                                             </context>
 </generatorConfiguration>

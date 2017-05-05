@@ -3,6 +3,7 @@ package ${package_name}.service;
 import ${package_name}.base.BaseService;
 import ${package_name}.dao.model.${model};
 import ${package_name}.dao.model.${model}Example;
+import  ${package_name}.service.${model}Service;
 
 /**
 * ${model}Service接口

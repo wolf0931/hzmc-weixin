@@ -337,52 +337,52 @@ public class UserExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andTypeEqualTo(Byte value) {
+        public Criteria andTypeEqualTo(Integer value) {
             addCriterion("type =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotEqualTo(Byte value) {
+        public Criteria andTypeNotEqualTo(Integer value) {
             addCriterion("type <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThan(Byte value) {
+        public Criteria andTypeGreaterThan(Integer value) {
             addCriterion("type >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThanOrEqualTo(Byte value) {
+        public Criteria andTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("type >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThan(Byte value) {
+        public Criteria andTypeLessThan(Integer value) {
             addCriterion("type <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThanOrEqualTo(Byte value) {
+        public Criteria andTypeLessThanOrEqualTo(Integer value) {
             addCriterion("type <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIn(List<Byte> values) {
+        public Criteria andTypeIn(List<Integer> values) {
             addCriterion("type in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotIn(List<Byte> values) {
+        public Criteria andTypeNotIn(List<Integer> values) {
             addCriterion("type not in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeBetween(Byte value1, Byte value2) {
+        public Criteria andTypeBetween(Integer value1, Integer value2) {
             addCriterion("type between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotBetween(Byte value1, Byte value2) {
+        public Criteria andTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
@@ -524,6 +524,76 @@ public class UserExample implements Serializable {
 
         public Criteria andSaltNotBetween(String value1, String value2) {
             addCriterion("salt not between", value1, value2, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeIsNull() {
+            addCriterion("ctime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeIsNotNull() {
+            addCriterion("ctime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeEqualTo(String value) {
+            addCriterion("ctime =", value, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeNotEqualTo(String value) {
+            addCriterion("ctime <>", value, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeGreaterThan(String value) {
+            addCriterion("ctime >", value, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeGreaterThanOrEqualTo(String value) {
+            addCriterion("ctime >=", value, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeLessThan(String value) {
+            addCriterion("ctime <", value, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeLessThanOrEqualTo(String value) {
+            addCriterion("ctime <=", value, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeLike(String value) {
+            addCriterion("ctime like", value, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeNotLike(String value) {
+            addCriterion("ctime not like", value, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeIn(List<String> values) {
+            addCriterion("ctime in", values, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeNotIn(List<String> values) {
+            addCriterion("ctime not in", values, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeBetween(String value1, String value2) {
+            addCriterion("ctime between", value1, value2, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeNotBetween(String value1, String value2) {
+            addCriterion("ctime not between", value1, value2, "ctime");
             return (Criteria) this;
         }
     }

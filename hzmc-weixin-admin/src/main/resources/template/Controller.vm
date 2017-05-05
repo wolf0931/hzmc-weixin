@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Api(value = "${model}控制器", description = "${model}管理")
 public class ${model}Controller extends BaseController {
 
-private templates.static Logger _log = LoggerFactory.getLogger(${model}Controller.class);
-
+    private static Logger LOGGER = LoggerFactory.getLogger(${model}Controller.class);
 
 }

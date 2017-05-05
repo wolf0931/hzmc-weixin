@@ -7,6 +7,7 @@ import com.hzmc.weixin.admin.base.Result;
 import com.hzmc.weixin.admin.constant.ResultConstant;
 import com.hzmc.weixin.admin.dao.model.User;
 import com.hzmc.weixin.admin.service.UserService;
+import com.hzmc.weixin.admin.service.WxUserService;
 import com.hzmc.weixin.admin.util.MD5Util;
 import com.hzmc.weixin.admin.util.validator.LengthValidator;
 import com.hzmc.weixin.admin.util.validator.NotNullValidator;
@@ -43,6 +44,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private WxUserService wxUserService;
+
 	@RequestMapping(value = "/{curPage}/{curSize}", method = RequestMethod.GET)
 	@ApiOperation(value = "获取微信公众号关注的用户列表")
 	public Object getUserList(@PathVariable Integer curPage, @PathVariable Integer curSize) {
@@ -58,8 +62,8 @@ public class UserController {
 			userList.add(user);
 		}
 		Map<String, Object> result = new HashedMap();
-		result.put("users",userList);
-		return new Result(ResultConstant.SUCCESS,result);
+		result.put("users", userList);
+		return new Result(ResultConstant.SUCCESS, result);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -78,10 +82,10 @@ public class UserController {
 		String salt = UUID.randomUUID().toString().replaceAll("-", "");
 		user.setSalt(salt);
 		user.setPassword(MD5Util.MD5(user.getPassword() + user.getSalt()));
-		user.setCtime(time);
+		user.setCtime(String.valueOf(time));
 		int count = userService.insert(user);
 		_log.info("新增用户，主键：userId={}", user.getId());
 		return new Result(ResultConstant.SUCCESS, count);
-
 	}
+
 }

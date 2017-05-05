@@ -13,7 +13,7 @@ public class User implements Serializable {
     private String username;
 
     /**
-     * 密码
+     * 密码MD5(密码+盐)
      *
      * @mbg.generated
      */
@@ -24,7 +24,7 @@ public class User implements Serializable {
      *
      * @mbg.generated
      */
-    private int type;
+    private Integer type;
 
     /**
      * 真实姓名
@@ -33,6 +33,11 @@ public class User implements Serializable {
      */
     private String realname;
 
+    /**
+     * 盐
+     *
+     * @mbg.generated
+     */
     private String salt;
 
     /**
@@ -40,8 +45,7 @@ public class User implements Serializable {
      *
      * @mbg.generated
      */
-    private Long ctime;
-
+    private String ctime;
 
     private static final long serialVersionUID = 1L;
 
@@ -69,11 +73,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -93,11 +97,11 @@ public class User implements Serializable {
         this.salt = salt;
     }
 
-    public Long getCtime() {
+    public String getCtime() {
         return ctime;
     }
 
-    public void setCtime(Long ctime) {
+    public void setCtime(String ctime) {
         this.ctime = ctime;
     }
 
