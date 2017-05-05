@@ -40,14 +40,14 @@ public class ApplicationEventListener implements ApplicationListener {
 			LOGGER.info("应用刷新");
 		} else if (event instanceof ApplicationReadyEvent) {
 			LOGGER.info("启动已完成");
-			new Thread(new Runnable() {
+			/*new Thread(new Runnable() {
 				@Override
 				public void run() {
 					LOGGER.info("开始插入数据");
-					insertGroupDb();
+					//insertGroupDb();
 					//insertUserDb();
 				}
-			}).start();
+			}).start();*/
 		} else if (event instanceof ContextClosedEvent) {
 			LOGGER.info("应用关闭");
 		}

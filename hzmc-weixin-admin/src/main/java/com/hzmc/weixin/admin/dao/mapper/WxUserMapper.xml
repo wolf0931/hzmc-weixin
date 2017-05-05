@@ -384,4 +384,7 @@
     <select id="getWxUserByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
       SELECT * FROM wx_user WHERE openid = #{openId,jdbcType=VARCHAR}
     </select>
+    <select id="getWxUserListByGroupId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM wx_user WHERE groupid = #{groupId,jdbcType=VARCHAR}
+    </select>
 </mapper>

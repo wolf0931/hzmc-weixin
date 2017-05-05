@@ -20,7 +20,7 @@ public class OauthController {
 	@Autowired
 	private RedPayService redPayService;
 
-	@RequestMapping(value = "/",method = RequestMethod.GET)
+	@RequestMapping(value = "",method = RequestMethod.GET)
 	public void Oauth(){
 		redPayService.sendSingleRed(new RedPackRequest());
 	}
