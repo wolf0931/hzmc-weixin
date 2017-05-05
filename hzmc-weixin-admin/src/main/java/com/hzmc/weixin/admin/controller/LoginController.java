@@ -5,7 +5,6 @@ import com.hzmc.weixin.admin.base.Result;
 import com.hzmc.weixin.admin.constant.ResultConstant;
 import com.hzmc.weixin.admin.dao.model.User;
 import com.hzmc.weixin.admin.service.UserService;
-import com.hzmc.weixin.admin.util.AESUtil;
 import com.hzmc.weixin.admin.util.MD5Util;
 import io.swagger.annotations.Api;
 import org.apache.commons.lang.StringUtils;
@@ -40,12 +39,15 @@ public class LoginController extends BaseController {
 		if (StringUtils.isBlank(password)) {
 			return new Result(ResultConstant.EMPTY_PASSWORD, "密码不能为空！");
 		}
-		user.setPassword(AESUtil.AESDecode(user.getPassword()));
+		String salt = UUID.randomUUID().toString().replaceAll("-", "");
+		user.setCtime(salt);
+		user.setPassword(MD5Util.MD5(user.getPassword()));
 		User user1 = userService.getUserByNameAndPwd(user);
 		if (user1 == null) {
 			return new Result(ResultConstant.FAILED, "用户不存在或密码不正确");
+		}else {
+			return new Result(ResultConstant.SUCCESS, "登录成功");
 		}
-		return null;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -62,7 +64,7 @@ public class LoginController extends BaseController {
 		long time = System.currentTimeMillis();
 		String salt = UUID.randomUUID().toString().replaceAll("-", "");
 		user.setSalt(salt);
-		user.setPassword(MD5Util.MD5(user.getPassword() + user.getSalt()));
+		user.setPassword(MD5Util.MD5(user.getPassword()));
 		user.setCtime(String.valueOf(time));
 		return userService.insertSelective(user);
 	}
