@@ -1,0 +1,63 @@
+body{
+    background: linear-gradient(-45deg,#53a0fd,#3123ae) no-repeat;
+    background: -moz-linear-gradient(right bottom,#53a0fd,#3123ae) no-repeat;
+    background: -ms-linear-gradient(-45deg,#53a0fd,#3123ae);
+    FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#53a0fd,endColorStr=#3123ae);
+}
+.container-fluid{
+    width: 100%;
+}
+.w-bgc{
+    height: 350px;
+    background-color: #fff;
+    position: relative;
+    margin: 150px 0 0 37.5%;
+}
+.title{
+	text-align:center;
+	font-size:28px;
+	font-weight:bold;
+}
+.form-group-style{
+    border-bottom:2px solid #979797;
+    color: #2c3134;
+    font-size: 16px;
+}
+form{
+	margin-top:45px;
+}
+form input{
+    border:0;
+    box-shadow: none;
+    margin-top: 0;
+}
+label{
+    text-align: center;
+}
+input:focus{
+    outline: 0;
+}
+.form-group a{
+    font-size: 12px;
+    color: #008dd7;
+    text-decoration: underline;
+}
+.form-group a:hover{
+    color: #008dd7;
+}
+.btn-style{
+    height: 50px;
+    font-size: 20px;
+    color: #fff;
+    background-color: #5097f7;
+    margin-top: 9%;
+}
+.btn:hover{
+    color: #fff;
+}
+.empty,.wrong{
+    position: absolute;
+    top: 100px;
+    left: 35%;
+    display: none;
+}

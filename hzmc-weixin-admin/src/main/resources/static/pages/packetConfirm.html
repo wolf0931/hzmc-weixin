@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>杭州美创微信管理平台</title>
+ 	<link rel="stylesheet" type="text/css" href="../css/lib/bootstrap_3.3.6.min.css">
+ 	<link rel="stylesheet" type="text/css" href="../css/main.css">
+<style>
+	#main_container{
+		text-align:center;
+	}
+	#main_container form{
+		width:54%;
+		margin:30px auto;
+	} 
+	.comfirmInfo{
+		width:100%;
+	}
+	td{
+		padding:30px 0;
+		text-align:center;
+		border:1px solid #000;
+	}
+	.lableGroup{
+		width:50%;
+		text-align:left;
+		margin:5px auto;
+	}
+	lable{
+		display:inline-block;
+		width:100px;
+		text-align:center;
+	}
+	#minAccount,#maxAccount{
+		width:50px;
+	}
+	#startDate,#endDate{
+		width:130px;
+	}
+	.button{
+		width:80px;
+		height:40px;
+		color:#fff;
+		font-size:16px;
+		background:#50B8EC;
+		border-radius:10px;
+		border:0;
+		cursor:pointer;
+	}
+</style>
+
+</head>
+<body ng-app=''>
+<!-- 菜单 -->
+ <div ng-include="'../header.html'"></div>
+<!-- 菜单 end-->
+
+
+<div style="clear: both"></div>
+<div id="main"> 
+    <div id="main_container">
+    	<form>
+		    <table class='comfirmInfo'>
+		    	<tr>
+		    		<td>红包设置</td>
+		    		<td>
+		    			<div class='lableGroup'>
+		    				<lable for='activeName'>活动名：</lable>
+		    				<input id='activeName'>
+		    			</div>
+		    			<div class='lableGroup'>
+		    				<lable for='sum'>红包总金额：</lable>
+		    				<input id='sum'>
+		    			</div>
+		    			<div class='lableGroup'>
+		    				<lable for='number'>红包数量：</lable>
+		    				<input id='number'>
+		    			</div>
+		    			<div class='lableGroup'>
+		    				<lable>红包金额范围：</lable>
+		    				<input id='minAccount'>~<input id='maxAccount'>
+		    			</div>
+		    			<div class='lableGroup'>
+		    				<lable>活动时间：</lable>
+		    				<input type='date' id='startDate'>~<input type='date' id='endDate'>
+		    			</div>
+		    			<div class='lableGroup'>
+		    				<lable for='rate'>中奖率：</lable>
+		    				<input id='rate' type='number' max='1' min='0'>
+		    			</div>
+		    			<div class='lableGroup'>
+		    				<lable for='introduce'>活动说明：</lable>
+		    				<textarea id='introduce' style="resize:none" cols='40' rows='5'></textarea>
+		    			</div>
+		    		</td>
+		    	</tr>
+		    	<tr>
+		    		<td colspan='2'>
+		    			<button type='submit' class='button'>提交</button>
+		    		</td>
+		    	</tr>
+		    </table>
+		</form>
+    </div>
+
+</div>
+
+
+ 	<script src="../js/lib/jquery_1.11.3.min.js"></script>
+    <script src="../js/lib/bootstrap_3.3.6.min.js"></script>
+    <script src="../js/lib/angular.min.js"></script>
+</body>
+</html>

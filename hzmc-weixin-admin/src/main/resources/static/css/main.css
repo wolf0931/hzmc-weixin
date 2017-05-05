@@ -1,0 +1,378 @@
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+}
+ul,ol{
+    list-style-type: none;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.clear{
+    clear: both;
+}
+.display{
+    display: none;
+}
+.danger{
+    font-size: 12px;
+    color: #d70000;
+}
+.danger .active{
+    display: inline-block;
+}
+.navbar{
+    height: 60px;
+    background: #5097f7;
+    color: #fff;
+}
+.navbar-header{
+    width: 300px;
+}
+@media screen and (max-width: 792px) {
+    .navbar-header h3{
+        display: none;
+    }
+}
+#logo{
+    display: inline-block;
+    width: 75px;
+    height: 25px;
+    background: url("../images/logo-w.png") no-repeat;
+    background-size: cover;
+    margin-top: 19px;
+    margin-left: 40px;
+    margin-right: 10px;
+}
+.navbar-header h3{
+    font-size: 20px;
+}
+.navbar a{
+    color: #fff;
+}
+.caret{
+    display: inline-block;
+    width: 10px;
+    height: 5px;
+    padding: 0;
+    border: 0;
+    margin:0;
+    margin-left: 4px;
+    background: url("../images/dropdown-w.png");
+}
+.dropdown{
+    text-align: right;
+    margin-right: 20px;
+    margin-top: 20px;
+    position: relative;
+}
+.dropdown:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.dropdown a{
+    font-size: 16px;
+}
+.icon{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin:10px 4px 0px 12px;
+}
+.title{
+    font-size: 16px;
+    color: #5097f7;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+.dropdown-menu{
+    min-width:88px;
+    height: 78px;
+    font-size: 13px;
+    background: #5097f7;
+    border:0;
+    position: absolute;
+    top: 36px;
+    left: 70px;
+}
+.dropdown-menu li{
+    text-align: center;
+}
+.dropdown-menu .divider{
+    margin:5px 0;
+}
+.icon-lock{
+    background: url("../images/lock.png");
+}
+.icon-quit{
+    background: url("../images/quit.png");
+}
+.center{
+    width: 900px;
+    min-height: 164px;
+    border:1px solid #d8dee5;
+    margin:10px auto;
+    text-align: center;
+    clear: both;
+}
+#views{
+    padding: 10px;
+}
+.info{
+    display: inline-block;
+    margin:5px 0;
+}
+.parent{
+    position: relative;
+    float: left;
+    left: 50%;
+}
+.child{
+    position: relative;
+    float: left;
+    left: -50%;
+}
+.step{
+    height:44px;
+    text-align: center;
+    margin-top:50px;
+    margin-bottom: 30px;
+    padding-left: 55px;
+}
+.step ul{
+    text-align: center;
+}
+.step ul:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.step .step-name{
+    padding: 0;
+    margin: 0;
+}
+.step .step-name li{
+    width:142px;
+    font-size: 14px;
+    color: #d8dee5;
+    text-align: center;
+}
+.step .step-name li.active-name{
+    width:133px;
+    color:#5097f7;
+}
+.step .step-icon{
+    margin-top: 10px;
+    padding-left:55px;
+}
+.step .step-icon li{
+    height:14px;
+    margin:0 3px;
+}
+.step .step-icon li span.active-icon{
+     display: inline-block;
+     width: 28px;
+     height: 28px;
+     background: url("../image/prograss-now.png");
+}
+.step .step-icon li span.success-icon{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background: url("../image/success-blue.png") no-repeat;
+    background-size: cover;
+    margin-top: 5px;
+}
+.step .step-icon li span.active-line{
+    display: inline-block;
+    width: 99px;
+    border-top:2px solid #d8dee5;
+}
+.step .step-icon li span.success-line{
+    display: inline-block;
+    width: 99px;
+    border-top:2px solid #5097f7;
+}
+.step .step-icon li span.icon{
+    display: inline-block;
+    width:8px;
+    height:8px;
+    border:4px solid #d8dee5;
+    border-radius: 50%;
+}
+.step .step-icon li span.line{
+    display: inline-block;
+    width: 105px;
+    border-top:2px solid #d8dee5;
+}
+.table{
+    width: 860px;
+    max-height:369px;
+    margin: 0 auto;
+    border:1px solid #979FA2;
+}
+.page{
+    width: 70%;
+    color: #7c8693;
+    margin: 0 auto;
+    padding: 20px 0 26px 70px;
+}
+.page:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.pager{
+    width: 20px;
+    height: 20px;
+    border:1px solid #7c8693;
+    cursor: pointer;
+    margin: 0;
+}
+.page .first-pager{
+    margin-left: 8px;
+}
+.page .last-pager{
+    margin-right: 8px;
+}
+.page input{
+    width: 42px;
+    height: 18px;
+}
+.page button{
+    width:26px;
+    height:18px;
+    line-height: 18px;
+    font-size: 14px;
+    padding: 0;
+    background: #5097F7;
+    color: #fff;
+}
+.page .pager.active{
+    background: #5097F7;
+    border:1px solid #008DD7;
+    color: #fff;
+}
+.btn-event{
+    width: 100px;
+    height: 30px;
+    background-color: #5097F7;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 40px;
+    margin-right: 120px;
+}
+.btn-event span{
+    line-height: 30px;
+}
+.disabled{
+    background-color: #D8DEE5;
+}
+.cover{
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top:0;
+    z-index: 10;
+    background: #2a2d31;
+    opacity: .8;
+}
+.add-container{
+    background: #fff;
+    z-index: 20;
+    position: absolute;
+    top: 120px;
+}
+.close{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("../image/close.png");
+    margin-right: 30px;
+    margin-top: 15px;
+}
+.add-main{
+    margin:30px 40px 0;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    background: #fafafa;
+    border:2px solid #D7DBDE;
+}
+label{
+    text-align: right;
+    padding-left: 0;
+}
+.makeSure{
+    width: 196px;
+    height: 74px;
+    position: absolute;
+    top:0;
+    right: -1px;
+    border:1px solid #d70000;
+    color: #d70000;
+    background-color: #fff9f9;
+    padding-top: 10px;
+    padding-left: 10px;
+    z-index: 10;
+}
+.makeSure div{
+    margin-top: 12px;
+}
+.btn-delete{
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+    background: #d70000;
+    color: #fff;
+    margin-right: 10px;
+}
+.btn-giveUp{
+    line-height: 20px;
+    color: #4e4040;
+    margin-right: 10px;
+}
+div.navbar{
+    height: 50px;
+    border-radius: 0;
+}
+div.navbar h4{
+    font-size: 18px;
+    margin-left: 30px;
+    margin-top: 15px;
+}
+.add-btn{
+    width: 80px;
+    height: 30px;
+    margin:30px 40px 10px 0;
+    padding-top: 5px;
+}
+.giveUp{
+    font-size: 14px;
+    color: #5097f7;
+    cursor: pointer;
+    margin-top: 35px;
+    margin-right: 10px;
+}
+form input{
+    width: 300px;
+    height: 30px;
+    margin: 10px 10px 0 10px;
+    box-shadow: 0 1px 3px #2a2d31 inset;
+}
+textarea{
+	margin-left: 10px;
+}
+.no-padding{
+    padding: 0;
+}
+.btn:focus{
+    color: #fff;
+}
