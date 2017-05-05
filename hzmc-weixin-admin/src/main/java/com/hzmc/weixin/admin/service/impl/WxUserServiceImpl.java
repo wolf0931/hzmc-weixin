@@ -12,16 +12,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
-* WxUserService实现
-* Created by wph on 2017/5/4.
-*/
+ * WxUserService实现
+ * Created by wph on 2017/5/4.
+ */
 @Service
 @Transactional
 public class WxUserServiceImpl extends BaseServiceImpl<WxUserMapper, WxUser, WxUserExample> implements WxUserService {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(WxUserServiceImpl.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(WxUserServiceImpl.class);
 
-    @Autowired
-    WxUserMapper wxUserMapper;
+	@Autowired
+	WxUserMapper wxUserMapper;
 
+	@Override
+	public WxUser getWxUserByOpenId(String openId) {
+
+		return wxUserMapper.getWxUserByOpenId(openId);
+	}
 }

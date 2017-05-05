@@ -3,15 +3,14 @@ package com.hzmc.weixin.admin.util;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 /**
  * 资源文件读取工具
- *
  */
-@ComponentScan
+@Component
 public class SpringContextUtil implements ApplicationContextAware {
 
 	private static ApplicationContext context = null;
@@ -27,6 +26,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 
 	/**
 	 * 根据名称获取bean
+	 *
 	 * @param beanName
 	 * @return
 	 */
@@ -36,14 +36,17 @@ public class SpringContextUtil implements ApplicationContextAware {
 
 	/**
 	 * 根据bean名称获取指定类型bean
+	 *
 	 * @param beanName bean名称
-	 * @param clazz 返回的bean类型,若类型不匹配,将抛出异常
+	 * @param clazz    返回的bean类型,若类型不匹配,将抛出异常
 	 */
 	public static <T> T getBean(String beanName, Class<T> clazz) {
 		return context.getBean(beanName, clazz);
 	}
+
 	/**
 	 * 根据类型获取bean
+	 *
 	 * @param clazz
 	 * @return
 	 */
@@ -58,6 +61,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 
 	/**
 	 * 是否包含bean
+	 *
 	 * @param beanName
 	 * @return
 	 */
@@ -67,6 +71,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 
 	/**
 	 * 是否是单例
+	 *
 	 * @param beanName
 	 * @return
 	 */
@@ -76,6 +81,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 
 	/**
 	 * bean的类型
+	 *
 	 * @param beanName
 	 * @return
 	 */

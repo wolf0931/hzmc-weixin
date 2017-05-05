@@ -20,7 +20,7 @@ import java.util.List;
  * Created by wph on 2017/5/4.
  */
 
-public class ApplicationEventListener implements ApplicationListener{
+public class ApplicationEventListener implements ApplicationListener {
 
 	private static Logger LOGGER = Logger.getLogger(ApplicationEventListener.class);
 
@@ -34,22 +34,23 @@ public class ApplicationEventListener implements ApplicationListener{
 			LOGGER.info("应用刷新");
 		} else if (event instanceof ApplicationReadyEvent) {
 			LOGGER.info("启动已完成");
-			//insertDb();
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					LOGGER.info("开始插入数据");
+					insertDb();
+				}
+			}).start();
 		} else if (event instanceof ContextClosedEvent) {
 			LOGGER.info("应用关闭");
 		}
 	}
 
-
-	/*@Override
-	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-		insertDb();
-	}*/
-
-
 	private void insertDb() {
 		WxUserService wxUserService = SpringContextUtil.getBean(WxUserService.class);
 		UserPagination userPagination = Users.defaultUsers().list();
+		int count = userPagination.getCount();
+		int sqlCount = wxUserService.countByExample(null);
 		List<String> users = userPagination.getUsers();
 		for (String opeonId : users) {
 			com.hzmc.weixin.mp.user.bean.User user = Users.defaultUsers().get(opeonId);
@@ -80,7 +81,14 @@ public class ApplicationEventListener implements ApplicationListener{
 				}
 			}
 			wxUser.setTagidList(sb.toString());
-			wxUserService.insert(wxUser);
+			WxUser wxUser1 = wxUserService.getWxUserByOpenId(opeonId);
+			if (wxUser1 != null) {
+				LOGGER.info("数据已存在");
+			} else {
+				LOGGER.info("添加数据");
+				wxUserService.insertSelective(wxUser);
+			}
+
 		}
 	}
 }
