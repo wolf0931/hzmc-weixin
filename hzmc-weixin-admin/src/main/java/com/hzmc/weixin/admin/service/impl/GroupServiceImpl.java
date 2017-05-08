@@ -1,9 +1,9 @@
 package com.hzmc.weixin.admin.service.impl;
 
 import com.hzmc.weixin.admin.base.BaseServiceImpl;
-import com.hzmc.weixin.admin.dao.mapper.GroupMapper;
-import com.hzmc.weixin.admin.dao.model.Group;
-import com.hzmc.weixin.admin.dao.model.GroupExample;
+import com.hzmc.weixin.admin.dao.mapper.WxGroupMapper;
+import com.hzmc.weixin.admin.dao.model.WxGroup;
+import com.hzmc.weixin.admin.dao.model.WxGroupExample;
 import com.hzmc.weixin.admin.service.GroupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,15 +17,15 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class GroupServiceImpl extends BaseServiceImpl<GroupMapper, Group, GroupExample> implements GroupService {
+public class GroupServiceImpl extends BaseServiceImpl<WxGroupMapper, WxGroup, WxGroupExample> implements GroupService {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(GroupServiceImpl.class);
 
 	@Autowired
-	GroupMapper groupMapper;
+	WxGroupMapper groupMapper;
 
 	@Override
-	public Group getGroupByName(String name) {
+	public WxGroup getGroupByName(String name) {
 		return groupMapper.getGroupByName(name);
 	}
 }

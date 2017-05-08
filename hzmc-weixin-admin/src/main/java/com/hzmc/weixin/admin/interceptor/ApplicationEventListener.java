@@ -57,7 +57,7 @@ public class ApplicationEventListener implements ApplicationListener {
 		GroupService groupService = SpringContextUtil.getBean(GroupService.class);
 		List<Group> groups = Groups.defaultGroups().list();
 		for (Group g : groups) {
-			com.hzmc.weixin.admin.dao.model.Group group = new com.hzmc.weixin.admin.dao.model.Group();
+			com.hzmc.weixin.admin.dao.model.WxGroup group = new com.hzmc.weixin.admin.dao.model.WxGroup();
 			group.setId(g.getId());
 			group.setCount(g.getCount());
 			group.setName(g.getName());

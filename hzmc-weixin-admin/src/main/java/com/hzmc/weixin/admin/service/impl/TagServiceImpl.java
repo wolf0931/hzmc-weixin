@@ -1,9 +1,9 @@
 package com.hzmc.weixin.admin.service.impl;
 
 import com.hzmc.weixin.admin.base.BaseServiceImpl;
-import com.hzmc.weixin.admin.dao.mapper.TagMapper;
-import com.hzmc.weixin.admin.dao.model.Tag;
-import com.hzmc.weixin.admin.dao.model.TagExample;
+import com.hzmc.weixin.admin.dao.mapper.WxTagMapper;
+import com.hzmc.weixin.admin.dao.model.WxTag;
+import com.hzmc.weixin.admin.dao.model.WxTagExample;
 import com.hzmc.weixin.admin.service.TagService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 */
 @Service
 @Transactional
-public class TagServiceImpl extends BaseServiceImpl<TagMapper, Tag, TagExample> implements TagService {
+public class TagServiceImpl extends BaseServiceImpl<WxTagMapper, WxTag, WxTagExample> implements TagService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(TagServiceImpl.class);
 
     @Autowired
-    TagMapper tagMapper;
+    WxTagMapper tagMapper;
 
 }

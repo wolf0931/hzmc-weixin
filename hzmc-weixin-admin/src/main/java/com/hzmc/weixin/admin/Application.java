@@ -13,6 +13,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
 import static com.hzmc.weixin.admin.util.SpringContextUtil.getBean;
 
 @SpringBootApplication
+@EnableScheduling
 public class Application extends SpringBootServletInitializer {
 	private static Logger LOGGER = Logger.getLogger(SpringBootServletInitializer.class);
 
@@ -33,17 +35,21 @@ public class Application extends SpringBootServletInitializer {
 	}
 
 
+	@Scheduled(fixedRate = 30 * 1000)
+	private void initGroupDate() {
+		//insertGroupDb();
+	}
+
 	@Scheduled(fixedRate = 60 * 1000)
-	private void initDate() {
-		insertGroupDb();
-		insertUserDb();
+	private void initUserDate() {
+		//insertUserDb();
 	}
 
 	private void insertGroupDb() {
 		GroupService groupService = getBean(GroupService.class);
 		List<Group> groups = Groups.defaultGroups().list();
 		for (Group g : groups) {
-			com.hzmc.weixin.admin.dao.model.Group group = new com.hzmc.weixin.admin.dao.model.Group();
+			com.hzmc.weixin.admin.dao.model.WxGroup group = new com.hzmc.weixin.admin.dao.model.WxGroup();
 			group.setId(g.getId());
 			group.setCount(g.getCount());
 			group.setName(g.getName());

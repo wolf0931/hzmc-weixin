@@ -36,7 +36,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("/user")
-@Api(value = "用户控制器", description = "微信用户管理")
+@Api(value = "微信用户控制器", description = "微信用户管理")
 public class UserController {
 
 	private static Logger _log = LoggerFactory.getLogger(UserController.class);

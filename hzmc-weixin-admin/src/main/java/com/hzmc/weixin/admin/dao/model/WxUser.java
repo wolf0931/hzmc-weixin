@@ -22,6 +22,11 @@ public class WxUser implements Serializable {
 
     private String openid;
 
+    /**
+     * 昵称
+     *
+     * @mbg.generated
+     */
     private String nickname;
 
     private String headimgurl;
