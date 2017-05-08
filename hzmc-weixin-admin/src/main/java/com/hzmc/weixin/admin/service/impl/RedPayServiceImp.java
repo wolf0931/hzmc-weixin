@@ -64,7 +64,7 @@ public class RedPayServiceImp implements RedPayService {
 			wxPayRecord.setTotalAmount(redPackResponse.getAmount());
 			wxPayRecord.setWxappid(PaySetting.defaultSetting().getAppId());
 			wxPayRecord.setCtime(String.valueOf(System.currentTimeMillis()));
-			wxPayRecordService.insertSelective(wxPayRecord);
+			wxPayRecordService.insert(wxPayRecord);
 		}
 		return redPackResponse;
 	}
