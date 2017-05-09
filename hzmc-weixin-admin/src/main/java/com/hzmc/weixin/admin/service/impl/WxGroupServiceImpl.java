@@ -4,7 +4,7 @@ import com.hzmc.weixin.admin.base.BaseServiceImpl;
 import com.hzmc.weixin.admin.dao.mapper.WxGroupMapper;
 import com.hzmc.weixin.admin.dao.model.WxGroup;
 import com.hzmc.weixin.admin.dao.model.WxGroupExample;
-import com.hzmc.weixin.admin.service.GroupService;
+import com.hzmc.weixin.admin.service.WxGroupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,20 +12,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * GroupService实现
- * Created by wph on 2017/5/4.
- */
+* WxGroupService实现
+* Created by wph on 2017/5/8.
+*/
 @Service
 @Transactional
-public class GroupServiceImpl extends BaseServiceImpl<WxGroupMapper, WxGroup, WxGroupExample> implements GroupService {
+public class WxGroupServiceImpl extends BaseServiceImpl<WxGroupMapper, WxGroup, WxGroupExample> implements WxGroupService {
 
-	private static Logger LOGGER = LoggerFactory.getLogger(GroupServiceImpl.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(WxGroupServiceImpl.class);
 
-	@Autowired
-	WxGroupMapper groupMapper;
+    @Autowired
+    WxGroupMapper wxGroupMapper;
 
-	@Override
-	public WxGroup getGroupByName(String name) {
-		return groupMapper.getGroupByName(name);
-	}
 }

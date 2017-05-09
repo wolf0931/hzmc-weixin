@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * WxUserService实现
  * Created by wph on 2017/5/4.
@@ -28,5 +30,10 @@ public class WxUserServiceImpl extends BaseServiceImpl<WxUserMapper, WxUser, WxU
 	public WxUser getWxUserByOpenId(String openId) {
 
 		return wxUserMapper.getWxUserByOpenId(openId);
+	}
+
+	@Override
+	public List<WxUser> getWxUserListByGroupId(String groupId) {
+		return wxUserMapper.getWxUserListByGroupId(groupId);
 	}
 }

@@ -2,7 +2,7 @@ package com.hzmc.weixin.admin.dao.model;
 
 import java.io.Serializable;
 
-public class Group implements Serializable {
+public class WxGroup implements Serializable {
     private Integer id;
 
     private String name;

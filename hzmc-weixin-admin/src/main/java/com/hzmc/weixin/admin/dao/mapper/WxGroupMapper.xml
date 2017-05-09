@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hzmc.weixin.admin.dao.mapper.TagMapper">
-  <resultMap id="BaseResultMap" type="com.hzmc.weixin.admin.dao.model.Tag">
+<mapper namespace="com.hzmc.weixin.admin.dao.mapper.WxGroupMapper">
+  <resultMap id="BaseResultMap" type="com.hzmc.weixin.admin.dao.model.WxGroup">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="count" jdbcType="INTEGER" property="count" />
@@ -67,13 +67,13 @@
   <sql id="Base_Column_List">
     id, name, count
   </sql>
-  <select id="selectByExample" parameterType="com.hzmc.weixin.admin.dao.model.TagExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.hzmc.weixin.admin.dao.model.WxGroupExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tag
+    from wx_group
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,20 +89,20 @@
       </if>
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.hzmc.weixin.admin.dao.model.TagExample">
-    delete from tag
+  <delete id="deleteByExample" parameterType="com.hzmc.weixin.admin.dao.model.WxGroupExample">
+    delete from wx_group
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.hzmc.weixin.admin.dao.model.Tag">
-    insert into tag (id, name, count
+  <insert id="insert" parameterType="com.hzmc.weixin.admin.dao.model.WxGroup">
+    insert into wx_group (id, name, count
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.hzmc.weixin.admin.dao.model.Tag">
-    insert into tag
+  <insert id="insertSelective" parameterType="com.hzmc.weixin.admin.dao.model.WxGroup">
+    insert into wx_group
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -126,14 +126,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.hzmc.weixin.admin.dao.model.TagExample" resultType="java.lang.Long">
-    select count(*) from tag
+  <select id="countByExample" parameterType="com.hzmc.weixin.admin.dao.model.WxGroupExample" resultType="java.lang.Long">
+    select count(*) from wx_group
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tag
+    update wx_group
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -150,7 +150,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tag
+    update wx_group
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       count = #{record.count,jdbcType=INTEGER}
@@ -158,4 +158,9 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <select id="getGroupByName" parameterType="String" resultMap="BaseResultMap">
+    select * from wx_group where name = #{name,jdbcType=INTEGER}
+  </select>
+
 </mapper>

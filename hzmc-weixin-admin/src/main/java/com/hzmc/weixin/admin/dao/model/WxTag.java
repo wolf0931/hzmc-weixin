@@ -2,7 +2,7 @@ package com.hzmc.weixin.admin.dao.model;
 
 import java.io.Serializable;
 
-public class Tag implements Serializable {
+public class WxTag implements Serializable {
     private Integer id;
 
     private String name;

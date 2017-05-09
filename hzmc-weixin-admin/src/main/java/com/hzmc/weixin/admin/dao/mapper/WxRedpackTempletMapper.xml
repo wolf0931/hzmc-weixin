@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hzmc.weixin.admin.dao.mapper.GroupMapper">
-    <resultMap id="BaseResultMap" type="com.hzmc.weixin.admin.dao.model.Group">
+<mapper namespace="com.hzmc.weixin.admin.dao.mapper.WxRedpackTempletMapper">
+    <resultMap id="BaseResultMap" type="com.hzmc.weixin.admin.dao.model.WxRedpackTemplet">
         <result column="id" jdbcType="INTEGER" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="count" jdbcType="INTEGER" property="count"/>
+        <result column="act_name" jdbcType="VARCHAR" property="actName"/>
+        <result column="send_name" jdbcType="VARCHAR" property="sendName"/>
+        <result column="wishing" jdbcType="VARCHAR" property="wishing"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="total_num" jdbcType="INTEGER" property="totalNum"/>
+        <result column="total_amount" jdbcType="VARCHAR" property="totalAmount"/>
+        <result column="winning_rate" jdbcType="VARCHAR" property="winningRate"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -67,16 +72,16 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, name, count
+    id, act_name, send_name, wishing, remark, total_num, total_amount, winning_rate
   </sql>
-
-    <select id="selectByExample" parameterType="com.hzmc.weixin.admin.dao.model.GroupExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.hzmc.weixin.admin.dao.model.WxRedpackTempletExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from wx_group
+        from wx_redpack_templet
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -93,80 +98,134 @@
         </if>
     </select>
 
-    <delete id="deleteByExample" parameterType="com.hzmc.weixin.admin.dao.model.GroupExample">
-        delete from wx_group
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wx_redpack_templet
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByExample" parameterType="com.hzmc.weixin.admin.dao.model.WxRedpackTempletExample">
+        delete from wx_redpack_templet
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-
-    <insert id="insert" parameterType="com.hzmc.weixin.admin.dao.model.Group">
-       insert into wx_group (id,name,count) values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER})
-    </insert>
-
-    <insert id="insertSelective" parameterType="com.hzmc.weixin.admin.dao.model.Group">
-        insert into wx_group
+    <insert id="insert" parameterType="com.hzmc.weixin.admin.dao.model.WxRedpackTemplet">
+    insert into wx_redpack_templet (id, act_name, send_name, 
+      wishing, remark, total_num, 
+      total_amount, winning_rate)
+    values (#{id,jdbcType=INTEGER}, #{actName,jdbcType=VARCHAR}, #{sendName,jdbcType=VARCHAR}, 
+      #{wishing,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{totalNum,jdbcType=INTEGER}, 
+      #{totalAmount,jdbcType=VARCHAR}, #{winningRate,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hzmc.weixin.admin.dao.model.WxRedpackTemplet">
+        insert into wx_redpack_templet
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
-            <if test="name != null">
-                name,
+            <if test="actName != null">
+                act_name,
             </if>
-            <if test="count != null">
-                count,
+            <if test="sendName != null">
+                send_name,
+            </if>
+            <if test="wishing != null">
+                wishing,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="totalNum != null">
+                total_num,
+            </if>
+            <if test="totalAmount != null">
+                total_amount,
+            </if>
+            <if test="winningRate != null">
+                winning_rate,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="name != null">
-                #{name,jdbcType=VARCHAR},
+            <if test="actName != null">
+                #{actName,jdbcType=VARCHAR},
             </if>
-            <if test="count != null">
-                #{count,jdbcType=INTEGER},
+            <if test="sendName != null">
+                #{sendName,jdbcType=VARCHAR},
+            </if>
+            <if test="wishing != null">
+                #{wishing,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="totalNum != null">
+                #{totalNum,jdbcType=INTEGER},
+            </if>
+            <if test="totalAmount != null">
+                #{totalAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="winningRate != null">
+                #{winningRate,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
-
-    <select id="countByExample" parameterType="com.hzmc.weixin.admin.dao.model.GroupExample"
+    <select id="countByExample" parameterType="com.hzmc.weixin.admin.dao.model.WxRedpackTempletExample"
             resultType="java.lang.Long">
-        select count(*) from wx_group
+        select count(*) from wx_redpack_templet
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
-
     <update id="updateByExampleSelective" parameterType="map">
-        update wx_group
+        update wx_redpack_templet
         <set>
             <if test="record.id != null">
                 id = #{record.id,jdbcType=INTEGER},
             </if>
-            <if test="record.name != null">
-                name = #{record.name,jdbcType=VARCHAR},
+            <if test="record.actName != null">
+                act_name = #{record.actName,jdbcType=VARCHAR},
             </if>
-            <if test="record.count != null">
-                count = #{record.count,jdbcType=INTEGER},
+            <if test="record.sendName != null">
+                send_name = #{record.sendName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wishing != null">
+                wishing = #{record.wishing,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.totalNum != null">
+                total_num = #{record.totalNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.totalAmount != null">
+                total_amount = #{record.totalAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.winningRate != null">
+                winning_rate = #{record.winningRate,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-
     <update id="updateByExample" parameterType="map">
-        update wx_group
+        update wx_redpack_templet
         set id = #{record.id,jdbcType=INTEGER},
-        name = #{record.name,jdbcType=VARCHAR},
-        count = #{record.count,jdbcType=INTEGER}
+        act_name = #{record.actName,jdbcType=VARCHAR},
+        send_name = #{record.sendName,jdbcType=VARCHAR},
+        wishing = #{record.wishing,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        total_num = #{record.totalNum,jdbcType=INTEGER},
+        total_amount = #{record.totalAmount,jdbcType=VARCHAR},
+        winning_rate = #{record.winningRate,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-
-    <select id="getGroupByName" parameterType="String" resultMap="BaseResultMap">
-      select * from wx_group where name = #{name,jdbcType=INTEGER}
-    </select>
 </mapper>

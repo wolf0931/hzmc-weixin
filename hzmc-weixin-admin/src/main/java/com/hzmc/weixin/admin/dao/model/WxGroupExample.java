@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TagExample implements Serializable {
+public class WxGroupExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -17,7 +17,7 @@ public class TagExample implements Serializable {
 
     private Integer offset;
 
-    public TagExample() {
+    public WxGroupExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

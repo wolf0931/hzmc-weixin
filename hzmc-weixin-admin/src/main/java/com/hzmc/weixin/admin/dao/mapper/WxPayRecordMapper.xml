@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hzmc.weixin.admin.dao.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.hzmc.weixin.admin.dao.model.User">
+<mapper namespace="com.hzmc.weixin.admin.dao.mapper.WxPayRecordMapper">
+  <resultMap id="BaseResultMap" type="com.hzmc.weixin.admin.dao.model.WxPayRecord">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="realname" jdbcType="VARCHAR" property="realname" />
-    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="mch_billno" jdbcType="VARCHAR" property="mchBillno" />
+    <result column="wxappid" jdbcType="VARCHAR" property="wxappid" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="total_amount" jdbcType="INTEGER" property="totalAmount" />
+    <result column="mch_id" jdbcType="VARCHAR" property="mchId" />
+    <result column="send_listid" jdbcType="VARCHAR" property="sendListid" />
     <result column="ctime" jdbcType="VARCHAR" property="ctime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,15 +70,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, type, realname, salt, ctime
+    id, mch_billno, wxappid, openid, total_amount, mch_id, send_listid, ctime
   </sql>
-  <select id="selectByExample" parameterType="com.hzmc.weixin.admin.dao.model.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.hzmc.weixin.admin.dao.model.WxPayRecordExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user
+    from wx_pay_record
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,102 +97,111 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
+    from wx_pay_record
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
+    delete from wx_pay_record
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.hzmc.weixin.admin.dao.model.UserExample">
-    delete from user
+  <delete id="deleteByExample" parameterType="com.hzmc.weixin.admin.dao.model.WxPayRecordExample">
+    delete from wx_pay_record
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.hzmc.weixin.admin.dao.model.User">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into user (username, password, type, 
-      realname, salt, ctime
-      )
-    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
-      #{realname,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{ctime,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.hzmc.weixin.admin.dao.model.WxPayRecord">
+    insert into wx_pay_record (id, mch_billno, wxappid, 
+      openid, total_amount, mch_id, 
+      send_listid, ctime)
+    values (#{id,jdbcType=INTEGER}, #{mchBillno,jdbcType=VARCHAR}, #{wxappid,jdbcType=VARCHAR}, 
+      #{openid,jdbcType=VARCHAR}, #{totalAmount,jdbcType=INTEGER}, #{mchId,jdbcType=VARCHAR}, 
+      #{sendListid,jdbcType=VARCHAR}, #{ctime,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.hzmc.weixin.admin.dao.model.User">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into user
+  <insert id="insertSelective" parameterType="com.hzmc.weixin.admin.dao.model.WxPayRecord">
+    insert into wx_pay_record
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="username != null">
-        username,
+      <if test="id != null">
+        id,
       </if>
-      <if test="password != null">
-        password,
+      <if test="mchBillno != null">
+        mch_billno,
       </if>
-      <if test="type != null">
-        type,
+      <if test="wxappid != null">
+        wxappid,
       </if>
-      <if test="realname != null">
-        realname,
+      <if test="openid != null">
+        openid,
       </if>
-      <if test="salt != null">
-        salt,
+      <if test="totalAmount != null">
+        total_amount,
+      </if>
+      <if test="mchId != null">
+        mch_id,
+      </if>
+      <if test="sendListid != null">
+        send_listid,
       </if>
       <if test="ctime != null">
         ctime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="mchBillno != null">
+        #{mchBillno,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
+      <if test="wxappid != null">
+        #{wxappid,jdbcType=VARCHAR},
       </if>
-      <if test="realname != null">
-        #{realname,jdbcType=VARCHAR},
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
       </if>
-      <if test="salt != null">
-        #{salt,jdbcType=VARCHAR},
+      <if test="totalAmount != null">
+        #{totalAmount,jdbcType=INTEGER},
+      </if>
+      <if test="mchId != null">
+        #{mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendListid != null">
+        #{sendListid,jdbcType=VARCHAR},
       </if>
       <if test="ctime != null">
         #{ctime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.hzmc.weixin.admin.dao.model.UserExample" resultType="java.lang.Long">
-    select count(*) from user
+  <select id="countByExample" parameterType="com.hzmc.weixin.admin.dao.model.WxPayRecordExample" resultType="java.lang.Long">
+    select count(*) from wx_pay_record
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user
+    update wx_pay_record
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.username != null">
-        username = #{record.username,jdbcType=VARCHAR},
+      <if test="record.mchBillno != null">
+        mch_billno = #{record.mchBillno,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
+      <if test="record.wxappid != null">
+        wxappid = #{record.wxappid,jdbcType=VARCHAR},
       </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
+      <if test="record.openid != null">
+        openid = #{record.openid,jdbcType=VARCHAR},
       </if>
-      <if test="record.realname != null">
-        realname = #{record.realname,jdbcType=VARCHAR},
+      <if test="record.totalAmount != null">
+        total_amount = #{record.totalAmount,jdbcType=INTEGER},
       </if>
-      <if test="record.salt != null">
-        salt = #{record.salt,jdbcType=VARCHAR},
+      <if test="record.mchId != null">
+        mch_id = #{record.mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendListid != null">
+        send_listid = #{record.sendListid,jdbcType=VARCHAR},
       </if>
       <if test="record.ctime != null">
         ctime = #{record.ctime,jdbcType=VARCHAR},
@@ -202,35 +212,39 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user
+    update wx_pay_record
     set id = #{record.id,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=INTEGER},
-      realname = #{record.realname,jdbcType=VARCHAR},
-      salt = #{record.salt,jdbcType=VARCHAR},
+      mch_billno = #{record.mchBillno,jdbcType=VARCHAR},
+      wxappid = #{record.wxappid,jdbcType=VARCHAR},
+      openid = #{record.openid,jdbcType=VARCHAR},
+      total_amount = #{record.totalAmount,jdbcType=INTEGER},
+      mch_id = #{record.mchId,jdbcType=VARCHAR},
+      send_listid = #{record.sendListid,jdbcType=VARCHAR},
       ctime = #{record.ctime,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hzmc.weixin.admin.dao.model.User">
-    update user
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzmc.weixin.admin.dao.model.WxPayRecord">
+    update wx_pay_record
     <set>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
+      <if test="mchBillno != null">
+        mch_billno = #{mchBillno,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+      <if test="wxappid != null">
+        wxappid = #{wxappid,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
       </if>
-      <if test="realname != null">
-        realname = #{realname,jdbcType=VARCHAR},
+      <if test="totalAmount != null">
+        total_amount = #{totalAmount,jdbcType=INTEGER},
       </if>
-      <if test="salt != null">
-        salt = #{salt,jdbcType=VARCHAR},
+      <if test="mchId != null">
+        mch_id = #{mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendListid != null">
+        send_listid = #{sendListid,jdbcType=VARCHAR},
       </if>
       <if test="ctime != null">
         ctime = #{ctime,jdbcType=VARCHAR},
@@ -238,13 +252,14 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hzmc.weixin.admin.dao.model.User">
-    update user
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
-      realname = #{realname,jdbcType=VARCHAR},
-      salt = #{salt,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.hzmc.weixin.admin.dao.model.WxPayRecord">
+    update wx_pay_record
+    set mch_billno = #{mchBillno,jdbcType=VARCHAR},
+      wxappid = #{wxappid,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      total_amount = #{totalAmount,jdbcType=INTEGER},
+      mch_id = #{mchId,jdbcType=VARCHAR},
+      send_listid = #{sendListid,jdbcType=VARCHAR},
       ctime = #{ctime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

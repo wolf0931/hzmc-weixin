@@ -38,29 +38,9 @@ public class AccessServiceImp implements AccessService {
 		//String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://09d9db0b.ngrok.io/wx/oauth/", "snsapi_base");
 		XmlMessageHeader xmlMessageHeader = MpXmlMessages.fromXml(MessageUtil.parseMsgXml(request));
 		if (xmlMessageHeader instanceof TextRequest) {
-			/*if (((TextRequest) xmlMessageHeader).getContent().equals("test")){
-				User user = Users.defaultUsers().get(xmlMessageHeader.getFromUser());
-				NewsXmlMessage newsXmlMessage = new NewsXmlMessage();
-				News news = new News();
-				Article article1 = new Article();
-				article1.setTitle("[1]测试news");
-				article1.setDescription("[1]今日头条，正在调试message API, 测试是否能正常发送news类型。");
-				article1.setUrl(url);
-				//article1.setPicUrl("http://wx.qlogo.cn/mmopen/ajNVdqHZLLCxVL7PbRb7roIcC7TPHNKbO3HrFpCSq7gyiaea7265PvyfzF3Mv7eFBLZqnAw7Q3Megb6jVaNFGXg/0");
-				news.add(article1);
 
-				newsXmlMessage.setNews(news);
-				newsXmlMessage.setFromUser(xmlMessageHeader.getToUser());
-				newsXmlMessage.setToUser(xmlMessageHeader.getFromUser());
-				newsXmlMessage.setCreateTime(new Date());
-				result = MpXmlMessages.toXml(newsXmlMessage);
-				LOGGER.info(result);
-			}*/
 		} else if (xmlMessageHeader instanceof SceneSubEvent) {
 			if (((SceneSubEvent) xmlMessageHeader).getEventType() == EventType.subscribe) {
-				//RedPackRequest redPackRequest = new RedPackRequest();
-				//redPackRequest.setOpenId(xmlMessageHeader.getFromUser());
-				//redPayService.sendSingleRed(redPackRequest);
 				User user = Users.defaultUsers().get(xmlMessageHeader.getFromUser());
 				NewsXmlMessage newsXmlMessage = new NewsXmlMessage();
 				News news = new News();
