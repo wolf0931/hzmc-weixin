@@ -19,6 +19,15 @@ ul,ol{
 .display{
     display: none;
 }
+.red{
+	color:red
+}
+.relative{
+	position:relative
+}
+.cursor{
+	cursor: pointer;
+}
 .danger{
     font-size: 12px;
     color: #d70000;
@@ -295,13 +304,15 @@ ul,ol{
     display: inline-block;
     width: 16px;
     height: 16px;
-    background: url("../image/close.png");
+    background: url("../images/close.png");
     margin-right: 30px;
     margin-top: 15px;
 }
 .add-main{
+	font-size: 20px;
+	text-align: center;
     margin:30px 40px 0;
-    padding-top: 30px;
+    padding-top: 15px;
     padding-bottom: 15px;
     background: #fafafa;
     border:2px solid #D7DBDE;
@@ -365,7 +376,6 @@ form input{
     width: 300px;
     height: 30px;
     margin: 10px 10px 0 10px;
-    box-shadow: 0 1px 3px #2a2d31 inset;
 }
 textarea{
 	margin-left: 10px;

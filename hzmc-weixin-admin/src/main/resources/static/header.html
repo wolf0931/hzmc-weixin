@@ -5,12 +5,19 @@
             <h3 class="left col-sm-7 no-padding">美创微信管理平台</h3>
         </div>
         <div class="dropdown right col-xs-2 col-md-1">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">admin<span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id='username'></a>
             <ul class="dropdown-menu">
-                <li><span class="icon icon-lock"></span>修改密码</li>
+                <li class='cursor'><span class="icon icon-lock"></span>修改密码</li>
                 <li class="divider"></li>
-                <li><span class="icon icon-quit"></span>退出登录</li>
+                <li id='quitLogin'  class='cursor'><span class="icon icon-quit"></span>退出登录</li>
             </ul>
         </div>
     </div>
 </nav>
+<script>
+	$('#username').html(decodeURI(location.search).split('=')[1]+'<span class="caret"></span>');
+	
+	$('#quitLogin').on('click',function(){
+		window.location.href='../index.html';
+	});
+</script>

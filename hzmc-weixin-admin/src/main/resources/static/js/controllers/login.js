@@ -9,18 +9,22 @@ $('button.btn').click(function(){
         $('.danger span.empty').addClass('active');
     }else{
         $('.danger span.empty').removeClass('active');
+        var userTemp = {"username": $userName,"password": $userPwd};
         $.ajax({
         	type:'post',
         	url:"/login",
-        	async:false,
-        	data:{
-        		"username": $userName,
-        		"password": $userPwd
-        	},
+        	dataType: "json",
+        	headers:{  
+                Accept:"application/json",  
+                "Content-Type":"application/json"  
+            },
+        	data:JSON.stringify(userTemp),
         	success:function(data){
-        		
-        		self.location='pages/packetConfirm.html';
-        		
+//        		if(data.message == 'failed'){
+//        			$('.danger span.wrong').addClass('active');
+//        		}else{
+        			self.location='pages/packetConfirm.html?$username='+$userName;
+//        		}
         	}
         });
     }
