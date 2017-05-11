@@ -17,6 +17,10 @@
 <script>
 	$('#username').html(decodeURI(location.search).split('=')[1]+'<span class="caret"></span>');
 	
+	$.ajax({
+		
+	});
+	
 	$('#quitLogin').on('click',function(){
 		window.location.href='../index.html';
 	});

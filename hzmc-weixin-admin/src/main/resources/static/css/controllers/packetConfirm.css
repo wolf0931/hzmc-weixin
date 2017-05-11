@@ -1,20 +1,16 @@
 	#main_container{
 		text-align:center;
 	}
-	#main_container form{
-		width:54%;
-		margin:30px auto;
-	} 
 	.comfirmInfo{
 		width:100%;
 	}
 	td{
 		padding:30px 0;
 		text-align:center;
-		border:1px solid #000;
+		border:1px solid #7C8693;
 	}
 	.lableGroup{
-		width:50%;
+		width:70%;
 		text-align:left;
 		margin:5px auto;
 	}
@@ -42,7 +38,7 @@
 	.errwarn{
 		position:absolute;
 		top:15px;
-		right:-125px;
+		right:-105px;
 		display:inline-block;
 		width:150px
 	}

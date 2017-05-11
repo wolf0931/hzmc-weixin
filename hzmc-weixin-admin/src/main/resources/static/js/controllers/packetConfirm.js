@@ -84,7 +84,7 @@ $('#submit').click(function(){
     	let warn='<span class="red errwarn">活动截止时间应晚于开始时间</sapn>';
     	$('#endDate').after(warn);
     	return ;
-    }else if($startDate < new Date()){
+    }else if(new Date($startDate) < new Date()){
     	let warn='<span class="red errwarn">不能从过去开始</sapn>';
     	$('#endDate').after(warn);
     	return ;
