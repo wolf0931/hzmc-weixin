@@ -40,7 +40,7 @@ public class WxRedpackTemplet implements Serializable {
      *
      * @mbg.generated
      */
-    private int totalAmount;
+    private Integer totalAmount;
 
     /**
      * 中奖率
@@ -48,6 +48,14 @@ public class WxRedpackTemplet implements Serializable {
      * @mbg.generated
      */
     private String winningRate;
+
+    private String starttime;
+
+    private String endtime;
+
+    private Integer minAmount;
+
+    private Integer maxAmount;
 
     private static final long serialVersionUID = 1L;
 
@@ -99,11 +107,11 @@ public class WxRedpackTemplet implements Serializable {
         this.totalNum = totalNum;
     }
 
-    public int getTotalAmount() {
+    public Integer getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(int totalAmount) {
+    public void setTotalAmount(Integer totalAmount) {
         this.totalAmount = totalAmount;
     }
 
@@ -113,6 +121,38 @@ public class WxRedpackTemplet implements Serializable {
 
     public void setWinningRate(String winningRate) {
         this.winningRate = winningRate;
+    }
+
+    public String getStarttime() {
+        return starttime;
+    }
+
+    public void setStarttime(String starttime) {
+        this.starttime = starttime;
+    }
+
+    public String getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(String endtime) {
+        this.endtime = endtime;
+    }
+
+    public Integer getMinAmount() {
+        return minAmount;
+    }
+
+    public void setMinAmount(Integer minAmount) {
+        this.minAmount = minAmount;
+    }
+
+    public Integer getMaxAmount() {
+        return maxAmount;
+    }
+
+    public void setMaxAmount(Integer maxAmount) {
+        this.maxAmount = maxAmount;
     }
 
     @Override
@@ -129,6 +169,10 @@ public class WxRedpackTemplet implements Serializable {
         sb.append(", totalNum=").append(totalNum);
         sb.append(", totalAmount=").append(totalAmount);
         sb.append(", winningRate=").append(winningRate);
+        sb.append(", starttime=").append(starttime);
+        sb.append(", endtime=").append(endtime);
+        sb.append(", minAmount=").append(minAmount);
+        sb.append(", maxAmount=").append(maxAmount);
         sb.append("]");
         return sb.toString();
     }

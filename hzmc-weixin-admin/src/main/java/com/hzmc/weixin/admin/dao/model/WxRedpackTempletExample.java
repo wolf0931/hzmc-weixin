@@ -537,62 +537,52 @@ public class WxRedpackTempletExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andTotalAmountEqualTo(String value) {
+        public Criteria andTotalAmountEqualTo(Integer value) {
             addCriterion("total_amount =", value, "totalAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTotalAmountNotEqualTo(String value) {
+        public Criteria andTotalAmountNotEqualTo(Integer value) {
             addCriterion("total_amount <>", value, "totalAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTotalAmountGreaterThan(String value) {
+        public Criteria andTotalAmountGreaterThan(Integer value) {
             addCriterion("total_amount >", value, "totalAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTotalAmountGreaterThanOrEqualTo(String value) {
+        public Criteria andTotalAmountGreaterThanOrEqualTo(Integer value) {
             addCriterion("total_amount >=", value, "totalAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTotalAmountLessThan(String value) {
+        public Criteria andTotalAmountLessThan(Integer value) {
             addCriterion("total_amount <", value, "totalAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTotalAmountLessThanOrEqualTo(String value) {
+        public Criteria andTotalAmountLessThanOrEqualTo(Integer value) {
             addCriterion("total_amount <=", value, "totalAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTotalAmountLike(String value) {
-            addCriterion("total_amount like", value, "totalAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalAmountNotLike(String value) {
-            addCriterion("total_amount not like", value, "totalAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalAmountIn(List<String> values) {
+        public Criteria andTotalAmountIn(List<Integer> values) {
             addCriterion("total_amount in", values, "totalAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTotalAmountNotIn(List<String> values) {
+        public Criteria andTotalAmountNotIn(List<Integer> values) {
             addCriterion("total_amount not in", values, "totalAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTotalAmountBetween(String value1, String value2) {
+        public Criteria andTotalAmountBetween(Integer value1, Integer value2) {
             addCriterion("total_amount between", value1, value2, "totalAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTotalAmountNotBetween(String value1, String value2) {
+        public Criteria andTotalAmountNotBetween(Integer value1, Integer value2) {
             addCriterion("total_amount not between", value1, value2, "totalAmount");
             return (Criteria) this;
         }
@@ -664,6 +654,266 @@ public class WxRedpackTempletExample implements Serializable {
 
         public Criteria andWinningRateNotBetween(String value1, String value2) {
             addCriterion("winning_rate not between", value1, value2, "winningRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeIsNull() {
+            addCriterion("startTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeIsNotNull() {
+            addCriterion("startTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeEqualTo(String value) {
+            addCriterion("startTime =", value, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeNotEqualTo(String value) {
+            addCriterion("startTime <>", value, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeGreaterThan(String value) {
+            addCriterion("startTime >", value, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeGreaterThanOrEqualTo(String value) {
+            addCriterion("startTime >=", value, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeLessThan(String value) {
+            addCriterion("startTime <", value, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeLessThanOrEqualTo(String value) {
+            addCriterion("startTime <=", value, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeLike(String value) {
+            addCriterion("startTime like", value, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeNotLike(String value) {
+            addCriterion("startTime not like", value, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeIn(List<String> values) {
+            addCriterion("startTime in", values, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeNotIn(List<String> values) {
+            addCriterion("startTime not in", values, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeBetween(String value1, String value2) {
+            addCriterion("startTime between", value1, value2, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStarttimeNotBetween(String value1, String value2) {
+            addCriterion("startTime not between", value1, value2, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeIsNull() {
+            addCriterion("endTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeIsNotNull() {
+            addCriterion("endTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeEqualTo(String value) {
+            addCriterion("endTime =", value, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeNotEqualTo(String value) {
+            addCriterion("endTime <>", value, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeGreaterThan(String value) {
+            addCriterion("endTime >", value, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeGreaterThanOrEqualTo(String value) {
+            addCriterion("endTime >=", value, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeLessThan(String value) {
+            addCriterion("endTime <", value, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeLessThanOrEqualTo(String value) {
+            addCriterion("endTime <=", value, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeLike(String value) {
+            addCriterion("endTime like", value, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeNotLike(String value) {
+            addCriterion("endTime not like", value, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeIn(List<String> values) {
+            addCriterion("endTime in", values, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeNotIn(List<String> values) {
+            addCriterion("endTime not in", values, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeBetween(String value1, String value2) {
+            addCriterion("endTime between", value1, value2, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeNotBetween(String value1, String value2) {
+            addCriterion("endTime not between", value1, value2, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinAmountIsNull() {
+            addCriterion("min_amount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinAmountIsNotNull() {
+            addCriterion("min_amount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinAmountEqualTo(Integer value) {
+            addCriterion("min_amount =", value, "minAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinAmountNotEqualTo(Integer value) {
+            addCriterion("min_amount <>", value, "minAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinAmountGreaterThan(Integer value) {
+            addCriterion("min_amount >", value, "minAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinAmountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("min_amount >=", value, "minAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinAmountLessThan(Integer value) {
+            addCriterion("min_amount <", value, "minAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinAmountLessThanOrEqualTo(Integer value) {
+            addCriterion("min_amount <=", value, "minAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinAmountIn(List<Integer> values) {
+            addCriterion("min_amount in", values, "minAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinAmountNotIn(List<Integer> values) {
+            addCriterion("min_amount not in", values, "minAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinAmountBetween(Integer value1, Integer value2) {
+            addCriterion("min_amount between", value1, value2, "minAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinAmountNotBetween(Integer value1, Integer value2) {
+            addCriterion("min_amount not between", value1, value2, "minAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxAmountIsNull() {
+            addCriterion("max_amount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxAmountIsNotNull() {
+            addCriterion("max_amount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxAmountEqualTo(Integer value) {
+            addCriterion("max_amount =", value, "maxAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxAmountNotEqualTo(Integer value) {
+            addCriterion("max_amount <>", value, "maxAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxAmountGreaterThan(Integer value) {
+            addCriterion("max_amount >", value, "maxAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxAmountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("max_amount >=", value, "maxAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxAmountLessThan(Integer value) {
+            addCriterion("max_amount <", value, "maxAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxAmountLessThanOrEqualTo(Integer value) {
+            addCriterion("max_amount <=", value, "maxAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxAmountIn(List<Integer> values) {
+            addCriterion("max_amount in", values, "maxAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxAmountNotIn(List<Integer> values) {
+            addCriterion("max_amount not in", values, "maxAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxAmountBetween(Integer value1, Integer value2) {
+            addCriterion("max_amount between", value1, value2, "maxAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxAmountNotBetween(Integer value1, Integer value2) {
+            addCriterion("max_amount not between", value1, value2, "maxAmount");
             return (Criteria) this;
         }
     }

@@ -11,17 +11,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
-* WxRedpackTempletService实现
-* Created by wph on 2017/5/8.
-*/
+ * WxRedpackTempletService实现
+ * Created by wph on 2017/5/8.
+ */
 @Service
 @Transactional
 public class WxRedpackTempletServiceImpl extends BaseServiceImpl<WxRedpackTempletMapper, WxRedpackTemplet, WxRedpackTempletExample> implements WxRedpackTempletService {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(WxRedpackTempletServiceImpl.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(WxRedpackTempletServiceImpl.class);
 
-    @Autowired
-    WxRedpackTempletMapper wxRedpackTempletMapper;
+	@Autowired
+	WxRedpackTempletMapper wxRedpackTempletMapper;
 
+	@Override
+	public List<WxRedpackTemplet> getTempletByActName(String actName) {
+		return wxRedpackTempletMapper.getTempletByActName(actName);
+	}
 }

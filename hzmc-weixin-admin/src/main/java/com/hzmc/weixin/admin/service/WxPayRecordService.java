@@ -3,7 +3,6 @@ package com.hzmc.weixin.admin.service;
 import com.hzmc.weixin.admin.base.BaseService;
 import com.hzmc.weixin.admin.dao.model.WxPayRecord;
 import com.hzmc.weixin.admin.dao.model.WxPayRecordExample;
-import  com.hzmc.weixin.admin.service.WxPayRecordService;
 
 /**
 * WxPayRecordService接口

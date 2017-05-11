@@ -11,15 +11,23 @@ public interface WxRedpackTempletMapper {
 
     int deleteByExample(WxRedpackTempletExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(WxRedpackTemplet record);
 
     int insertSelective(WxRedpackTemplet record);
 
-    WxRedpackTemplet selectByPrimaryKey(Integer id);
-
     List<WxRedpackTemplet> selectByExample(WxRedpackTempletExample example);
+
+    WxRedpackTemplet selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") WxRedpackTemplet record, @Param("example") WxRedpackTempletExample example);
 
     int updateByExample(@Param("record") WxRedpackTemplet record, @Param("example") WxRedpackTempletExample example);
+
+    int updateByPrimaryKeySelective(WxRedpackTemplet record);
+
+    int updateByPrimaryKey(WxRedpackTemplet record);
+
+    List<WxRedpackTemplet> getTempletByActName(@Param("actName") String actName);
 }
