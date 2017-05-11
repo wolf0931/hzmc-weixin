@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 * ${model}controller
 * Created by wph on ${ctime}.
 */
-@Controller
+@RestController
 @RequestMapping("/${model}")
 @Api(value = "${model}控制器", description = "${model}管理")
 public class ${model}Controller extends BaseController {

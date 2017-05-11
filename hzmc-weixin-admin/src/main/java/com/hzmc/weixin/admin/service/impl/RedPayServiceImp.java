@@ -3,6 +3,7 @@ package com.hzmc.weixin.admin.service.impl;
 import com.hzmc.weixin.admin.dao.model.WxPayRecord;
 import com.hzmc.weixin.admin.service.RedPayService;
 import com.hzmc.weixin.admin.service.WxPayRecordService;
+import com.hzmc.weixin.admin.service.WxUserService;
 import com.hzmc.weixin.common.util.RandomStringGenerator;
 import com.hzmc.weixin.mp.user.Users;
 import com.hzmc.weixin.mp.user.bean.User;
@@ -29,6 +30,9 @@ public class RedPayServiceImp implements RedPayService {
 
 	@Autowired
 	private WxPayRecordService wxPayRecordService;
+
+	@Autowired
+	private WxUserService userService;
 
 	@Override
 	public RedPackResponse sendSingleRed(RedPackRequest redPackRequest) {

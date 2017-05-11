@@ -11,9 +11,9 @@ import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +22,7 @@ import java.util.Map;
 * WxGroupcontroller
 * Created by wph on 2017/5/8.
 */
-@Controller
+@RestController
 @RequestMapping("/WxGroup")
 @Api(value = "微信分组控制器", description = "微信分组管理")
 public class WxGroupController extends BaseController {
