@@ -25,6 +25,7 @@ import java.util.UUID;
 @RequestMapping(value = "/login")
 public class LoginController extends BaseController {
 	private static Logger LOGGER = Logger.getLogger(LoginController.class);
+
 	@Autowired
 	private UserService userService;
 
@@ -45,28 +46,14 @@ public class LoginController extends BaseController {
 		User user1 = userService.getUserByNameAndPwd(user);
 		if (user1 == null) {
 			return new Result(ResultConstant.FAILED, "用户不存在或密码不正确");
-		}else {
+		} else {
 			return new Result(ResultConstant.SUCCESS, user1);
 		}
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Object addLogin(@RequestBody User user) {
+	@RequestMapping(value = "/exit", method = RequestMethod.POST)
+	public Object loginOut(@RequestBody User user) {
 		LOGGER.info(user.toString());
-		String username = user.getUsername();
-		String password = user.getPassword();
-		if (StringUtils.isBlank(username)) {
-			return new Result(ResultConstant.EMPTY_USERNAME, "帐号不能为空！");
-		}
-		if (StringUtils.isBlank(password)) {
-			return new Result(ResultConstant.EMPTY_PASSWORD, "密码不能为空！");
-		}
-		long time = System.currentTimeMillis();
-		String salt = UUID.randomUUID().toString().replaceAll("-", "");
-		user.setSalt(salt);
-		user.setPassword(MD5Util.MD5(user.getPassword()));
-		user.setCtime(String.valueOf(time));
-		return userService.insertSelective(user);
+		return null;
 	}
-
 }

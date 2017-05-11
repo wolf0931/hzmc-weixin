@@ -11,22 +11,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
-* UserService实现
-* Created by wph on 2017/4/24.
-*/
+ * UserService实现
+ * Created by wph on 2017/4/24.
+ */
 @Service
 @Transactional
 public class UserServiceImpl extends BaseServiceImpl<UserMapper, User, UserExample> implements UserService {
 
-    private static Logger _log = LoggerFactory.getLogger(UserServiceImpl.class);
+	private static Logger _log = LoggerFactory.getLogger(UserServiceImpl.class);
 
 
-    @Autowired
-    private UserMapper mapper;
+	@Autowired
+	private UserMapper mapper;
 
-    @Override
-    public User getUserByNameAndPwd(User user) {
-        return mapper.getUserByNameAndPwd(user);
-    }
+	@Override
+	public User getUserByNameAndPwd(User user) {
+		return mapper.getUserByNameAndPwd(user);
+	}
+
+	@Override
+	public List<User> getUserByName(String name) {
+		return mapper.getUserByName(name);
+	}
 }
