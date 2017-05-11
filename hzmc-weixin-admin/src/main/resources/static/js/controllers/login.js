@@ -20,10 +20,10 @@ $('button.btn').click(function(){
             },
         	data:JSON.stringify(userTemp),
         	success:function(data){
-//        		if(data.message == 'failed'){
-//        			$('.danger span.wrong').addClass('active');
-//        		}else{
+//        		if(data.message == 'success'){
         			self.location='pages/packetConfirm.html?$username='+$userName;
+//        		}else{
+//        			$('.danger span.wrong').addClass('active');
 //        		}
         	}
         });
