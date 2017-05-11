@@ -1,5 +1,7 @@
 package com.hzmc.weixin.admin.dao.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -17,6 +19,7 @@ public class User implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonIgnore
     private String password;
 
     /**
@@ -24,6 +27,7 @@ public class User implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonIgnore
     private Integer type;
 
     /**
@@ -38,6 +42,7 @@ public class User implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonIgnore
     private String salt;
 
     /**
@@ -45,6 +50,7 @@ public class User implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonIgnore
     private String ctime;
 
     private static final long serialVersionUID = 1L;
