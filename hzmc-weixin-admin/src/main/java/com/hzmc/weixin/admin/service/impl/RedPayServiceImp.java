@@ -1,8 +1,10 @@
 package com.hzmc.weixin.admin.service.impl;
 
 import com.hzmc.weixin.admin.dao.model.WxPayRecord;
+import com.hzmc.weixin.admin.dao.model.WxUser;
 import com.hzmc.weixin.admin.service.RedPayService;
 import com.hzmc.weixin.admin.service.WxPayRecordService;
+import com.hzmc.weixin.admin.service.WxRedpackTempletService;
 import com.hzmc.weixin.admin.service.WxUserService;
 import com.hzmc.weixin.common.util.RandomStringGenerator;
 import com.hzmc.weixin.mp.user.Users;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -34,8 +37,18 @@ public class RedPayServiceImp implements RedPayService {
 	@Autowired
 	private WxUserService userService;
 
+	@Autowired
+	private WxRedpackTempletService redpackTempletService;
+
 	@Override
 	public RedPackResponse sendSingleRed(RedPackRequest redPackRequest) {
+		//102 为员工不能发红包
+		List<WxUser>  wxUserList =  userService.getWxUserListByGroupId("102");
+		for (WxUser u: wxUserList) {
+			if (u.getOpenid().equals(redPackRequest.getOpenId())){
+				return null;
+			}
+		}
 		//单个红包
 		User user = Users.defaultUsers().get("oJvITt-VfGOTCe0dcXsZPCqn1APM");
 		//102 为员工不能发红包
