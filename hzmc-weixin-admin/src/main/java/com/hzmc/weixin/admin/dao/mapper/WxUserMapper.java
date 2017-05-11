@@ -33,4 +33,6 @@ public interface WxUserMapper {
 
     List<WxUser> getWxUserListByGroupId(@Param("groupId") String groupId);
 
+    int updateWxUserByOpenId(WxUser wxUser);
+
 }

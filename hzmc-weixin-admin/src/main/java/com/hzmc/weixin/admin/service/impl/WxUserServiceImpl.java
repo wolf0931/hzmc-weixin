@@ -33,6 +33,11 @@ public class WxUserServiceImpl extends BaseServiceImpl<WxUserMapper, WxUser, WxU
 	}
 
 	@Override
+	public int updateWxUserByOpenId(WxUser wxUser) {
+		return wxUserMapper.updateWxUserByOpenId(wxUser);
+	}
+
+	@Override
 	public List<WxUser> getWxUserListByGroupId(String groupId) {
 		return wxUserMapper.getWxUserListByGroupId(groupId);
 	}

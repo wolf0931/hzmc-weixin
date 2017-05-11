@@ -376,6 +376,21 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <update id="updateWxUserByOpenId" parameterType="com.hzmc.weixin.admin.dao.model.WxUser">
+    update wx_user
+    set sex = #{sex,jdbcType=INTEGER},
+    city = #{city,jdbcType=VARCHAR},
+    country = #{country,jdbcType=VARCHAR},
+    province = #{province,jdbcType=VARCHAR},
+    remark = #{remark,jdbcType=VARCHAR},
+    subscribe = #{subscribe,jdbcType=INTEGER},
+    openid = #{openid,jdbcType=VARCHAR},
+    nickname = #{nickname,jdbcType=VARCHAR},
+    headimgurl = #{headimgurl,jdbcType=VARCHAR},
+    subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP}
+    where openid = #{openid,jdbcType=VARCHAR}
+  </update>
+
   <select id="getWxUserByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT * FROM wx_user WHERE openid = #{openId,jdbcType=VARCHAR}
   </select>

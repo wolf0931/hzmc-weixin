@@ -14,6 +14,8 @@ public interface WxUserService extends BaseService<WxUser, WxUserExample> {
 
 	WxUser getWxUserByOpenId(String openId);
 
+	int updateWxUserByOpenId(WxUser wxUser);
+
 	List<WxUser> getWxUserListByGroupId(String groupId);
 
 }
