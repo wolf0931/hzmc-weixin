@@ -93,6 +93,10 @@
       </if>
     </if>
   </select>
+  <select id="getUserByNameAndPwd" resultMap="BaseResultMap">
+  		select * from user where username = #{username} and password=#{password} limit 1
+  </select>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
