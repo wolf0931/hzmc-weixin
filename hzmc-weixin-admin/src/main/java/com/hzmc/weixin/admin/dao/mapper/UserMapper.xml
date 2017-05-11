@@ -252,4 +252,9 @@
       ctime = #{ctime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getUserByNameAndPwd" resultMap="BaseResultMap">
+    select * from user where username = #{username} and password=#{password} limit 1
+  </select>
+
 </mapper>

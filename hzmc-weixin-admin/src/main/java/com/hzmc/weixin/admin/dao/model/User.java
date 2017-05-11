@@ -1,8 +1,12 @@
 package com.hzmc.weixin.admin.dao.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
+    @JsonIgnore
     private Integer id;
 
     /**
@@ -17,6 +21,8 @@ public class User implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonDeserialize
+    @JsonIgnore
     private String password;
 
     /**
@@ -38,6 +44,7 @@ public class User implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonIgnore
     private String salt;
 
     /**

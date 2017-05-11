@@ -24,7 +24,7 @@ public abstract class BaseController {
 	@ExceptionHandler
 	public String exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception exception) {
 		_log.error("统一异常处理：", exception);
-		return null;
+		return exception.getMessage();
 	}
 
 
