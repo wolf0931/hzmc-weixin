@@ -1,6 +1,7 @@
 package com.hzmc.weixin.admin.service.impl;
 
 import com.hzmc.weixin.admin.dao.model.WxPayRecord;
+import com.hzmc.weixin.admin.dao.model.WxRedpackTemplet;
 import com.hzmc.weixin.admin.dao.model.WxUser;
 import com.hzmc.weixin.admin.service.RedPayService;
 import com.hzmc.weixin.admin.service.WxPayRecordService;
@@ -20,7 +21,6 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -38,39 +38,39 @@ public class RedPayServiceImp implements RedPayService {
 	private WxUserService userService;
 
 	@Autowired
-	private WxRedpackTempletService redpackTempletService;
+	private WxRedpackTempletService wxRedpackTempletService;
 
 	@Override
-	public RedPackResponse sendSingleRed(RedPackRequest redPackRequest) {
-		//102 为员工不能发红包
-		List<WxUser>  wxUserList =  userService.getWxUserListByGroupId("102");
-		for (WxUser u: wxUserList) {
-			if (u.getOpenid().equals(redPackRequest.getOpenId())){
-				return null;
-			}
-		}
+	public Object sendSingleRed(WxUser wxUser, int id) {
 		//单个红包
-		User user = Users.defaultUsers().get("oJvITt-VfGOTCe0dcXsZPCqn1APM");
-		//102 为员工不能发红包
-		/*if (user.getGroup() == 102) {
-			return null;
+		//102 为员工不能发红包 oJvITt-VfGOTCe0dcXsZPCqn1APM
+		RedPackRequest redPackRequest = new RedPackRequest();
+		User user = Users.defaultUsers().get(wxUser.getOpenid());
+		WxUser wxUser1 = userService.getWxUserByOpenId(wxUser.getOpenid());
+		/*if (user.getGroup() == 102 || wxUser1.getGroupid() == 102) {
+			return new Result(ResultConstant.FAILED, "内部人员不能发红包");
+		} else if (!user.isSubscribed()) {
+			return new Result(ResultConstant.FAILED, "没有关注公众号");
 		}*/
+		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(id);
 		redPackRequest.setAppId(PaySetting.defaultSetting().getAppId());
-		redPackRequest.setActivityName("土豪发红包");
+		redPackRequest.setActivityName(wxRedpackTemplet.getActName());
 		Random random = new Random();
-		int sum = random.nextInt(50);
-		redPackRequest.setAmount(100 + sum);
+		int max = wxRedpackTemplet.getMaxAmount();
+		int min = wxRedpackTemplet.getMinAmount();
+		int randomSum = random.nextInt(max - min);
+		redPackRequest.setAmount(min + randomSum);
 		Date nowTime = new Date(System.currentTimeMillis());
 		SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyyMMdd");
 		String retStrFormatNowDate = sdFormatter.format(nowTime);
 		redPackRequest.setBillNumber(PaySetting.defaultSetting().getMchId() + retStrFormatNowDate + RandomStringGenerator.getRandomIntByLength(10));
 		redPackRequest.setNumber(1);
-		redPackRequest.setOpenId("oJvITt-VfGOTCe0dcXsZPCqn1APM");
-		redPackRequest.setRemark("测试发红包");
-		redPackRequest.setWishing("恭喜发财");
-		redPackRequest.setSendName("美创科技");
+		redPackRequest.setOpenId(wxUser.getOpenid());
+		redPackRequest.setRemark(wxRedpackTemplet.getRemark());
+		redPackRequest.setWishing(wxRedpackTemplet.getWishing());
+		redPackRequest.setSendName(wxRedpackTemplet.getSendName());
 		RedPackResponse redPackResponse = RedPacks.defaultRedPacks().sendSingle(redPackRequest);
-		if (redPackResponse.success()){
+		if (redPackResponse.success()) {
 			//插入记录
 			LOGGER.info("红包发送成功，插入红包记录");
 			WxPayRecord wxPayRecord = new WxPayRecord();

@@ -1,5 +1,6 @@
 package com.hzmc.weixin.admin.service;
 
+import com.hzmc.weixin.admin.dao.model.WxUser;
 import com.hzmc.weixin.pay.redpack.bean.RedPackRequest;
 import com.hzmc.weixin.pay.redpack.bean.RedPackResponse;
 
@@ -8,7 +9,7 @@ import com.hzmc.weixin.pay.redpack.bean.RedPackResponse;
  */
 public interface RedPayService {
 
-	RedPackResponse sendSingleRed(RedPackRequest redPackRequest);
+	Object sendSingleRed(WxUser wxUser, int id);
 
 
 	RedPackResponse sendGroupRed(RedPackRequest redPackRequest);

@@ -11,8 +11,7 @@ import com.hzmc.weixin.common.message.xml.NewsXmlMessage;
 import com.hzmc.weixin.common.request.TextRequest;
 import com.hzmc.weixin.mp.event.ticket.SceneSubEvent;
 import com.hzmc.weixin.mp.message.MpXmlMessages;
-import com.hzmc.weixin.mp.user.Users;
-import com.hzmc.weixin.mp.user.bean.User;
+import com.hzmc.weixin.mp.oauth2.MpOAuth2s;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,27 +37,31 @@ public class AccessServiceImp implements AccessService {
 		//String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://09d9db0b.ngrok.io/wx/oauth/", "snsapi_base");
 		XmlMessageHeader xmlMessageHeader = MpXmlMessages.fromXml(MessageUtil.parseMsgXml(request));
 		if (xmlMessageHeader instanceof TextRequest) {
-
+			if (((TextRequest) xmlMessageHeader).getContent().equals("test")){
+				return sendXml(xmlMessageHeader);
+			}
 		} else if (xmlMessageHeader instanceof SceneSubEvent) {
 			if (((SceneSubEvent) xmlMessageHeader).getEventType() == EventType.subscribe) {
-				User user = Users.defaultUsers().get(xmlMessageHeader.getFromUser());
-				NewsXmlMessage newsXmlMessage = new NewsXmlMessage();
-				News news = new News();
-				Article article1 = new Article();
-				article1.setTitle("红包主题");
-				article1.setDescription("红包主题。");
-				article1.setUrl("http://09d9db0b.ngrok.io/wx/oauth/");
-				//article1.setPicUrl("http://wx.qlogo.cn/mmopen/ajNVdqHZLLCxVL7PbRb7roIcC7TPHNKbO3HrFpCSq7gyiaea7265PvyfzF3Mv7eFBLZqnAw7Q3Megb6jVaNFGXg/0");
-				news.add(article1);
-				newsXmlMessage.setNews(news);
-				newsXmlMessage.setFromUser(xmlMessageHeader.getToUser());
-				newsXmlMessage.setToUser(xmlMessageHeader.getFromUser());
-				newsXmlMessage.setCreateTime(new Date());
-				result = MpXmlMessages.toXml(newsXmlMessage);
 
 			}
 		}
 
 		return result;
+	}
+
+	private String sendXml(XmlMessageHeader xmlMessageHeader){
+		String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://09d9db0b.ngrok.io/src/view_mobile/index.html", "snsapi_base");
+		NewsXmlMessage newsXmlMessage = new NewsXmlMessage();
+		News news = new News();
+		Article article1 = new Article();
+		article1.setTitle("红包主题");
+		article1.setDescription("红包主题。");
+		article1.setUrl(url);
+		news.add(article1);
+		newsXmlMessage.setNews(news);
+		newsXmlMessage.setFromUser(xmlMessageHeader.getToUser());
+		newsXmlMessage.setToUser(xmlMessageHeader.getFromUser());
+		newsXmlMessage.setCreateTime(new Date());
+		return MpXmlMessages.toXml(newsXmlMessage);
 	}
 }

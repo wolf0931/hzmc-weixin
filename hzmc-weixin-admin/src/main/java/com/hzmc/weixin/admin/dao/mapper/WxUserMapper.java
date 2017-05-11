@@ -29,7 +29,7 @@ public interface WxUserMapper {
 
     int updateByPrimaryKey(WxUser record);
 
-    WxUser getWxUserByOpenId(@Param("record") String openId);
+    WxUser getWxUserByOpenId(@Param("openId") String openId);
 
     List<WxUser> getWxUserListByGroupId(@Param("groupId") String groupId);
 

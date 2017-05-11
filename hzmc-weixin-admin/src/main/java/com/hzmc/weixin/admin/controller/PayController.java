@@ -1,11 +1,12 @@
 package com.hzmc.weixin.admin.controller;
 
+import com.hzmc.weixin.admin.dao.model.WxUser;
 import com.hzmc.weixin.admin.service.RedPayService;
 import com.hzmc.weixin.common.util.JsonMapper;
 import com.hzmc.weixin.pay.redpack.RedPacks;
-import com.hzmc.weixin.pay.redpack.bean.RedPackRequest;
 import com.hzmc.weixin.pay.redpack.bean.RedPackResult;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,18 +19,20 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/wx/pay")
-@Api(value = "发红包控制器",description = "发红包控制器")
+@Api(value = "发红包控制器", description = "发红包控制器")
 public class PayController {
 
 	@Autowired
 	private RedPayService redPayService;
 
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void pay(@RequestBody RedPackRequest redPackRequest) {
-		redPayService.sendSingleRed(redPackRequest);
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	@ApiOperation(value = "根据红包模板ID发红包")
+	public Object pay(@RequestBody WxUser wxUser, @PathVariable int id) {
+		return redPayService.sendSingleRed(wxUser, id);
 	}
 
 	@RequestMapping(value = "/query/{billNumber}", method = RequestMethod.GET)
+	@ApiOperation(value = "根据billNumber查询红包详情")
 	public Object payQuery(@PathVariable String billNumber) {
 		RedPackResult redPackResult = RedPacks.defaultRedPacks().query(billNumber);
 		return JsonMapper.defaultMapper().toJson(redPackResult);
