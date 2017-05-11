@@ -46,7 +46,7 @@ public class LoginController extends BaseController {
 		if (user1 == null) {
 			return new Result(ResultConstant.FAILED, "用户不存在或密码不正确");
 		}else {
-			return new Result(ResultConstant.SUCCESS, "登录成功");
+			return new Result(ResultConstant.SUCCESS, user1);
 		}
 	}
 
