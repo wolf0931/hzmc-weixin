@@ -128,17 +128,34 @@ header>div{
 
 .add-container h4{
 	margin: 0;
+	margin-left: 5px;
 	line-height: 30px;
 }
 
-.closeDown{
+.close{
 	display: inline-block;
-	
+	width: 20px;
+	height: 20px;
+	margin: 5px 5px 0 0;
+	background: url('../images/close.png');
+	background-size: cover;
 }
-
 .add-main{
 	background: #fff;
+	height: 50px;
+	line-height: 50px;
 }
+
+.alert-footer{
+	height: 10%;
+	background: #5097F7;
+}
+.alert-footer .btn-event{
+	color: #fff;
+	line-height: 200%;
+	margin-right: 5px;
+}
+
 .navbar-header h3{
     font-size: 20px;
 }

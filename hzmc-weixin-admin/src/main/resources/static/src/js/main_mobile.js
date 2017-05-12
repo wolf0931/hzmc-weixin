@@ -23,7 +23,7 @@ function judge(){
     	url: '/oauth/'+openId,
     	success:function(data){
     		if(data.message == 'success'){
-    	        myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz='+data.data.appId+'==&scene=110#wechat_redirect">先关注才能参与活动</a>');
+    	        myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz='+data.data.appId+'==#wechat_redirect">先关注才能参与活动</a>');
     	        
     	    }
     	}
