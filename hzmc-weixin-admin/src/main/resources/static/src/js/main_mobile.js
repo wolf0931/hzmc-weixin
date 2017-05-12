@@ -22,9 +22,9 @@ function judge(){
     	type: 'GET',
     	url: '/oauth/'+openId,
     	success:function(data){
-    		if(data.message == 'falied'){
-    	        myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz='+data.hints.req_id+'">先关注才能参与活动</a>');
-    	        return false;
+    		if(data.message == 'success'){
+    	        myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz='+data.appid+'">先关注才能参与活动</a>');
+    	        
     	    }
     	}
     });
