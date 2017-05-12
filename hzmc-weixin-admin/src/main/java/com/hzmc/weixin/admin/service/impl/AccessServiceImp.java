@@ -60,7 +60,7 @@ public class AccessServiceImp implements AccessService {
 	}
 
 	private String sendXml(XmlMessageHeader xmlMessageHeader) {
-		String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://09d9db0b.ngrok.io/src/view_mobile/index.html", "snsapi_userinfo");
+		String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://09d9db0b.ngrok.io/src/view_mobile/index.html", "snsapi_base");
 		//String url  = "http://09d9db0b.ngrok.io/src/view_mobile/index.html";
 		NewsXmlMessage newsXmlMessage = new NewsXmlMessage();
 		News news = new News();
