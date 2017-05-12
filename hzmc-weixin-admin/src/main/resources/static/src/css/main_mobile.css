@@ -1,3 +1,12 @@
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.clear{
+	clear: both
+}
 body{
     height: 100%;
     background: #E64148;
@@ -87,4 +96,57 @@ header>div{
     height: 100%;
     width: 0;
     overflow: hidden;
+}
+
+.cover{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: #000;
+	opacity: 0.6;
+}
+.add-container{
+	width:50%;
+	height: 50%;
+	position: absolute;
+	top: 20%;
+	left: 25%;
+}
+.navbar{
+    height: 10%;
+    background: #5097f7;
+    color: #fff;
+}
+
+@media screen and (max-width: 792px) {
+    .navbar-header h3{
+        display: none;
+    }
+}
+
+.add-container h4{
+	margin: 0;
+	line-height: 30px;
+}
+
+.add-main{
+	background: #fff;
+}
+.navbar-header h3{
+    font-size: 20px;
+}
+.navbar a{
+    color: #fff;
+}
+.caret{
+    display: inline-block;
+    width: 10px;
+    height: 5px;
+    padding: 0;
+    border: 0;
+    margin:0;
+    margin-left: 4px;
+    background: url("../images/dropdown-w.png");
 }

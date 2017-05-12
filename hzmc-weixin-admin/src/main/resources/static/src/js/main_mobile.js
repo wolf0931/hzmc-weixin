@@ -16,14 +16,14 @@ $('#open2').click(function(){
 function judge(){
 	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
 	
-	myAlert(openId);
+	//myAlert('1');
 	
     $.ajax({
     	type: 'GET',
     	url: '/oauth/'+openId,
     	success:function(data){
-    		if(data == 'falied'){
-    	        myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=">先关注才能参与活动</a>');
+    		if(data.message == 'falied'){
+    	        myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz='+data.openid+'">先关注才能参与活动</a>');
     	        return false;
     	    }
     	}
