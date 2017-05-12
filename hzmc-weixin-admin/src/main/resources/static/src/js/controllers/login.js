@@ -21,7 +21,7 @@ $('button.btn').click(function(){
         	data:JSON.stringify(userTemp),
         	success:function(data){
         		if(data.message == 'success'){
-        			self.location='src/view_pc/pages/packetConfirm.html?$username='+$userName;
+        			self.location='src/view_pc/pages/packetConfirm.html';
         		}else{
         			$('.danger span.wrong').addClass('active');
         		}

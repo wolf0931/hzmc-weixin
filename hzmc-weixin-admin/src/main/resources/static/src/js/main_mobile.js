@@ -16,7 +16,7 @@ $('#open2').click(function(){
 function judge(){
 	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
 	
-	//myAlert('1');
+//	myAlert('1');
 	
     $.ajax({
     	type: 'GET',

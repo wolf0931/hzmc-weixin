@@ -7,7 +7,7 @@ function myAlert(str){
 	 $('body').append(alert);
 }
 
-$('body').on('closeDown','click',function(){
-	$('.cover').remove();
-	$('.add-container').remove();
+$('body').on('click','.closeDown',function(){
+    $('.cover').remove();
+    $('.add-container').remove();
 });

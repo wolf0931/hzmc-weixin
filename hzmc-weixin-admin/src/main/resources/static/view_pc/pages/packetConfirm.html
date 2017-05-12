@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>杭州美创微信管理平台</title>
- 	<link rel="stylesheet" type="text/css" href="../../css/lib/bootstrap_3.3.6.min.css">
- 	<link rel="stylesheet" type="text/css" href="../../css/main_pc.css">
- 	<link rel="stylesheet" type="text/css" href="../../css/controllers/packetConfirm.css">
+ 	<link rel="stylesheet" type="text/css" href="../../src/css/lib/bootstrap_3.3.6.min.css">
+ 	<link rel="stylesheet" type="text/css" href="../../src/css/main_pc.css">
+ 	<link rel="stylesheet" type="text/css" href="../../src/css/controllers/packetConfirm.css">
 </head>
 <body ng-app=''>
 <!-- 菜单 -->
@@ -16,15 +16,14 @@
 <div style="clear: both"></div>
 <div id="main"> 
 
-	<div class='list_container col-sm-1'>
+	<div class='list_container col-sm-2'>
 		<div ng-include="'../list.html'"></div>
 	</div>
 	
-    <div id="main_container" class='col-sm-11'>
+    <div id="main_container" class='col-sm-10'>
     	<form class='col-sm-6 col-sm-offset-3'>
 		    <table class='comfirmInfo'>
 		    	<tr>
-		    		<td>红包设置</td>
 		    		<td>
 		    			<div class='lableGroup relative'>
 		    				<lable for='sendName'><span class='red'>*</span>商户名：</lable>
@@ -65,7 +64,7 @@
 		    		</td>
 		    	</tr>
 		    	<tr>
-		    		<td colspan='2'>
+		    		<td>
 		    			<button id='submit' class='button'>提交</button>
 		    		</td>
 		    	</tr>
@@ -76,11 +75,11 @@
 </div>
 
 
- 	<script src="../../js/lib/jquery_1.11.3.min.js"></script>
-    <script src="../../js/lib/bootstrap_3.3.6.min.js"></script>
-    <script src="../../js/lib/jquery-impromptu.2.5.min.js"></script>
-    <script src="../../js/lib/angular.min.js"></script>
-    <script src="../../js/controllers/packetConfirm.js"></script>
-    <script src="../../js/alert.js"></script>
+ 	<script src="../../src/js/lib/jquery_1.11.3.min.js"></script>
+    <script src="../../src/js/lib/bootstrap_3.3.6.min.js"></script>
+    <script src="../../src/js/lib/jquery-impromptu.2.5.min.js"></script>
+    <script src="../../src/js/lib/angular.min.js"></script>
+    <script src="../../src/js/controllers/packetConfirm.js"></script>
+    <script src="../../src/js/alert.js"></script>
 </body>
 </html>
