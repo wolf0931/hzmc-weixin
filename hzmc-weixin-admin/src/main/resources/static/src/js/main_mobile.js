@@ -19,12 +19,15 @@ function judge(){
 	myAlert(openId);
 	
     $.ajax({
-    	
+    	type: 'GET',
+    	url: '/oauth/'+openId,
+    	success:function(data){
+    		if(data == 'falied'){
+    	        myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=">先关注才能参与活动</a>');
+    	        return false;
+    	    }
+    	}
     });
-    if(data == false){
-        myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=">先关注才能参与活动</a>');
-        return false;
-    }
 }
 
 function redPacket(){
