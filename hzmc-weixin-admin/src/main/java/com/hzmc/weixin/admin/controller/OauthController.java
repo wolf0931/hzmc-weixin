@@ -10,11 +10,14 @@ import com.hzmc.weixin.mp.user.Users;
 import com.hzmc.weixin.mp.user.bean.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 /**
  * Created by wph on 2017/5/11.
@@ -33,9 +36,14 @@ public class OauthController {
 		AccessToken token = MpOAuth2s.defaultOAuth2s().getAccessToken(code);
 		String openId = token.getOpenid();
 		User user = Users.defaultUsers().get(openId);
+		Map<String, Object> map = new HashedMap();
 		if (user.isSubscribed()) {
-			return new Result(ResultConstant.SUCCESS, "已经关注");
+			map.put("status", "已经关注");
+			map.put("user", user);
+			return new Result(ResultConstant.SUCCESS, map);
 		} else {
+			map.put("status", "没有关注");
+			map.put("appId", AppSetting.defaultSettings().getAppId());
 			return new Result(ResultConstant.FAILED, AppSetting.defaultSettings().getAppId());
 		}
 
