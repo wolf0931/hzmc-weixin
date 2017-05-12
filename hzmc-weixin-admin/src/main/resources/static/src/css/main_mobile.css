@@ -131,6 +131,11 @@ header>div{
 	line-height: 30px;
 }
 
+.closeDown{
+	display: inline-block;
+	
+}
+
 .add-main{
 	background: #fff;
 }
