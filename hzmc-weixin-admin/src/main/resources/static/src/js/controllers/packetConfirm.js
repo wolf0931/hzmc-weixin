@@ -133,7 +133,7 @@ $('#submit').click(function(){
     		"totalNum": $number,
     		"minAccount": $minAccount,
     		"maxAccount": $maxAccount,
-    		"startDate": $startDate,
+    		"starttime": $startDate,
     		"endDate": $endDate,
     		"winningRate": $rate,
     		"intro": $introduce,

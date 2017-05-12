@@ -5,7 +5,7 @@ $('button.btn').click(function(){
     event.preventDefault();
     $userName=$('#userName').val();
     $userPwd=$('#userPwd').val();
-    if($userName== ""||$userPwd==""){
+    if($userName == ""||$userPwd == ""){
         $('.danger span.empty').addClass('active');
     }else{
         $('.danger span.empty').removeClass('active');
@@ -20,11 +20,11 @@ $('button.btn').click(function(){
             },
         	data:JSON.stringify(userTemp),
         	success:function(data){
-//        		if(data.message == 'success'){
+        		if(data.message == 'success'){
         			self.location='src/view_pc/pages/packetConfirm.html?$username='+$userName;
-//        		}else{
-//        			$('.danger span.wrong').addClass('active');
-//        		}
+        		}else{
+        			$('.danger span.wrong').addClass('active');
+        		}
         	}
         });
     }

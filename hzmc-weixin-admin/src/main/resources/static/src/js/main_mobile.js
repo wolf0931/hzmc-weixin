@@ -1,7 +1,7 @@
 /**
  * Created by DELL on 2017/4/25.
  */
-var foodCount,customCount;
+var foodCount=0,customCount=0;
 $('#open1').click(function(){
     foodCount+=1;
     judge();
@@ -14,8 +14,12 @@ $('#open2').click(function(){
 });
 
 function judge(){
+	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
+	
+	myAlert(openId);
+	
     $.ajax({
-
+    	
     });
     if(data == false){
         myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=">先关注才能参与活动</a>');
@@ -25,9 +29,16 @@ function judge(){
 
 function redPacket(){
     $.ajax({
-
+    	type: 'GET',
+    	url: '/WxRedpackTemplet',
+    	success: function(data){
+    		$rate = data.winningRate;
+    	}
     });
-    myAlert('恭喜获得红包，请退回聊天窗口领取');
-
-    myAlert('好遗憾，没有获得红包哦');
+    if(Math.random() < $rate){
+    	
+	    myAlert('恭喜获得红包，请退回聊天窗口领取');
+    }else{	
+	    myAlert('好遗憾，没有获得红包哦');
+    }
 }

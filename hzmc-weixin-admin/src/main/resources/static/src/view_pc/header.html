@@ -17,11 +17,31 @@
 <script>
 	$('#username').html(decodeURI(location.search).split('=')[1]+'<span class="caret"></span>');
 	
+	
 	$.ajax({
-		
+		type:'get',
+	   	url:"",
+	    success:function(data){
+	    	$('#username').html();
+		}
 	});
 	
+	
 	$('#quitLogin').on('click',function(){
-		window.location.href='../../../index.html';
+		$.ajax({
+			type:'post',
+	    	url:"/login/exit",
+	    	dataType: "json",
+	    	headers:{  
+	            Accept:"application/json",  
+	            "Content-Type":"application/json"  
+	        },
+	    	data:JSON.stringify(user),
+	    	success:function(data){
+	    		if(data.message == "success"){
+	    			window.location.href='../../../index.html';
+	    		}
+	    	}
+		});
 	});
 </script>
