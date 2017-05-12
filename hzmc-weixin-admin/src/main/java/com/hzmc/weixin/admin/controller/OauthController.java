@@ -40,6 +40,7 @@ public class OauthController {
 		if (user.isSubscribed()) {
 			map.put("status", "已经关注");
 			map.put("user", user);
+			map.put("appId", AppSetting.defaultSettings().getAppId());
 			return new Result(ResultConstant.SUCCESS, map);
 		} else {
 			map.put("status", "没有关注");
