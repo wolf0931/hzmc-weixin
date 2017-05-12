@@ -54,6 +54,8 @@ public class User implements Serializable {
      */
     private String ctime;
 
+    private Long lastUpdateTime;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -112,6 +114,15 @@ public class User implements Serializable {
         this.ctime = ctime;
     }
 
+
+    public Long getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(Long lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -125,6 +136,7 @@ public class User implements Serializable {
         sb.append(", realname=").append(realname);
         sb.append(", salt=").append(salt);
         sb.append(", ctime=").append(ctime);
+        sb.append(", lastUpdateTime=").append(lastUpdateTime);
         sb.append("]");
         return sb.toString();
     }
