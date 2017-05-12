@@ -12,6 +12,7 @@ import com.hzmc.weixin.common.message.xml.NewsXmlMessage;
 import com.hzmc.weixin.common.request.TextRequest;
 import com.hzmc.weixin.mp.event.ticket.SceneSubEvent;
 import com.hzmc.weixin.mp.message.MpXmlMessages;
+import com.hzmc.weixin.mp.oauth2.MpOAuth2s;
 import com.hzmc.weixin.mp.user.Users;
 import com.hzmc.weixin.mp.user.bean.User;
 import org.apache.log4j.Logger;
@@ -59,8 +60,8 @@ public class AccessServiceImp implements AccessService {
 	}
 
 	private String sendXml(XmlMessageHeader xmlMessageHeader) {
-		//String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://09d9db0b.ngrok.io/src/view_mobile/index.html", "snsapi_base");
-		String url  = "http://09d9db0b.ngrok.io/src/view_mobile/index.html";
+		String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://09d9db0b.ngrok.io/src/view_mobile/index.html", "snsapi_userinfo");
+		//String url  = "http://09d9db0b.ngrok.io/src/view_mobile/index.html";
 		NewsXmlMessage newsXmlMessage = new NewsXmlMessage();
 		News news = new News();
 		Article article1 = new Article();
