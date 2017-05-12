@@ -4,6 +4,7 @@ import com.hzmc.weixin.admin.base.Result;
 import com.hzmc.weixin.admin.constant.ResultConstant;
 import com.hzmc.weixin.admin.service.AccessService;
 import com.hzmc.weixin.common.AccessToken;
+import com.hzmc.weixin.mp.base.AppSetting;
 import com.hzmc.weixin.mp.oauth2.MpOAuth2s;
 import com.hzmc.weixin.mp.user.Users;
 import com.hzmc.weixin.mp.user.bean.User;
@@ -35,7 +36,7 @@ public class OauthController {
 		if (user.isSubscribed()) {
 			return new Result(ResultConstant.SUCCESS, "已经关注");
 		} else {
-			return new Result(ResultConstant.FAILED, "没有关注");
+			return new Result(ResultConstant.FAILED, AppSetting.defaultSettings().getAppId());
 		}
 
 	}
