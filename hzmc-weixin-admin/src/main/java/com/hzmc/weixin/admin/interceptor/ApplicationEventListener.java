@@ -1,10 +1,10 @@
 package com.hzmc.weixin.admin.interceptor;
 
+import com.hzmc.weixin.admin.dao.model.WxGroup;
 import com.hzmc.weixin.admin.dao.model.WxUser;
 import com.hzmc.weixin.admin.dao.model.WxUserExample;
 import com.hzmc.weixin.admin.service.GroupService;
 import com.hzmc.weixin.admin.service.WxUserService;
-import com.hzmc.weixin.admin.util.SpringContextUtil;
 import com.hzmc.weixin.mp.user.Groups;
 import com.hzmc.weixin.mp.user.Users;
 import com.hzmc.weixin.mp.user.bean.Group;
@@ -40,31 +40,32 @@ public class ApplicationEventListener implements ApplicationListener {
 			LOGGER.info("应用刷新");
 		} else if (event instanceof ApplicationReadyEvent) {
 			LOGGER.info("启动已完成");
-			/*new Thread(new Runnable() {
+			new Thread(new Runnable() {
 				@Override
 				public void run() {
 					LOGGER.info("开始插入数据");
-					//insertGroupDb();
-					//insertUserDb();
+					insertGroupDb();
+					insertUserDb();
 				}
-			}).start();*/
+			}).start();
 		} else if (event instanceof ContextClosedEvent) {
 			LOGGER.info("应用关闭");
 		}
 	}
 
 	private void insertGroupDb() {
-		GroupService groupService = SpringContextUtil.getBean(GroupService.class);
+		GroupService groupService = getBean(GroupService.class);
 		List<Group> groups = Groups.defaultGroups().list();
 		for (Group g : groups) {
-			com.hzmc.weixin.admin.dao.model.WxGroup group = new com.hzmc.weixin.admin.dao.model.WxGroup();
-			group.setId(g.getId());
-			group.setCount(g.getCount());
-			group.setName(g.getName());
+			com.hzmc.weixin.admin.dao.model.WxGroup wxGroup = new com.hzmc.weixin.admin.dao.model.WxGroup();
+			wxGroup.setId(g.getId());
+			wxGroup.setCount(g.getCount());
+			wxGroup.setName(g.getName());
+			WxGroup wxGroup1 = groupService.getGroupByName(g.getName());
 			if (groupService.getGroupByName(g.getName()) != null) {
-
+				groupService.updateByPrimaryKey(wxGroup1);
 			} else {
-				groupService.insert(group);
+				groupService.insert(wxGroup);
 			}
 		}
 	}
@@ -110,8 +111,10 @@ public class ApplicationEventListener implements ApplicationListener {
 				WxUser wxUser1 = wxUserService.getWxUserByOpenId(opeonId);
 				if (wxUser1 != null) {
 					LOGGER.info("数据已存在");
+					wxUserService.updateByPrimaryKey(wxUser1);
 				} else {
-					LOGGER.info("添加数据");
+					LOGGER.info("添加数据" + wxUser.toString());
+					wxUser.setNickname(wxUser.getNickname().replaceAll("[\\x{10000}-\\x{10FFFF}]", ""));
 					wxUserService.insertSelective(wxUser);
 				}
 

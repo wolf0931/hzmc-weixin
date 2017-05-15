@@ -1,5 +1,6 @@
 package com.hzmc.weixin.admin;
 
+import com.hzmc.weixin.admin.dao.model.WxGroup;
 import com.hzmc.weixin.admin.dao.model.WxUser;
 import com.hzmc.weixin.admin.dao.model.WxUserExample;
 import com.hzmc.weixin.admin.service.GroupService;
@@ -14,7 +15,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.List;
 
@@ -35,12 +35,12 @@ public class Application extends SpringBootServletInitializer {
 	}
 
 
-	@Scheduled(fixedRate = 30 * 1000)
+	//@Scheduled(fixedRate = 60 * 1000)
 	private void initGroupDate() {
 		//insertGroupDb();
 	}
 
-	@Scheduled(fixedRate = 60 * 1000)
+	//@Scheduled(fixedRate = 60 * 1000)
 	private void initUserDate() {
 		//insertUserDb();
 	}
@@ -49,14 +49,15 @@ public class Application extends SpringBootServletInitializer {
 		GroupService groupService = getBean(GroupService.class);
 		List<Group> groups = Groups.defaultGroups().list();
 		for (Group g : groups) {
-			com.hzmc.weixin.admin.dao.model.WxGroup group = new com.hzmc.weixin.admin.dao.model.WxGroup();
-			group.setId(g.getId());
-			group.setCount(g.getCount());
-			group.setName(g.getName());
+			com.hzmc.weixin.admin.dao.model.WxGroup wxGroup = new com.hzmc.weixin.admin.dao.model.WxGroup();
+			wxGroup.setId(g.getId());
+			wxGroup.setCount(g.getCount());
+			wxGroup.setName(g.getName());
+			WxGroup wxGroup1 = groupService.getGroupByName(g.getName());
 			if (groupService.getGroupByName(g.getName()) != null) {
-
+				groupService.updateByPrimaryKey(wxGroup1);
 			} else {
-				groupService.insert(group);
+				groupService.insert(wxGroup);
 			}
 		}
 	}
@@ -102,8 +103,10 @@ public class Application extends SpringBootServletInitializer {
 				WxUser wxUser1 = wxUserService.getWxUserByOpenId(opeonId);
 				if (wxUser1 != null) {
 					LOGGER.info("数据已存在");
+					wxUserService.updateByPrimaryKey(wxUser1);
 				} else {
-					LOGGER.info("添加数据");
+					LOGGER.info("添加数据"+wxUser.toString());
+					wxUser.setNickname(wxUser.getNickname().replaceAll("[\\x{10000}-\\x{10FFFF}]", ""));
 					wxUserService.insertSelective(wxUser);
 				}
 

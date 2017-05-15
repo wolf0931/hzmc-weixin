@@ -31,7 +31,7 @@ public class OauthController {
 
 	@RequestMapping(value = "/{code}", method = RequestMethod.GET)
 	@ApiOperation(value = "根据code判断用户是否关注")
-	private Object getOAuthDate(@PathVariable String code) {
+	private Object getOAuthData(@PathVariable String code) {
 		LOGGER.info(code);
 		AccessToken token = MpOAuth2s.defaultOAuth2s().getAccessToken(code);
 		String openId = token.getOpenid();
