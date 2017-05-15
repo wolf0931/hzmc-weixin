@@ -3,128 +3,142 @@ package com.hzmc.weixin.admin.dao.model;
 import java.io.Serializable;
 
 public class WxPayRecord implements Serializable {
-    private Integer id;
+	private Integer id;
 
-    /**
-     * 商户订单号
-     *
-     * @mbg.generated
-     */
-    private String mchBillno;
+	/**
+	 * 商户订单号
+	 *
+	 * @mbg.generated
+	 */
+	private String mchBillno;
 
-    /**
-     * 公众账号appid
-     *
-     * @mbg.generated
-     */
-    private String wxappid;
+	/**
+	 * 公众账号appid
+	 *
+	 * @mbg.generated
+	 */
+	private String wxappid;
 
-    /**
-     * 用户openid
-     *
-     * @mbg.generated
-     */
-    private String openid;
+	/**
+	 * 红包模板Id
+	 */
+	private int redpacktemid;
 
-    /**
-     * 付款金额
-     *
-     * @mbg.generated
-     */
-    private Integer totalAmount;
+	/**
+	 * 用户openid
+	 *
+	 * @mbg.generated
+	 */
+	private String openid;
 
-    /**
-     * 商户号
-     *
-     * @mbg.generated
-     */
-    private String mchId;
+	/**
+	 * 付款金额
+	 *
+	 * @mbg.generated
+	 */
+	private Integer totalAmount;
 
-    private String sendListid;
+	/**
+	 * 商户号
+	 *
+	 * @mbg.generated
+	 */
+	private String mchId;
 
-    private String ctime;
+	private String sendListid;
 
-    private static final long serialVersionUID = 1L;
+	private String ctime;
 
-    public Integer getId() {
-        return id;
-    }
+	private static final long serialVersionUID = 1L;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getMchBillno() {
-        return mchBillno;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setMchBillno(String mchBillno) {
-        this.mchBillno = mchBillno;
-    }
+	public String getMchBillno() {
+		return mchBillno;
+	}
 
-    public String getWxappid() {
-        return wxappid;
-    }
+	public void setMchBillno(String mchBillno) {
+		this.mchBillno = mchBillno;
+	}
 
-    public void setWxappid(String wxappid) {
-        this.wxappid = wxappid;
-    }
+	public String getWxappid() {
+		return wxappid;
+	}
 
-    public String getOpenid() {
-        return openid;
-    }
+	public void setWxappid(String wxappid) {
+		this.wxappid = wxappid;
+	}
 
-    public void setOpenid(String openid) {
-        this.openid = openid;
-    }
+	public int getRedpacktemid() {
+		return redpacktemid;
+	}
 
-    public Integer getTotalAmount() {
-        return totalAmount;
-    }
+	public void setRedpacktemid(int redpacktemid) {
+		this.redpacktemid = redpacktemid;
+	}
 
-    public void setTotalAmount(Integer totalAmount) {
-        this.totalAmount = totalAmount;
-    }
+	public String getOpenid() {
+		return openid;
+	}
 
-    public String getMchId() {
-        return mchId;
-    }
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
 
-    public void setMchId(String mchId) {
-        this.mchId = mchId;
-    }
+	public Integer getTotalAmount() {
+		return totalAmount;
+	}
 
-    public String getSendListid() {
-        return sendListid;
-    }
+	public void setTotalAmount(Integer totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 
-    public void setSendListid(String sendListid) {
-        this.sendListid = sendListid;
-    }
+	public String getMchId() {
+		return mchId;
+	}
 
-    public String getCtime() {
-        return ctime;
-    }
+	public void setMchId(String mchId) {
+		this.mchId = mchId;
+	}
 
-    public void setCtime(String ctime) {
-        this.ctime = ctime;
-    }
+	public String getSendListid() {
+		return sendListid;
+	}
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", mchBillno=").append(mchBillno);
-        sb.append(", wxappid=").append(wxappid);
-        sb.append(", openid=").append(openid);
-        sb.append(", totalAmount=").append(totalAmount);
-        sb.append(", mchId=").append(mchId);
-        sb.append(", sendListid=").append(sendListid);
-        sb.append(", ctime=").append(ctime);
-        sb.append("]");
-        return sb.toString();
-    }
+	public void setSendListid(String sendListid) {
+		this.sendListid = sendListid;
+	}
+
+	public String getCtime() {
+		return ctime;
+	}
+
+	public void setCtime(String ctime) {
+		this.ctime = ctime;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(getClass().getSimpleName());
+		sb.append(" [");
+		sb.append("Hash = ").append(hashCode());
+		sb.append(", id=").append(id);
+		sb.append(", mchBillno=").append(mchBillno);
+		sb.append(", redpacktemid=").append(redpacktemid);
+		sb.append(", wxappid=").append(wxappid);
+		sb.append(", openid=").append(openid);
+		sb.append(", totalAmount=").append(totalAmount);
+		sb.append(", mchId=").append(mchId);
+		sb.append(", sendListid=").append(sendListid);
+		sb.append(", ctime=").append(ctime);
+		sb.append("]");
+		return sb.toString();
+	}
 }

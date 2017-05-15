@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.hzmc.weixin.admin.dao.model.WxPayRecord">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="mch_billno" jdbcType="VARCHAR" property="mchBillno" />
+    <result column="redpacktemid" jdbcType="INTEGER" property="redpacktemid" />
     <result column="wxappid" jdbcType="VARCHAR" property="wxappid" />
     <result column="openid" jdbcType="VARCHAR" property="openid" />
     <result column="total_amount" jdbcType="INTEGER" property="totalAmount" />
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, mch_billno, wxappid, openid, total_amount, mch_id, send_listid, ctime
+    id, mch_billno,redpacktemid, wxappid, openid, total_amount, mch_id, send_listid, ctime
   </sql>
   <select id="selectByExample" parameterType="com.hzmc.weixin.admin.dao.model.WxPayRecordExample" resultMap="BaseResultMap">
     select
@@ -111,10 +112,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.hzmc.weixin.admin.dao.model.WxPayRecord">
-    insert into wx_pay_record (id, mch_billno, wxappid, 
+    insert into wx_pay_record (id, mch_billno, redpacktemid,wxappid,
       openid, total_amount, mch_id, 
       send_listid, ctime)
-    values (#{id,jdbcType=INTEGER}, #{mchBillno,jdbcType=VARCHAR}, #{wxappid,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{mchBillno,jdbcType=VARCHAR},#{redpacktemid,jdbcType=INTEGER}, #{wxappid,jdbcType=VARCHAR},
       #{openid,jdbcType=VARCHAR}, #{totalAmount,jdbcType=INTEGER}, #{mchId,jdbcType=VARCHAR}, 
       #{sendListid,jdbcType=VARCHAR}, #{ctime,jdbcType=VARCHAR})
   </insert>
@@ -126,6 +127,9 @@
       </if>
       <if test="mchBillno != null">
         mch_billno,
+      </if>
+      <if test="redpacktemid != null">
+        redpacktemid,
       </if>
       <if test="wxappid != null">
         wxappid,
@@ -152,6 +156,9 @@
       </if>
       <if test="mchBillno != null">
         #{mchBillno,jdbcType=VARCHAR},
+      </if>
+      <if test="redpacktemid != null">
+        #{id,jdbcType=INTEGER},
       </if>
       <if test="wxappid != null">
         #{wxappid,jdbcType=VARCHAR},
@@ -188,6 +195,9 @@
       <if test="record.mchBillno != null">
         mch_billno = #{record.mchBillno,jdbcType=VARCHAR},
       </if>
+      <if test="record.redpacktemid != null">
+        redpacktemid = #{record.redpacktemid,jdbcType=INTEGER},
+      </if>
       <if test="record.wxappid != null">
         wxappid = #{record.wxappid,jdbcType=VARCHAR},
       </if>
@@ -215,6 +225,7 @@
     update wx_pay_record
     set id = #{record.id,jdbcType=INTEGER},
       mch_billno = #{record.mchBillno,jdbcType=VARCHAR},
+      redpacktemid = #{record.redpacktemid,jdbcType=INTEGER},
       wxappid = #{record.wxappid,jdbcType=VARCHAR},
       openid = #{record.openid,jdbcType=VARCHAR},
       total_amount = #{record.totalAmount,jdbcType=INTEGER},
@@ -230,6 +241,9 @@
     <set>
       <if test="mchBillno != null">
         mch_billno = #{mchBillno,jdbcType=VARCHAR},
+      </if>
+      <if test="redpacktemid != null">
+        redpacktemid = #{redpacktemid,jdbcType=INTEGER},
       </if>
       <if test="wxappid != null">
         wxappid = #{wxappid,jdbcType=VARCHAR},
@@ -255,6 +269,7 @@
   <update id="updateByPrimaryKey" parameterType="com.hzmc.weixin.admin.dao.model.WxPayRecord">
     update wx_pay_record
     set mch_billno = #{mchBillno,jdbcType=VARCHAR},
+      redpacktemid = #{redpacktemid,jdbcType=INTEGER},
       wxappid = #{wxappid,jdbcType=VARCHAR},
       openid = #{openid,jdbcType=VARCHAR},
       total_amount = #{totalAmount,jdbcType=INTEGER},

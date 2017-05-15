@@ -21,6 +21,8 @@ public interface WxGroupMapper {
 
     int updateByExample(@Param("record") WxGroup record, @Param("example") WxGroupExample example);
 
+    int updateByPrimaryKey(WxGroup record);
+
     WxGroup getGroupByName(@Param("name") String name);
 
 }
