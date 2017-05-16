@@ -3,6 +3,7 @@
  */
 
 
+
 $('#submit').click(function(){
     event.preventDefault();
     $sendName=$('#sendName').val();
@@ -11,8 +12,8 @@ $('#submit').click(function(){
     $number=$('#number').val();
     $minAccount=$('#minAccount').val();
     $maxAccount=$('#maxAccount').val();
-    $startDate=$('#startDate').val();
-    $endDate=$('#endDate').val();
+    $startDate=Date.parse($('#startDate').val())/1000;
+    $endDate=Date.parse($('#endDate').val())/1000;
     $rate=$('#rate').val();
     $introduce=$('#introduce').val();
     $wishing=$('#wishing').val();
@@ -84,7 +85,7 @@ $('#submit').click(function(){
     	let warn='<span class="red errwarn">活动截止时间应晚于开始时间</sapn>';
     	$('#endDate').after(warn);
     	return ;
-    }else if(new Date($startDate) < new Date()){
+    }else if($startDate < Date.parse(new Date())/1000){
     	let warn='<span class="red errwarn">不能从过去开始</sapn>';
     	$('#endDate').after(warn);
     	return ;

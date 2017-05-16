@@ -106,7 +106,7 @@ ul,ol{
     margin-top: 30px;
     margin-bottom: 15px;
 }
-.dropdown-menu{
+.drop-nav{
     min-width:88px;
     height: 78px;
     font-size: 13px;
@@ -210,7 +210,6 @@ ul,ol{
     cursor: pointer;
     text-align: center;
     margin-top: 40px;
-    margin-right: 120px;
 }
 .btn-event span{
     line-height: 30px;
@@ -340,4 +339,18 @@ textarea{
 .list ul li.chosen{
 	background: #00A8D2;
 	color: #fff;
+}
+
+.dropdown-toggle{
+	width: 100%
+}
+.packetComfigList{
+	position: static;
+	margin: 0 auto;
+	float: none;
+	border: none;
+	box-shadow: none;
+}
+.packetComfigList li a{
+	font-size: 14px;
 }

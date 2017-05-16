@@ -7,7 +7,17 @@ function myAlert(str){
 	 $('body').append(alert);
 }
 
-$('body').on('click','.closeDown',function(){
+$('body').on('click','.closeDown',function($scope){
     $('.cover').remove();
     $('.add-container').remove();
+});
+
+angular.module('myApp',[]).controller('myCtrl',function($scope){
+	$.ajax({
+		type: 'GET',
+		url: '/WxRedpackTemplet',
+		success: function(data){
+			$scope.actList = data.data;
+		}
+	});
 });

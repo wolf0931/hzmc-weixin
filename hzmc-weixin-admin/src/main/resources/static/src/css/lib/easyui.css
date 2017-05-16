@@ -968,7 +968,7 @@
   overflow: auto;
 }
 .combo-arrow {
-  background: url('images/combo_arrow.png') no-repeat center center;
+  background: url('../../images/combo_arrow.png') no-repeat center center;
 }
 .combo-panel {
   background-color: #ffffff;
