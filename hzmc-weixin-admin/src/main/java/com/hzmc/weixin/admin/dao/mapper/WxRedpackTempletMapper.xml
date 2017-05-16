@@ -10,10 +10,10 @@
         <result column="total_num" jdbcType="INTEGER" property="totalNum"/>
         <result column="total_amount" jdbcType="INTEGER" property="totalAmount"/>
         <result column="winning_rate" jdbcType="VARCHAR" property="winningRate"/>
-        <result column="startTime" jdbcType="VARCHAR" property="starttime"/>
-        <result column="endTime" jdbcType="VARCHAR" property="endtime"/>
-        <result column="min_amount" jdbcType="INTEGER" property="minAmount"/>
-        <result column="max_amount" jdbcType="INTEGER" property="maxAmount"/>
+        <result column="startTime" jdbcType="VARCHAR" property="startTime"/>
+        <result column="endTime" jdbcType="VARCHAR" property="endTime"/>
+        <result column="min_amount" jdbcType="VARCHAR" property="minAmount"/>
+        <result column="max_amount" jdbcType="VARCHAR" property="maxAmount"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -129,8 +129,8 @@
         )
         values (#{id,jdbcType=INTEGER}, #{actName,jdbcType=VARCHAR}, #{sendName,jdbcType=VARCHAR},
         #{wishing,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{totalNum,jdbcType=INTEGER},
-        #{totalAmount,jdbcType=INTEGER}, #{winningRate,jdbcType=VARCHAR}, #{starttime,jdbcType=VARCHAR},
-        #{endtime,jdbcType=VARCHAR}, #{minAmount,jdbcType=INTEGER}, #{maxAmount,jdbcType=INTEGER}
+        #{totalAmount,jdbcType=INTEGER}, #{winningRate,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR},
+        #{endTime,jdbcType=VARCHAR}, #{minAmount,jdbcType=VARCHAR}, #{maxAmount,jdbcType=VARCHAR}
         )
     </insert>
     <insert id="insertSelective" parameterType="com.hzmc.weixin.admin.dao.model.WxRedpackTemplet">
@@ -160,10 +160,10 @@
             <if test="winningRate != null">
                 winning_rate,
             </if>
-            <if test="starttime != null">
+            <if test="startTime != null">
                 startTime,
             </if>
-            <if test="endtime != null">
+            <if test="endTime != null">
                 endTime,
             </if>
             <if test="minAmount != null">
@@ -198,17 +198,17 @@
             <if test="winningRate != null">
                 #{winningRate,jdbcType=VARCHAR},
             </if>
-            <if test="starttime != null">
-                #{starttime,jdbcType=VARCHAR},
+            <if test="startTime != null">
+                #{startTime,jdbcType=VARCHAR},
             </if>
-            <if test="endtime != null">
-                #{endtime,jdbcType=VARCHAR},
+            <if test="endTime != null">
+                #{endTime,jdbcType=VARCHAR},
             </if>
             <if test="minAmount != null">
-                #{minAmount,jdbcType=INTEGER},
+                #{minAmount,jdbcType=VARCHAR},
             </if>
             <if test="maxAmount != null">
-                #{maxAmount,jdbcType=INTEGER},
+                #{maxAmount,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -246,17 +246,17 @@
             <if test="record.winningRate != null">
                 winning_rate = #{record.winningRate,jdbcType=VARCHAR},
             </if>
-            <if test="record.starttime != null">
-                startTime = #{record.starttime,jdbcType=VARCHAR},
+            <if test="record.startTime != null">
+                startTime = #{record.startTime,jdbcType=VARCHAR},
             </if>
-            <if test="record.endtime != null">
-                endTime = #{record.endtime,jdbcType=VARCHAR},
+            <if test="record.endTime != null">
+                endTime = #{record.endTime,jdbcType=VARCHAR},
             </if>
             <if test="record.minAmount != null">
-                min_amount = #{record.minAmount,jdbcType=INTEGER},
+                min_amount = #{record.minAmount,jdbcType=VARCHAR},
             </if>
             <if test="record.maxAmount != null">
-                max_amount = #{record.maxAmount,jdbcType=INTEGER},
+                max_amount = #{record.maxAmount,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -273,10 +273,10 @@
         total_num = #{record.totalNum,jdbcType=INTEGER},
         total_amount = #{record.totalAmount,jdbcType=INTEGER},
         winning_rate = #{record.winningRate,jdbcType=VARCHAR},
-        startTime = #{record.starttime,jdbcType=VARCHAR},
-        endTime = #{record.endtime,jdbcType=VARCHAR},
-        min_amount = #{record.minAmount,jdbcType=INTEGER},
-        max_amount = #{record.maxAmount,jdbcType=INTEGER}
+        startTime = #{record.startTime,jdbcType=VARCHAR},
+        endTime = #{record.endTime,jdbcType=VARCHAR},
+        min_amount = #{record.minAmount,jdbcType=VARCHAR},
+        max_amount = #{record.maxAmount,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -305,17 +305,17 @@
             <if test="winningRate != null">
                 winning_rate = #{winningRate,jdbcType=VARCHAR},
             </if>
-            <if test="starttime != null">
-                startTime = #{starttime,jdbcType=VARCHAR},
+            <if test="startTime != null">
+                startTime = #{startTime,jdbcType=VARCHAR},
             </if>
-            <if test="endtime != null">
-                endTime = #{endtime,jdbcType=VARCHAR},
+            <if test="endTime != null">
+                endTime = #{endTime,jdbcType=VARCHAR},
             </if>
             <if test="minAmount != null">
-                min_amount = #{minAmount,jdbcType=INTEGER},
+                min_amount = #{minAmount,jdbcType=VARCHAR},
             </if>
             <if test="maxAmount != null">
-                max_amount = #{maxAmount,jdbcType=INTEGER},
+                max_amount = #{maxAmount,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -329,10 +329,10 @@
       total_num = #{totalNum,jdbcType=INTEGER},
       total_amount = #{totalAmount,jdbcType=INTEGER},
       winning_rate = #{winningRate,jdbcType=VARCHAR},
-      startTime = #{starttime,jdbcType=VARCHAR},
-      endTime = #{endtime,jdbcType=VARCHAR},
-      min_amount = #{minAmount,jdbcType=INTEGER},
-      max_amount = #{maxAmount,jdbcType=INTEGER}
+      startTime = #{startTime,jdbcType=VARCHAR},
+      endTime = #{endTime,jdbcType=VARCHAR},
+      min_amount = #{minAmount,jdbcType=VARCHAR},
+      max_amount = #{maxAmount,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 

@@ -8,6 +8,8 @@ import com.hzmc.weixin.admin.dao.model.WxPayRecordExample;
 import com.hzmc.weixin.admin.service.WxPayRecordService;
 import com.hzmc.weixin.admin.service.WxRedpackTempletService;
 import com.hzmc.weixin.admin.service.WxUserService;
+import com.hzmc.weixin.pay.redpack.RedPacks;
+import com.hzmc.weixin.pay.redpack.bean.RedPackResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.map.HashedMap;
@@ -50,7 +52,14 @@ public class WxPayRecordController extends BaseController {
 		List<Map<String, Object>> list = new ArrayList<>();
 		for (WxPayRecord wxPayRecord : wxPayRecords) {
 			Map<String, Object> map = new HashedMap();
-			map.put("wxPayRecord", wxPayRecord);
+			if (wxPayRecord.getStatus().equals("RECEIVED")){
+				map.put("wxPayRecord", wxPayRecord);
+			}else{
+				RedPackResult redPackResult = RedPacks.defaultRedPacks().query(wxPayRecord.getMchBillno());
+				wxPayRecord.setStatus(redPackResult.getStatus());
+				wxPayRecordService.updateByPrimaryKey(wxPayRecord);
+				map.put("wxPayRecord", wxPayRecord);
+			}
 			map.put("user", wxUserService.getWxUserByOpenId(wxPayRecord.getOpenid()));
 			map.put("redPackTem",wxRedpackTempletService.selectByPrimaryKey(wxPayRecord.getRedpacktemid()));
 			list.add(map);
