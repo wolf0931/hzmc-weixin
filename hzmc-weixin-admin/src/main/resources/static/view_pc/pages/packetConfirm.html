@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>杭州美创微信管理平台</title>
  	<link rel="stylesheet" type="text/css" href="../../src/css/lib/bootstrap_3.3.6.min.css">
+ 	<link rel="stylesheet" type="text/css" href="../../src/css/lib/easyui.css">
  	<link rel="stylesheet" type="text/css" href="../../src/css/main_pc.css">
  	<link rel="stylesheet" type="text/css" href="../../src/css/controllers/packetConfirm.css">
 </head>
@@ -21,7 +22,7 @@
 	</div>
 	
     <div id="main_container" class='col-sm-10'>
-    	<form class='col-sm-6 col-sm-offset-3'>
+    	<form class='col-sm-8 col-sm-offset-2'>
 		    <table class='comfirmInfo'>
 		    	<tr>
 		    		<td>
@@ -47,7 +48,9 @@
 		    			</div>
 		    			<div class='lableGroup relative'>
 		    				<lable><span class='red'>*</span>活动时间：</lable>
-		    				<input type='date' id='startDate'>~<input type='date' id='endDate'>
+		    				<input class="easyui-datetimebox" id='startDate' label="Select DateTime:" labelPosition="top" style="width:100%;">
+		    				~
+		    				<input class="easyui-datetimebox" id='endDate' label="Select DateTime:" labelPosition="top" style="width:100%;">
 		    			</div>
 		    			<div class='lableGroup relative'>
 		    				<lable for='rate'><span class='red'>*</span>中奖率：</lable>
@@ -78,6 +81,7 @@
  	<script src="../../src/js/lib/jquery_1.11.3.min.js"></script>
     <script src="../../src/js/lib/bootstrap_3.3.6.min.js"></script>
     <script src="../../src/js/lib/jquery-impromptu.2.5.min.js"></script>
+    <script src="../../src/js/lib/jquery.easyui.min.js"></script>
     <script src="../../src/js/lib/angular.min.js"></script>
     <script src="../../src/js/controllers/packetConfirm.js"></script>
     <script src="../../src/js/alert.js"></script>
