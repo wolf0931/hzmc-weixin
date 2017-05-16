@@ -1,5 +1,7 @@
 package com.hzmc.weixin.admin.service.impl;
 
+import com.hzmc.weixin.admin.base.Result;
+import com.hzmc.weixin.admin.constant.ResultConstant;
 import com.hzmc.weixin.admin.dao.model.WxPayRecord;
 import com.hzmc.weixin.admin.dao.model.WxRedpackTemplet;
 import com.hzmc.weixin.admin.dao.model.WxUser;
@@ -47,11 +49,11 @@ public class RedPayServiceImp implements RedPayService {
 		RedPackRequest redPackRequest = new RedPackRequest();
 		User user = Users.defaultUsers().get(wxUser.getOpenid());
 		WxUser wxUser1 = userService.getWxUserByOpenId(wxUser.getOpenid());
-		/*if (user.getGroup() == 102 || wxUser1.getGroupid() == 102) {
+		if (user.getGroup() == 102 || wxUser1.getGroupid() == 102) {
 			return new Result(ResultConstant.FAILED, "内部人员不能发红包");
 		} else if (!user.isSubscribed()) {
 			return new Result(ResultConstant.FAILED, "没有关注公众号");
-		}*/
+		}
 		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(id);
 		redPackRequest.setAppId(PaySetting.defaultSetting().getAppId());
 		redPackRequest.setActivityName(wxRedpackTemplet.getActName());
