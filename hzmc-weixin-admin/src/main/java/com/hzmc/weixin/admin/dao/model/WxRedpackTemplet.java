@@ -49,9 +49,9 @@ public class WxRedpackTemplet implements Serializable {
      */
     private String winningRate;
 
-    private String starttime;
+    private String startTime;
 
-    private String endtime;
+    private String endTime;
 
     private Integer minAmount;
 
@@ -123,20 +123,20 @@ public class WxRedpackTemplet implements Serializable {
         this.winningRate = winningRate;
     }
 
-    public String getStarttime() {
-        return starttime;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setStarttime(String starttime) {
-        this.starttime = starttime;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
-    public String getEndtime() {
-        return endtime;
+    public String getEndTime() {
+        return endTime;
     }
 
-    public void setEndtime(String endtime) {
-        this.endtime = endtime;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public Integer getMinAmount() {
