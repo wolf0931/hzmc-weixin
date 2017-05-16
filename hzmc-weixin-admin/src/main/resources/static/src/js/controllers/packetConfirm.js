@@ -131,12 +131,12 @@ $('#submit').click(function(){
     		"actName": $actName,
     		"totalAmount": $sum,
     		"totalNum": $number,
-    		"minAccount": $minAccount,
-    		"maxAccount": $maxAccount,
-    		"starttime": $startDate,
-    		"endDate": $endDate,
+    		"minAmount": $minAccount,
+    		"maxAmount": $maxAccount,
+    		"startTime": $startDate,
+    		"endTime": $endDate,
     		"winningRate": $rate,
-    		"intro": $introduce,
+    		"remark": $introduce,
     		"wishing": $wishing
     };
     $.ajax({
