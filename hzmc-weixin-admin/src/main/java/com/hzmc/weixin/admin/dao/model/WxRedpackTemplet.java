@@ -53,9 +53,9 @@ public class WxRedpackTemplet implements Serializable {
 
     private String endTime;
 
-    private Integer minAmount;
+    private String minAmount;
 
-    private Integer maxAmount;
+    private String maxAmount;
 
     private static final long serialVersionUID = 1L;
 
@@ -139,19 +139,19 @@ public class WxRedpackTemplet implements Serializable {
         this.endTime = endTime;
     }
 
-    public Integer getMinAmount() {
+    public String getMinAmount() {
         return minAmount;
     }
 
-    public void setMinAmount(Integer minAmount) {
+    public void setMinAmount(String minAmount) {
         this.minAmount = minAmount;
     }
 
-    public Integer getMaxAmount() {
+    public String getMaxAmount() {
         return maxAmount;
     }
 
-    public void setMaxAmount(Integer maxAmount) {
+    public void setMaxAmount(String maxAmount) {
         this.maxAmount = maxAmount;
     }
 

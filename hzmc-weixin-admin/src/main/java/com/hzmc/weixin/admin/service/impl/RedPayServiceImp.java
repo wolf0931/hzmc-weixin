@@ -56,8 +56,8 @@ public class RedPayServiceImp implements RedPayService {
 		redPackRequest.setAppId(PaySetting.defaultSetting().getAppId());
 		redPackRequest.setActivityName(wxRedpackTemplet.getActName());
 		Random random = new Random();
-		int max = wxRedpackTemplet.getMaxAmount();
-		int min = wxRedpackTemplet.getMinAmount();
+		int max = Integer.valueOf(wxRedpackTemplet.getMaxAmount());
+		int min = Integer.valueOf(wxRedpackTemplet.getMinAmount());
 		int randomSum = random.nextInt(max - min);
 		redPackRequest.setAmount(min + randomSum);
 		Date nowTime = new Date(System.currentTimeMillis());

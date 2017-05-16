@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -48,9 +49,27 @@ public class WxRedpackTempletController extends BaseController {
 		if (!result.isSuccess()) {
 			return new Result(ResultConstant.FAILED, result.getErrors());
 		}
+	/*	String[] mins = wxRedpackTemplet.getMinAmount().split(".");
+		String minposition = mins[1];
+		String[] maxs = wxRedpackTemplet.getMaxAmount().split(".");
+		String maxposition = maxs[1];
+		if (minposition.length() > 2) {
+			return new Result(ResultConstant.FAILED, "最小金额最多二位小数点");
+		} else if (maxposition.length() > 2) {
+			return new Result(ResultConstant.FAILED, "最大金额最多二位小数点");
+		}*/
+
+		Double min = Double.valueOf(wxRedpackTemplet.getMinAmount()) * 100;
+		BigDecimal bmin = new BigDecimal(min);
+		min = bmin.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+
+		Double max = Double.valueOf(wxRedpackTemplet.getMaxAmount()) * 100;
+		BigDecimal bmax = new BigDecimal(max);
+		max = bmax.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+
 		wxRedpackTemplet.setTotalAmount(wxRedpackTemplet.getTotalAmount() * 100);
-		wxRedpackTemplet.setMinAmount(wxRedpackTemplet.getMinAmount() * 100);
-		wxRedpackTemplet.setMaxAmount(wxRedpackTemplet.getMaxAmount() * 100);
+		wxRedpackTemplet.setMinAmount(min.intValue() + "");
+		wxRedpackTemplet.setMaxAmount(max.intValue() + "");
 		List<WxRedpackTemplet> wxRedpackTempletList = wxRedpackTempletService.getTempletByActName(wxRedpackTemplet.getActName());
 		if (wxRedpackTempletList.size() > 0) {
 			return new Result(ResultConstant.FAILED, "活动名称已经存在");
@@ -72,5 +91,38 @@ public class WxRedpackTempletController extends BaseController {
 		WxRedpackTempletExample wxRedpackTemplet = new WxRedpackTempletExample();
 		List<WxRedpackTemplet> wxRedpackTemplets = wxRedpackTempletService.selectByExample(wxRedpackTemplet);
 		return new Result(ResultConstant.SUCCESS, wxRedpackTemplets);
+	}
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	@ApiOperation(value = "根据Id删除红包模板记录")
+	private Object deleteRedPackTemPletList(@PathVariable Integer id) {
+		int count = wxRedpackTempletService.deleteByPrimaryKey(id);
+		if (count == 1) {
+			return new Result(ResultConstant.SUCCESS, count);
+		} else {
+			return new Result(ResultConstant.FAILED, count);
+		}
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ApiOperation(value = "更新红包模板记录")
+	private Object updateRedPackTemPletList(@RequestBody WxRedpackTemplet wxRedpackTemplet) {
+		Double min = Double.valueOf(wxRedpackTemplet.getMinAmount()) * 100;
+		BigDecimal bmin = new BigDecimal(min);
+		min = bmin.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+
+		Double max = Double.valueOf(wxRedpackTemplet.getMaxAmount()) * 100;
+		BigDecimal bmax = new BigDecimal(max);
+		max = bmax.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+
+		wxRedpackTemplet.setTotalAmount(wxRedpackTemplet.getTotalAmount() * 100);
+		wxRedpackTemplet.setMinAmount(min.intValue() + "");
+		wxRedpackTemplet.setMaxAmount(max.intValue() + "");
+		int count = wxRedpackTempletService.updateByPrimaryKey(wxRedpackTemplet);
+		if (count == 1) {
+			return new Result(ResultConstant.SUCCESS, count);
+		} else {
+			return new Result(ResultConstant.FAILED, count);
+		}
 	}
 }
