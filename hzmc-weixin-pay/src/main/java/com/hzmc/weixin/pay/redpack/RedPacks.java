@@ -77,8 +77,8 @@ public class RedPacks {
             logger.info("send query redpack request: {}", xml);
             String response = wxSslClient.post(url, xml);
             logger.info("got query response: {}", response);
-            RedPackResultWrapper redPackResultWrapper = XmlObjectMapper.defaultMapper().fromXml(response, RedPackResultWrapper.class);
-            return redPackResultWrapper.getRedPackResult();
+            RedPackResult redPackResult = XmlObjectMapper.defaultMapper().fromXml(response, RedPackResult.class);
+            return redPackResult;
         } catch (Exception e) {
             throw new WxRuntimeException(999, " redpack failed:" + e.getMessage());
         }

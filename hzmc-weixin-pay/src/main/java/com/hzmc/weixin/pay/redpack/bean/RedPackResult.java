@@ -15,6 +15,15 @@ public class RedPackResult extends BaseResponse {
 	@JsonProperty("mch_billno")
 	private String billNumber;
 
+	@JsonProperty("mch_id")
+	private String mchId;
+
+	@JsonProperty("detail_id")
+	private String detailId;
+
+	@JsonProperty("status")
+	private String status;
+
 	@JsonProperty("total_amount")
 	private int totalAmount;
 
@@ -30,18 +39,15 @@ public class RedPackResult extends BaseResponse {
 	private String readPackType;
 
 	@JsonProperty("send_time")
-	@JsonSerialize(using = DateSerializer.class)
 	@JsonDeserialize(using = DateDeserializer.class)
 	private Date sendTime;
 
 	@JsonProperty("refund_time")
 	@JsonDeserialize(using = DateDeserializer.class)
-	@JsonSerialize(using = DateSerializer.class)
 	private Date refundTime;
 
 	@JsonProperty("refund_amount")
 	@JsonDeserialize(using = DateDeserializer.class)
-	@JsonSerialize(using = DateSerializer.class)
 	private int refundAmount;
 
 	@JsonProperty("hblist")
@@ -125,6 +131,30 @@ public class RedPackResult extends BaseResponse {
 
 	public void setBillNumber(String billNumber) {
 		this.billNumber = billNumber;
+	}
+
+	public String getMchId() {
+		return mchId;
+	}
+
+	public void setMchId(String mchId) {
+		this.mchId = mchId;
+	}
+
+	public String getDetailId() {
+		return detailId;
+	}
+
+	public void setDetailId(String detailId) {
+		this.detailId = detailId;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public static class RedPackReport {
