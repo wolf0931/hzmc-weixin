@@ -47,6 +47,16 @@ public class WxPayRecord implements Serializable {
 
 	private String sendListid;
 
+	/**
+	 * SENDING:发放中
+	 * SENT:已发放待领取
+	 * FAILED：发放失败
+	 * RECEIVED:已领取
+	 * RFUND_ING:退款中
+	 * REFUND:已退款
+	 */
+	private String status;
+
 	private String ctime;
 
 	private static final long serialVersionUID = 1L;
@@ -115,6 +125,14 @@ public class WxPayRecord implements Serializable {
 		this.sendListid = sendListid;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public String getCtime() {
 		return ctime;
 	}
@@ -136,6 +154,7 @@ public class WxPayRecord implements Serializable {
 		sb.append(", openid=").append(openid);
 		sb.append(", totalAmount=").append(totalAmount);
 		sb.append(", mchId=").append(mchId);
+		sb.append(", status=").append(status);
 		sb.append(", sendListid=").append(sendListid);
 		sb.append(", ctime=").append(ctime);
 		sb.append("]");
