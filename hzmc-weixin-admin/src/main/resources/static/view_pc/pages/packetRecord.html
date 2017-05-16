@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>杭州美创微信管理平台</title>
+ 	<link rel="stylesheet" type="text/css" href="../../src/css/lib/bootstrap_3.3.6.min.css">
+ 	<link rel="stylesheet" type="text/css" href="../../src/css/main_pc.css">
+ 	<link rel="stylesheet" type="text/css" href="../../src/css/controllers/packetConfirm.css">
+</head>
+<body ng-app=''>
+<!-- 菜单 -->
+ <div ng-include="'../header.html'"></div>
+<!-- 菜单 end-->
+
+
+<div style="clear: both"></div>
+<div id="main"> 
+
+	<div class='list_container col-sm-2'>
+		<div ng-include="'../list.html'"></div>
+	</div>
+	
+    <div id="main_container" class='col-sm-10'>
+    	<div class='col-sm-8 col-sm-offset-2'>
+		    <table class='comfirmInfo'>
+		    	<thead>
+		    		<th>openid</th>
+		    		<th>用户昵称</th>
+		    		<th>红包金额</th>
+		    		<th>红包状态</th>
+		    	</thead>
+		    </table>
+		</div>
+    </div>
+
+</div>
+
+
+ 	<script src="../../src/js/lib/jquery_1.11.3.min.js"></script>
+    <script src="../../src/js/lib/bootstrap_3.3.6.min.js"></script>
+    <script src="../../src/js/lib/jquery-impromptu.2.5.min.js"></script>
+    <script src="../../src/js/lib/angular.min.js"></script>
+    <script src="../../src/js/controllers/packetConfirm.js"></script>
+    <script src="../../src/js/alert.js"></script>
+</body>
+</html>
