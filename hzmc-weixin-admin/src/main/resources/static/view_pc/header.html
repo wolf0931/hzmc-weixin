@@ -31,12 +31,6 @@
 		$.ajax({
 			type:'post',
 	    	url:"/login/exit",
-	    	dataType: "json",
-	    	headers:{  
-	            Accept:"application/json",  
-	            "Content-Type":"application/json"  
-	        },
-	    	data:JSON.stringify(user),
 	    	success:function(data){
 	    		if(data.message == "success"){
 	    			window.location.href='../../index.html';
