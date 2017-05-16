@@ -32,7 +32,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 		if (!requestUrl.endsWith("/")) {
 			requestUrl = requestUrl + "/";
 		}
-		if (LOGINURL.equals(request.getRequestURI())) {
+		String uri = request.getRequestURI();
+		if (uri.contains("v2") || uri.contains("swagger")){
+			return true;
+		}
+		if (LOGINURL.equals(uri)) {
 			return true;
 		}
 		User user = null;
