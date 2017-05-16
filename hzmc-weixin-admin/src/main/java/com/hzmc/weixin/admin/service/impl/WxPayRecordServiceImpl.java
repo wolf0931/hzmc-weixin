@@ -23,5 +23,4 @@ public class WxPayRecordServiceImpl extends BaseServiceImpl<WxPayRecordMapper, W
 
     @Autowired
     WxPayRecordMapper wxPayRecordMapper;
-
 }

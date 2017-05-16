@@ -5,9 +5,9 @@ import com.hzmc.weixin.admin.dao.model.WxPayRecord;
 import com.hzmc.weixin.admin.dao.model.WxPayRecordExample;
 
 /**
-* WxPayRecordService接口
-* Created by wph on 2017/5/8.
-*/
+ * WxPayRecordService接口
+ * Created by wph on 2017/5/8.
+ */
 public interface WxPayRecordService extends BaseService<WxPayRecord, WxPayRecordExample> {
 
 }

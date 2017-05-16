@@ -2,8 +2,9 @@ package com.hzmc.weixin.admin.dao.mapper;
 
 import com.hzmc.weixin.admin.dao.model.WxPayRecord;
 import com.hzmc.weixin.admin.dao.model.WxPayRecordExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface WxPayRecordMapper {
     long countByExample(WxPayRecordExample example);
@@ -27,4 +28,5 @@ public interface WxPayRecordMapper {
     int updateByPrimaryKeySelective(WxPayRecord record);
 
     int updateByPrimaryKey(WxPayRecord record);
+
 }

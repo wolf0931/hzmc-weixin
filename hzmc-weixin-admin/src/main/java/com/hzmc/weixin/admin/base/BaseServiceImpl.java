@@ -1,5 +1,6 @@
 package com.hzmc.weixin.admin.base;
 
+import com.github.pagehelper.PageHelper;
 import com.hzmc.weixin.admin.util.SpringContextUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.annotations.Param;
@@ -16,7 +17,6 @@ public abstract class BaseServiceImpl<Mapper, Record, Example> implements BaseSe
 
 	@Autowired
 	public Mapper mapper;
-
 
 	@Override
 	public int countByExample(Example example) {
@@ -138,6 +138,20 @@ public abstract class BaseServiceImpl<Mapper, Record, Example> implements BaseSe
 			Method selectByPrimaryKey = mapper.getClass().getDeclaredMethod("selectByPrimaryKey", id.getClass());
 			Object result = selectByPrimaryKey.invoke(mapper, id);
 			return (Record) result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	@Override
+	public List<Record> selectByExampleForOffsetPage(Example example, Integer offset, Integer limit) {
+		try {
+			Method selectByExample = mapper.getClass().getDeclaredMethod("selectByExample", example.getClass());
+			PageHelper.offsetPage(offset, limit, false);
+			Object result = selectByExample.invoke(mapper, example);
+			return (List<Record>) result;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

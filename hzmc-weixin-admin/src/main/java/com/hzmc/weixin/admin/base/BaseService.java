@@ -29,6 +29,8 @@ public interface BaseService<Record, Example> {
 
 	Record selectByPrimaryKey(Integer id);
 
+	List<Record> selectByExampleForOffsetPage(Example example, Integer offset, Integer limit);
+
 	int updateByExampleSelective(@Param("record") Record record, @Param("example") Example example);
 
 	int updateByExampleWithBLOBs(@Param("record") Record record, @Param("example") Example example);

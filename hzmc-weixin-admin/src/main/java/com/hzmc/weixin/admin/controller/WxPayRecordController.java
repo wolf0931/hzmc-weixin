@@ -16,11 +16,13 @@ import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,19 +54,49 @@ public class WxPayRecordController extends BaseController {
 		List<Map<String, Object>> list = new ArrayList<>();
 		for (WxPayRecord wxPayRecord : wxPayRecords) {
 			Map<String, Object> map = new HashedMap();
-			if (wxPayRecord.getStatus().equals("RECEIVED")){
+			if (wxPayRecord.getStatus().equals("RECEIVED")) {
 				map.put("wxPayRecord", wxPayRecord);
-			}else{
+			} else {
 				RedPackResult redPackResult = RedPacks.defaultRedPacks().query(wxPayRecord.getMchBillno());
 				wxPayRecord.setStatus(redPackResult.getStatus());
 				wxPayRecordService.updateByPrimaryKey(wxPayRecord);
 				map.put("wxPayRecord", wxPayRecord);
 			}
 			map.put("user", wxUserService.getWxUserByOpenId(wxPayRecord.getOpenid()));
-			map.put("redPackTem",wxRedpackTempletService.selectByPrimaryKey(wxPayRecord.getRedpacktemid()));
+			map.put("redPackTem", wxRedpackTempletService.selectByPrimaryKey(wxPayRecord.getRedpacktemid()));
 			list.add(map);
 		}
 		return new Result(ResultConstant.SUCCESS, list);
 	}
 
+	@RequestMapping(value = "/{offset}/{limit}", method = RequestMethod.GET)
+	@ApiOperation(value = "得到所有已经发出发去的红包记录")
+	private Object getPayRecordPageLists(@PathVariable int offset,
+										 @PathVariable int limit) {
+		WxPayRecordExample wxPayRecordExample = new WxPayRecordExample();
+		wxPayRecordExample.setOffset(offset);
+		wxPayRecordExample.setLimit(limit);
+		List<WxPayRecord> wxPayRecords = wxPayRecordService.selectByExampleForOffsetPage(wxPayRecordExample,offset,limit);
+		List<Map<String, Object>> list = new ArrayList<>();
+		long total = wxPayRecordService.countByExample(wxPayRecordExample);
+		Map<String, Object> result = new HashMap<>();
+		result.put("total", total);
+		for (WxPayRecord wxPayRecord : wxPayRecords) {
+			Map<String, Object> map = new HashedMap();
+			if (wxPayRecord.getStatus() !=null){
+				if (wxPayRecord.getStatus().equals("RECEIVED")) {
+				} else {
+					RedPackResult redPackResult = RedPacks.defaultRedPacks().query(wxPayRecord.getMchBillno());
+					wxPayRecord.setStatus(redPackResult.getStatus());
+					wxPayRecordService.updateByPrimaryKey(wxPayRecord);
+				}
+			}
+			map.put("wxPayRecord", wxPayRecord);
+			map.put("user", wxUserService.getWxUserByOpenId(wxPayRecord.getOpenid()));
+			map.put("redPackTem", wxRedpackTempletService.selectByPrimaryKey(wxPayRecord.getRedpacktemid()));
+			list.add(map);
+		}
+		result.put("rows", list);
+		return new Result(ResultConstant.SUCCESS, result);
+	}
 }
