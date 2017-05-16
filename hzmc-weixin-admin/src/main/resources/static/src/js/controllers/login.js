@@ -1,8 +1,7 @@
 /**
  * Created by DELL on 2016/12/22.
  */
-$('button.btn').click(function(){
-    event.preventDefault();
+function login(){
     $userName=$('#userName').val();
     $userPwd=$('#userPwd').val();
     if($userName == ""||$userPwd == ""){
@@ -28,4 +27,4 @@ $('button.btn').click(function(){
         	}
         });
     }
-});
+}

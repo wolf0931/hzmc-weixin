@@ -18,6 +18,16 @@ function judge(){
 	
 //	myAlert('1');
 	
+	$.ajax({
+		type: 'GET',
+    	url: '',
+    	success:function(){
+    		if(data.massage == 'success'){
+    			return;
+    		}
+    	}
+	});
+	
     $.ajax({
     	type: 'GET',
     	url: '/oauth/'+openId,
