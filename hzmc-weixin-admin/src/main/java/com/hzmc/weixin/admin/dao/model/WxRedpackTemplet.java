@@ -169,8 +169,8 @@ public class WxRedpackTemplet implements Serializable {
         sb.append(", totalNum=").append(totalNum);
         sb.append(", totalAmount=").append(totalAmount);
         sb.append(", winningRate=").append(winningRate);
-        sb.append(", starttime=").append(starttime);
-        sb.append(", endtime=").append(endtime);
+        sb.append(", startTime=").append(startTime);
+        sb.append(", endTime=").append(endTime);
         sb.append(", minAmount=").append(minAmount);
         sb.append(", maxAmount=").append(maxAmount);
         sb.append("]");
