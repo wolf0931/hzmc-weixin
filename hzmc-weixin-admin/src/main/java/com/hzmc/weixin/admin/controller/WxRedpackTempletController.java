@@ -49,6 +49,8 @@ public class WxRedpackTempletController extends BaseController {
 			return new Result(ResultConstant.FAILED, result.getErrors());
 		}
 		wxRedpackTemplet.setTotalAmount(wxRedpackTemplet.getTotalAmount() * 100);
+		wxRedpackTemplet.setMinAmount(wxRedpackTemplet.getMinAmount() * 100);
+		wxRedpackTemplet.setMaxAmount(wxRedpackTemplet.getMaxAmount() * 100);
 		List<WxRedpackTemplet> wxRedpackTempletList = wxRedpackTempletService.getTempletByActName(wxRedpackTemplet.getActName());
 		if (wxRedpackTempletList.size() > 0) {
 			return new Result(ResultConstant.FAILED, "活动名称已经存在");
