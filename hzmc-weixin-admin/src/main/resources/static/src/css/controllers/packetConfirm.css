@@ -4,8 +4,8 @@
 	.comfirmInfo{
 		width:100%;
 	}
-	td{
-		padding:30px 0;
+	th,td{
+		padding:20px 0;
 		text-align:center;
 		border:1px solid #7C8693;
 	}
