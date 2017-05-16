@@ -6,8 +6,11 @@ import com.hzmc.weixin.admin.constant.ResultConstant;
 import com.hzmc.weixin.admin.dao.model.WxPayRecord;
 import com.hzmc.weixin.admin.dao.model.WxPayRecordExample;
 import com.hzmc.weixin.admin.service.WxPayRecordService;
+import com.hzmc.weixin.admin.service.WxRedpackTempletService;
+import com.hzmc.weixin.admin.service.WxUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * WxPayRecordcontroller
@@ -31,12 +36,26 @@ public class WxPayRecordController extends BaseController {
 	@Autowired
 	private WxPayRecordService wxPayRecordService;
 
+	@Autowired
+	private WxUserService wxUserService;
+
+	@Autowired
+	private WxRedpackTempletService wxRedpackTempletService;
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@ApiOperation(value = "得到所有已经发出发去的红包记录")
 	private Object getPayRecordLists() {
 		WxPayRecordExample wxPayRecordExample = new WxPayRecordExample();
 		List<WxPayRecord> wxPayRecords = wxPayRecordService.selectByExample(wxPayRecordExample);
-		return new Result(ResultConstant.SUCCESS, wxPayRecords);
+		List<Map<String, Object>> list = new ArrayList<>();
+		for (WxPayRecord wxPayRecord : wxPayRecords) {
+			Map<String, Object> map = new HashedMap();
+			map.put("wxPayRecord", wxPayRecord);
+			map.put("user", wxUserService.getWxUserByOpenId(wxPayRecord.getOpenid()));
+			map.put("redPackTem",wxRedpackTempletService.selectByPrimaryKey(wxPayRecord.getRedpacktemid()));
+			list.add(map);
+		}
+		return new Result(ResultConstant.SUCCESS, list);
 	}
 
 }

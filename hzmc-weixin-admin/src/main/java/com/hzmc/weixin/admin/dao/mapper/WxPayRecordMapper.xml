@@ -9,6 +9,7 @@
     <result column="openid" jdbcType="VARCHAR" property="openid" />
     <result column="total_amount" jdbcType="INTEGER" property="totalAmount" />
     <result column="mch_id" jdbcType="VARCHAR" property="mchId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="send_listid" jdbcType="VARCHAR" property="sendListid" />
     <result column="ctime" jdbcType="VARCHAR" property="ctime" />
   </resultMap>
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, mch_billno,redpacktemid, wxappid, openid, total_amount, mch_id, send_listid, ctime
+    id, mch_billno,redpacktemid, wxappid, openid, total_amount, mch_id, status,send_listid, ctime
   </sql>
   <select id="selectByExample" parameterType="com.hzmc.weixin.admin.dao.model.WxPayRecordExample" resultMap="BaseResultMap">
     select
@@ -113,10 +114,10 @@
   </delete>
   <insert id="insert" parameterType="com.hzmc.weixin.admin.dao.model.WxPayRecord">
     insert into wx_pay_record (id, mch_billno, redpacktemid,wxappid,
-      openid, total_amount, mch_id, 
+      openid, total_amount, mch_id, status,
       send_listid, ctime)
     values (#{id,jdbcType=INTEGER}, #{mchBillno,jdbcType=VARCHAR},#{redpacktemid,jdbcType=INTEGER}, #{wxappid,jdbcType=VARCHAR},
-      #{openid,jdbcType=VARCHAR}, #{totalAmount,jdbcType=INTEGER}, #{mchId,jdbcType=VARCHAR}, 
+      #{openid,jdbcType=VARCHAR}, #{totalAmount,jdbcType=INTEGER}, #{mchId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
       #{sendListid,jdbcType=VARCHAR}, #{ctime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hzmc.weixin.admin.dao.model.WxPayRecord">
@@ -142,6 +143,9 @@
       </if>
       <if test="mchId != null">
         mch_id,
+      </if>
+      <if test="status != null">
+        status,
       </if>
       <if test="sendListid != null">
         send_listid,
@@ -171,6 +175,9 @@
       </if>
       <if test="mchId != null">
         #{mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="status !=null">
+        #{status,jdbcType=VARCHAR},
       </if>
       <if test="sendListid != null">
         #{sendListid,jdbcType=VARCHAR},
@@ -210,6 +217,9 @@
       <if test="record.mchId != null">
         mch_id = #{record.mchId,jdbcType=VARCHAR},
       </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
       <if test="record.sendListid != null">
         send_listid = #{record.sendListid,jdbcType=VARCHAR},
       </if>
@@ -230,6 +240,7 @@
       openid = #{record.openid,jdbcType=VARCHAR},
       total_amount = #{record.totalAmount,jdbcType=INTEGER},
       mch_id = #{record.mchId,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
       send_listid = #{record.sendListid,jdbcType=VARCHAR},
       ctime = #{record.ctime,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -257,6 +268,9 @@
       <if test="mchId != null">
         mch_id = #{mchId,jdbcType=VARCHAR},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
       <if test="sendListid != null">
         send_listid = #{sendListid,jdbcType=VARCHAR},
       </if>
@@ -274,6 +288,7 @@
       openid = #{openid,jdbcType=VARCHAR},
       total_amount = #{totalAmount,jdbcType=INTEGER},
       mch_id = #{mchId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
       send_listid = #{sendListid,jdbcType=VARCHAR},
       ctime = #{ctime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

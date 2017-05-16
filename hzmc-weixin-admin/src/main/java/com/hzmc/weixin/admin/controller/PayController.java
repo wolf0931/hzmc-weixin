@@ -1,8 +1,9 @@
 package com.hzmc.weixin.admin.controller;
 
+import com.hzmc.weixin.admin.base.Result;
+import com.hzmc.weixin.admin.constant.ResultConstant;
 import com.hzmc.weixin.admin.dao.model.WxUser;
 import com.hzmc.weixin.admin.service.RedPayService;
-import com.hzmc.weixin.common.util.JsonMapper;
 import com.hzmc.weixin.pay.redpack.RedPacks;
 import com.hzmc.weixin.pay.redpack.bean.RedPackResult;
 import io.swagger.annotations.Api;
@@ -35,7 +36,7 @@ public class PayController {
 	@ApiOperation(value = "根据billNumber查询红包详情")
 	public Object payQuery(@PathVariable String billNumber) {
 		RedPackResult redPackResult = RedPacks.defaultRedPacks().query(billNumber);
-		return JsonMapper.defaultMapper().toJson(redPackResult);
+		return new Result(ResultConstant.SUCCESS, redPackResult);
 	}
 
 }
