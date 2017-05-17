@@ -46,22 +46,33 @@ public class RedPayServiceImp implements RedPayService {
 	public Object sendSingleRed(WxUser wxUser, int id) {
 		//单个红包
 		//102 为员工不能发红包 oJvITt-VfGOTCe0dcXsZPCqn1APM
+		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(id);
+		long curtime = System.currentTimeMillis() / 1000;
+		long minTime = Long.valueOf(wxRedpackTemplet.getStartTime());
+		long maxTime = Long.valueOf(wxRedpackTemplet.getEndTime());
+		if (curtime >= minTime && curtime <= maxTime) {
+			new Result(ResultConstant.SUCCESS, "活动已结束");
+		}
 		RedPackRequest redPackRequest = new RedPackRequest();
 		User user = Users.defaultUsers().get(wxUser.getOpenid());
+		if (user == null){
+			return new Result(ResultConstant.FAILED, "没有关注公众号");
+		}
 		WxUser wxUser1 = userService.getWxUserByOpenId(wxUser.getOpenid());
 		if (user.getGroup() == 102 || wxUser1.getGroupid() == 102) {
 			return new Result(ResultConstant.FAILED, "内部人员不能发红包");
 		} else if (!user.isSubscribed()) {
 			return new Result(ResultConstant.FAILED, "没有关注公众号");
 		}
-		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(id);
 		redPackRequest.setAppId(PaySetting.defaultSetting().getAppId());
 		redPackRequest.setActivityName(wxRedpackTemplet.getActName());
 		Random random = new Random();
-		int max = Integer.valueOf(wxRedpackTemplet.getMaxAmount());
-		int min = Integer.valueOf(wxRedpackTemplet.getMinAmount());
-		int randomSum = random.nextInt(max - min);
-		redPackRequest.setAmount(min + randomSum);
+		Double max = Double.valueOf(wxRedpackTemplet.getMaxAmount()) * 100;
+		int iMax = max.intValue();
+		Double min = Double.valueOf(wxRedpackTemplet.getMinAmount()) * 100;
+		int iMin = min.intValue();
+		int randomSum = random.nextInt(iMax - iMin);
+		redPackRequest.setAmount(iMin + randomSum);
 		Date nowTime = new Date(System.currentTimeMillis());
 		SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyyMMdd");
 		String retStrFormatNowDate = sdFormatter.format(nowTime);
@@ -81,6 +92,7 @@ public class RedPayServiceImp implements RedPayService {
 			wxPayRecord.setMchId(PaySetting.defaultSetting().getMchId());
 			wxPayRecord.setSendListid(redPackResponse.getSendListId());
 			wxPayRecord.setTotalAmount(redPackResponse.getAmount());
+			wxPayRecord.setStatus("SENT");
 			wxPayRecord.setWxappid(PaySetting.defaultSetting().getAppId());
 			wxPayRecord.setCtime(String.valueOf(System.currentTimeMillis()));
 			wxPayRecordService.insert(wxPayRecord);

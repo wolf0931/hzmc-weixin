@@ -968,7 +968,7 @@
   overflow: auto;
 }
 .combo-arrow {
-  background: url('images/combo_arrow.png') no-repeat center center;
+  background: url('../../images/combo_arrow.png') no-repeat center center;
 }
 .combo-panel {
   background-color: #ffffff;
@@ -2171,19 +2171,19 @@
 }
 .calendar-prevmonth {
   left: 20px;
-  background: url('images/calendar_arrows.png') no-repeat -18px -2px;
+  background: url('../../images/calendar_arrows.png') no-repeat -18px -2px;
 }
 .calendar-nextmonth {
   right: 20px;
-  background: url('images/calendar_arrows.png') no-repeat -34px -2px;
+  background: url('../../images/calendar_arrows.png') no-repeat -34px -2px;
 }
 .calendar-prevyear {
   left: 3px;
-  background: url('images/calendar_arrows.png') no-repeat -1px -2px;
+  background: url('../../images/calendar_arrows.png') no-repeat -1px -2px;
 }
 .calendar-nextyear {
   right: 3px;
-  background: url('images/calendar_arrows.png') no-repeat -49px -2px;
+  background: url('../../images/calendar_arrows.png') no-repeat -49px -2px;
 }
 .calendar-body {
   position: relative;
@@ -2252,11 +2252,11 @@
 }
 .calendar-menu-prev {
   margin-right: 10px;
-  background: url('images/calendar_arrows.png') no-repeat 2px 2px;
+  background: url('../../images/calendar_arrows.png') no-repeat 2px 2px;
 }
 .calendar-menu-next {
   margin-left: 10px;
-  background: url('images/calendar_arrows.png') no-repeat -45px 2px;
+  background: url('../../images/calendar_arrows.png') no-repeat -45px 2px;
 }
 .calendar-menu-month {
   text-align: center;
@@ -2398,16 +2398,16 @@
   filter: alpha(opacity=60);
 }
 .spinner-arrow-up {
-  background: url('images/spinner_arrows.png') no-repeat 1px center;
+  background: url('../../images/spinner_arrows.png') no-repeat 1px center;
 }
 .spinner-arrow-down {
-  background: url('images/spinner_arrows.png') no-repeat -15px center;
+  background: url('../../images/spinner_arrows.png') no-repeat -15px center;
 }
 .spinner-button-up {
-  background: url('images/spinner_arrows.png') no-repeat -32px center;
+  background: url('../../images/spinner_arrows.png') no-repeat -32px center;
 }
 .spinner-button-down {
-  background: url('images/spinner_arrows.png') no-repeat -48px center;
+  background: url('../../images/spinner_arrows.png') no-repeat -48px center;
 }
 .progressbar {
   border-width: 1px;

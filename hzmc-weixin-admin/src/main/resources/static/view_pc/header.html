@@ -6,7 +6,7 @@
         </div>
         <div class="dropdown right col-xs-2 col-md-1">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" id='username'></a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu drop-nav">
                 <li class='cursor'><span class="icon icon-lock"></span>修改密码</li>
                 <li class="divider"></li>
                 <li id='quitLogin'  class='cursor'><span class="icon icon-quit"></span>退出登录</li>
@@ -15,16 +15,22 @@
     </div>
 </nav>
 <script>
-	$('#username').html(decodeURI(location.search).split('=')[1]+'<span class="caret"></span>');
-	
-	
-	$.ajax({
-		type:'get',
-	   	url:"",
-	    success:function(data){
-	    	$('#username').html();
+
+$.ajax({
+	type: 'GET',
+	url: '/login/account/info',
+	success: function(data){
+		if(data.message == 'success'){
+			$('#username').html(data.data.username+'<span class="caret"></span>');
 		}
-	});
+	},
+	error:function(data){
+		if(data.status == 401){
+			window.location.href='../../index.html';
+		}
+	} 
+});
+
 	
 	
 	$('#quitLogin').on('click',function(){
@@ -33,9 +39,15 @@
 	    	url:"/login/exit",
 	    	success:function(data){
 	    		if(data.message == "success"){
+	    			sessionStorage.removeItem('username');
 	    			window.location.href='../../index.html';
 	    		}
-	    	}
+	    	},
+	    	error:function(data){
+	    		if(data.status == 401){
+	    			window.location.href='../../index.html';
+	    		}
+	    	} 
 		});
 	});
 </script>

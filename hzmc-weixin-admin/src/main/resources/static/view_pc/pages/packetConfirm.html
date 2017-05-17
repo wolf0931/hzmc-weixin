@@ -8,7 +8,7 @@
  	<link rel="stylesheet" type="text/css" href="../../src/css/main_pc.css">
  	<link rel="stylesheet" type="text/css" href="../../src/css/controllers/packetConfirm.css">
 </head>
-<body ng-app=''>
+<body ng-app='myApp'>
 <!-- 菜单 -->
  <div ng-include="'../header.html'"></div>
 <!-- 菜单 end-->
@@ -17,8 +17,21 @@
 <div style="clear: both"></div>
 <div id="main"> 
 
-	<div class='list_container col-sm-2'>
-		<div ng-include="'../list.html'"></div>
+	<div class='list_container col-sm-2' ng-controller='myCtrl'>
+		<div class='list col-sm-12'>
+			<ul>
+				<li>
+					<a href='../pages/packetConfirm.html' class="dropdown-toggle" data-toggle="dropdown" onclick='config()'>红包配置</a>
+					<ul class="dropdown-menu packetComfigList">
+						<li ng-repeat='act in actList'>
+							<a id='{{act.id}}' onclick='update(this)'>{{act.actName}}</a>
+						</li>
+					</ul>
+				</li>
+				
+				<li><a href='../pages/packetRecord.html'>红包领取情况</a></li>
+			</ul>
+		</div>
 	</div>
 	
     <div id="main_container" class='col-sm-10'>
@@ -82,8 +95,8 @@
     <script src="../../src/js/lib/bootstrap_3.3.6.min.js"></script>
     <script src="../../src/js/lib/jquery-impromptu.2.5.min.js"></script>
     <script src="../../src/js/lib/jquery.easyui.min.js"></script>
-    <script src="../../src/js/lib/angular.min.js"></script>
+    <script src="../../src/js/lib/angular.js"></script>
     <script src="../../src/js/controllers/packetConfirm.js"></script>
-    <script src="../../src/js/alert.js"></script>
+    <script src="../../src/js/main.js"></script>
 </body>
 </html>

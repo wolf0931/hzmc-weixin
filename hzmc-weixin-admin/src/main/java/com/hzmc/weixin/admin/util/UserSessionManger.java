@@ -4,6 +4,7 @@ import com.hzmc.weixin.admin.dao.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import java.util.Set;
 /**
  * Created by wph on 2017/5/12.
  */
+@Component
 public class UserSessionManger {
 	/**
 	 * logger

@@ -3,6 +3,22 @@
  */
 
 
+function config(){
+	$('#sendName').val('');
+    $('#activeName').val('');
+    $('#sum').val('');
+    $('#number').val('');
+    $('#minAccount').val('');
+    $('#maxAccount').val('');
+    $('#startDate').datebox('setValue','');
+    $('#endDate').datebox('setValue','');
+    $('#rate').val('');
+    $('#introduce').val('');
+    $('#wishing').val('');
+    $('#submit').html('提交');
+}
+
+
 $('#submit').click(function(){
     event.preventDefault();
     $sendName=$('#sendName').val();
@@ -11,8 +27,8 @@ $('#submit').click(function(){
     $number=$('#number').val();
     $minAccount=$('#minAccount').val();
     $maxAccount=$('#maxAccount').val();
-    $startDate=$('#startDate').val();
-    $endDate=$('#endDate').val();
+    $startDate=Date.parse($('#startDate').val())/1000;
+    $endDate=Date.parse($('#endDate').val())/1000;
     $rate=$('#rate').val();
     $introduce=$('#introduce').val();
     $wishing=$('#wishing').val();
@@ -84,7 +100,7 @@ $('#submit').click(function(){
     	let warn='<span class="red errwarn">活动截止时间应晚于开始时间</sapn>';
     	$('#endDate').after(warn);
     	return ;
-    }else if(new Date($startDate) < new Date()){
+    }else if($startDate < Date.parse(new Date())/1000){
     	let warn='<span class="red errwarn">不能从过去开始</sapn>';
     	$('#endDate').after(warn);
     	return ;
@@ -152,7 +168,12 @@ $('#submit').click(function(){
     		if(data.message == "success"){
     			myAlert('设置成功');
     		}
-    	}
+    	},
+    	error:function(data){
+    		if(data.status == 401){
+    			window.location.href='../../index.html';
+    		}
+    	} 
     });
     
     $('body').on('click','.closeDown',function(){
@@ -161,3 +182,65 @@ $('#submit').click(function(){
         $('#name').val('');
     });
 });
+
+function update(e){
+	var id = e.id;
+	$.ajax({
+		type: 'GET',
+		url: '/WxRedpackTemplet/'+id,
+		success: function(data){
+
+			var start = new Date(parseInt(data.data.startTime)*1000);
+			var startDate = start.getMonth()+1;
+			startDate += '/'+start.getDate();
+			startDate += '/'+start.getFullYear();
+			var startHour = start.getHours();
+			startHour += ':' + start.getMinutes();
+			startHour += ':' + start.getSeconds();
+			var end = new Date(parseInt(data.data.endTime)*1000);
+			var endDate = end.getMonth()+1;
+			endDate += '/'+end.getDate();
+			endDate += '/'+end.getFullYear();
+			var endHour = end.getHours();
+			endHour += ':' + end.getMinutes();
+			endHour += ':' + end.getSeconds();
+			$('#sendName').val(data.data.sendName);
+		    $('#activeName').val(data.data.actName);
+		    $('#sum').val(data.data.totalAmount);
+		    $('#number').val(data.data.totalNum);
+		    $('#minAccount').val(data.data.minAmount);
+		    $('#maxAccount').val(data.data.maxAmount);
+		    $('#startDate').datetimebox({  
+		        required : false,  
+		        onShowPanel:function(){  
+		            $(this).datetimebox("spinner").timespinner("setValue",startHour);  
+		        }  
+		    }); 
+		    $('#startDate').datebox('setValue',startDate);
+		    $('#endDate').datetimebox({  
+		        required : false,  
+		        onShowPanel:function(){  
+		            $(this).datetimebox("spinner").timespinner("setValue",endHour);  
+		        }  
+		    }); 
+		    $('#endDate').datebox('setValue',endDate);
+		    $('#rate').val(data.data.winningRate);
+		    $('#introduce').val(data.data.remark);
+		    $('#wishing').val(data.data.wishing);
+		    $('#submit').html('更新');
+		},
+    	error:function(data){
+    		if(data.status == 401){
+    			window.location.href='../../index.html';
+    		}
+    	} 
+	});
+}
+
+function addZreo(str){
+	if(str < 10){
+		str = '0'+ str;
+		return str;
+	}
+	return str;
+}
