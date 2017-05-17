@@ -13,28 +13,38 @@ $('body').on('click','.closeDown',function($scope){
 });
 
 angular.module('myApp',[]).controller('myCtrl',function($scope){
-	$.ajax({
-		type: 'GET',
-		url: '/WxRedpackTemplet',
-		success: function(data){
-			$scope.actList = data.data;
-		},
-    	error:function(data){
-    		if(data.status == 401){
-    			window.location.href='../../index.html';
-    		}
-    	} 
+	
+	$(function($){  
+		$scope.currPage=0;
+		redpackTemplet();
+		PayRecord();
 	});
 	
-	$scope.currPage=0;
+	function redpackTemplet(){
+		$.ajax({
+			type: 'GET',
+			url: '/WxRedpackTemplet',
+			success: function(data){
+				$scope.actList = data.data;
+			},
+	    	error:function(data){
+	    		if(data.status == 401){
+	    			window.location.href='../../index.html';
+	    		}
+	    	} 
+		});
+	}
 	
+		
+	function PayRecord(){
 		$.ajax({
 			type: 'GET',
 			url: '/WxPayRecord/'+$scope.currPage*10+'/'+($scope.currPage*10+9),
-			async: false,
 			success: function(data){
 
 				$scope.list = data;
+				
+				
 				$scope.total = data.data.total;
 				for(var i=0; i<$('.tablePager').length; i++){
 					if($('.tablePager')[i].innerHTML> ($scope.total/10+1)){
@@ -94,6 +104,9 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 					}
 				});
 				
+				$scope.$apply($scope.list);
+				
+				
 			},
 	    	error:function(data){
 	    		if(data.status == 401){
@@ -101,4 +114,5 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 	    		}
 	    	} 
 		});	
+	}
 });

@@ -3,17 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>登录页</title>
-    <script>
-	    $.ajax({
-	    	type: 'GET',
-	    	url: '/login/account/info',
-	    	success: function(data){
-	    		if(data.message == 'success'){
-	    			self.location='view_pc/pages/packetConfirm.html';
-	    		}
-	    	}
-	    });
-    </script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="stylesheet" type="text/css" href="src/css/lib/bootstrap_3.3.6.min.css">
     <link rel="stylesheet" type="text/css" href="src/css/main_pc.css">
