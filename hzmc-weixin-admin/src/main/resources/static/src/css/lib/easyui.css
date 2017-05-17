@@ -2171,19 +2171,19 @@
 }
 .calendar-prevmonth {
   left: 20px;
-  background: url('images/calendar_arrows.png') no-repeat -18px -2px;
+  background: url('../../images/calendar_arrows.png') no-repeat -18px -2px;
 }
 .calendar-nextmonth {
   right: 20px;
-  background: url('images/calendar_arrows.png') no-repeat -34px -2px;
+  background: url('../../images/calendar_arrows.png') no-repeat -34px -2px;
 }
 .calendar-prevyear {
   left: 3px;
-  background: url('images/calendar_arrows.png') no-repeat -1px -2px;
+  background: url('../../images/calendar_arrows.png') no-repeat -1px -2px;
 }
 .calendar-nextyear {
   right: 3px;
-  background: url('images/calendar_arrows.png') no-repeat -49px -2px;
+  background: url('../../images/calendar_arrows.png') no-repeat -49px -2px;
 }
 .calendar-body {
   position: relative;
