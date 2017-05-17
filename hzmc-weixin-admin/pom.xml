@@ -74,6 +74,12 @@
             <version>${mybatis-generator.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+
         <!-- fluent-validator -->
         <dependency>
             <groupId>com.baidu.unbiz</groupId>
