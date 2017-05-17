@@ -15,16 +15,13 @@
     </div>
 </nav>
 <script>
-	$('#username').html(decodeURI(location.search).split('=')[1]+'<span class="caret"></span>');
+
+	if(window.sessionStorage['username'] == undefined){
+		window.location.href='../../index.html';
+	}else{
+		$('#username').html(window.sessionStorage['username']+'<span class="caret"></span>');
+	}
 	
-	
-	$.ajax({
-		type:'get',
-	   	url:"",
-	    success:function(data){
-	    	$('#username').html();
-		}
-	});
 	
 	
 	$('#quitLogin').on('click',function(){
@@ -33,6 +30,7 @@
 	    	url:"/login/exit",
 	    	success:function(data){
 	    		if(data.message == "success"){
+	    			sessionStorage.removeItem('username');
 	    			window.location.href='../../index.html';
 	    		}
 	    	}

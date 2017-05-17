@@ -3,6 +3,21 @@
  */
 
 
+function config(){
+	$('#sendName').val('');
+    $('#activeName').val('');
+    $('#sum').val('');
+    $('#number').val('');
+    $('#minAccount').val('');
+    $('#maxAccount').val('');
+    $('#startDate').val('');
+    $('#endDate').val('');
+    $('#rate').val('');
+    $('#introduce').val('');
+    $('#wishing').val('');
+    $('#submit').html('提交');
+}
+
 
 $('#submit').click(function(){
     event.preventDefault();
@@ -169,17 +184,22 @@ function update(e){
 		type: 'GET',
 		url: '/WxRedpackTemplet/'+id,
 		success: function(data){
+			var date = new Date(parseInt(data.data.startTime)*1000)
+			var startTime = date.getDate();
+			startTime += '/'+date.getMonth();
+			startTime += '/'+date.getYear();
 			$('#sendName').val(data.data.sendName);
 		    $('#activeName').val(data.data.actName);
 		    $('#sum').val(data.data.totalAmount);
 		    $('#number').val(data.data.totalNum);
 		    $('#minAccount').val(data.data.minAmount);
 		    $('#maxAccount').val(data.data.maxAmount);
-		    $('#startDate').val(data.data.startTime);
-		    $('#endDate').val(data.data.endTime);
+		    $('#startDate').val();
+		    $('#endDate').val(new Date(parseInt(data.data.endTime)));
 		    $('#rate').val(data.data.winningRate);
 		    $('#introduce').val(data.data.remark);
 		    $('#wishing').val(data.data.wishing);
+		    $('#submit').html('更新');
 		}
 	});
 }

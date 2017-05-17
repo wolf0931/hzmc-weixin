@@ -20,4 +20,67 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 			$scope.actList = data.data;
 		}
 	});
+	
+	$.ajax({
+		type: 'GET',
+		url: '/WxPayRecord',
+		success: function(data){
+			for(var i=0;i<data.data.length;i++){
+				if(data.data[i].wxPayRecord.status == 'SEDING'){
+					data.data[i].wxPayRecord.status = '发放中';
+				}else if(data.data[i].wxPayRecord.status == 'SENT'){
+					data.data[i].wxPayRecord.status = '已发放待领取';
+				}else if(data.data[i].wxPayRecord.status == 'FAILED'){
+					data.data[i].wxPayRecord.status = '发放失败';
+				}else if(data.data[i].wxPayRecord.status == 'RECEIVED'){
+					data.data[i].wxPayRecord.status = '已领取';
+				}else if(data.data[i].wxPayRecord.status == 'RFUND_ING'){
+					data.data[i].wxPayRecord.status = '退款中';
+				}else if(data.data[i].wxPayRecord.status == 'REFUND'){
+					data.data[i].wxPayRecord.status = '已退款';
+				}
+				$scope.list = data;
+			}
+			$scope.total = data.data.length;
+			for(var i=0; i<$('.tablePager').length; i++){
+				if($('.tablePager')[i].innerHTML> ($scope.total/10+1)){
+					$($('.tablePager')[i]).parent().addClass('disabled');
+				}
+			}
+			if($('.active a').html() == '1'){
+				$('.previous').addClass('disabled');
+			}else{
+				$('.previous').click(function(){
+					if($('li.active').parent().index($('li.active') == 1)){
+						for(var i=0; i<$('.tablePager').length; i++){
+							$('.tablePager').html($('.tablePager').html()-1);
+						}
+					}else{
+						$('.active').remove('active').prev().addClass('active');
+					}
+					$scope.currPage = $('.active a').html();
+				});
+			}
+			if($('.active a').html() == Math.floor($scope.total/10+1)){
+				$('.latter').addClass('disabled');
+			}else{
+				$('.latter').click(function(){
+					if($('li.active').parent().index($('li.active') == 5)){
+						for(var i=0; i<$('.tablePager').length; i++){
+							$('.tablePager').html($('.tablePager').html()+1);
+						}
+					}else{
+						$('.active').remove('active').next().addClass('active');
+					}
+					$scope.currPage = $('.active a').html();
+				});
+			}
+			$('.tablePager').click(function(e){
+				$(e.target).parent().addClass('active').siblings('.active').removeClass('active');
+				$scope.currPage = $('.active a').html();
+			});
+			
+			$scope.currPage = $('.active a').html();
+		}
+	});	
 });

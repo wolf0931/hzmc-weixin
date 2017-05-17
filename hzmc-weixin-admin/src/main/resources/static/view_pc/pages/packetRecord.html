@@ -9,50 +9,58 @@
 </head>
 <body ng-app='myApp' ng-controller='myCtrl'>
 <!-- 菜单 -->
- <div ng-include="'../header.html'"></div>
+ 	<div ng-include="'../header.html'"></div>
 <!-- 菜单 end-->
 
 
-<div style="clear: both"></div>
-<div id="main"> 
-
-	<div class='list_container col-sm-2'>
-		<div class='list col-sm-12'>
-			<ul>
-				<li><a href='../pages/packetConfirm.html'>红包配置</a></li>
-				
-				<li><a href='../pages/packetRecord.html'>红包领取情况</a></li>
-			</ul>
-		</div>
-	</div>
+	<div style="clear: both"></div>
+	<div id="main"> 
 	
-    <div id="main_container" class='col-sm-10'>
-    	<div class='col-sm-8 col-sm-offset-2'>
-		    <table class='comfirmInfo'>
-		    	<thead>
-		    		<tr>
-			    		<th>openid</th>
-			    		<th>用户昵称</th>
-			    		<th>用户地址</th>
-			    		<th>红包金额/元</th>
-			    		<th>红包状态</th>
-		    		</tr>
-		    	</thead>
-		    	<tbody>
-		    		<tr ng-repeat='x in list.data | limitTo:currentPage*itemPage' ng-show="$index>(currentPage-1)*itemPage-1">
-		    			<td>{{x.user.openid}}</td>
-		    			<td>{{x.user.nickname}}</td>
-		    			<td>{{x.user.country}}{{x.user.province}}{{x.user.city}}</td>
-		    			<td>{{x.wxPayRecord.totalAmount/100}}</td>
-		    			<td>{{x.wxPayRecord.status}}</td>
-		    		</tr>
-		    	</tbody>
-		    </table>
-		    <div ng-include="''"></div>
+		<div class='list_container col-sm-2'>
+			<div class='list col-sm-12'>
+				<ul>
+					<li><a href='../pages/packetConfirm.html'>红包配置</a></li>
+					
+					<li><a href='../pages/packetRecord.html'>红包领取情况</a></li>
+				</ul>
+			</div>
 		</div>
-    </div>
-
-</div>
+		
+	    <div id="main_container" class='col-sm-10'>
+	    	<div class='col-sm-8 col-sm-offset-2'>
+			    <table class='comfirmInfo'>
+			    	<thead>
+			    		<tr>
+				    		<th>openid</th>
+				    		<th>用户昵称</th>
+				    		<th>用户地址</th>
+				    		<th>红包金额/元</th>
+				    		<th>红包状态</th>
+			    		</tr>
+			    	</thead>
+			    	<tbody>
+			    		<tr ng-repeat='x in list.data | limitTo:currPage*10' ng-show="$index>(currPage-1)*9-1">
+			    			<td>{{x.user.openid}}</td>
+			    			<td>{{x.user.nickname}}</td>
+			    			<td>{{x.user.country}}{{x.user.province}}{{x.user.city}}</td>
+			    			<td>{{x.wxPayRecord.totalAmount/100}}</td>
+			    			<td>{{x.wxPayRecord.status}}</td>
+			    		</tr>
+			    	</tbody>
+			    </table>
+			    <ul class="pagination">
+				    <li class='previous'><a href="#">&laquo;</a></li>
+				    <li class="active"><a href="#" class='tablePager'>1</a></li>
+				    <li><a href="#" class='tablePager'>2</a></li>
+				    <li><a href="#" class='tablePager'>3</a></li>
+				    <li><a href="#" class='tablePager'>4</a></li>
+				    <li><a href="#" class='tablePager'>5</a></li>
+				    <li class='latter'><a href="#">&raquo;</a></li>
+				</ul>
+			</div>
+	    </div>
+	
+	</div>
 
 
  	<script src="../../src/js/lib/jquery_1.11.3.min.js"></script>
