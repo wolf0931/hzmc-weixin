@@ -35,10 +35,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 			requestUrl = requestUrl + "/";
 		}
 		String uri = request.getRequestURI();
-		/*if (uri.contains("v2") || uri.contains("swagger")){
+		if (uri.contains("v2") || uri.contains("swagger")){
 			//接口列表
 			return true;
-		}*/
+		}
 		if ("/access".equals(uri)) {
 			//微信接口认证接口
 			return true;
