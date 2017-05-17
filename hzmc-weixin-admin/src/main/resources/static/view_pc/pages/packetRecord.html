@@ -46,7 +46,12 @@
 			    			<td>{{x.user.country}}{{x.user.province}}{{x.user.city}}</td>
 			    			<td>{{x.redPackTem.actName}}</td>
 			    			<td>{{x.wxPayRecord.totalAmount/100}}</td>
-			    			<td>{{x.wxPayRecord.status}}</td>
+			    			<td ng-if="x.wxPayRecord.status == 'SEDING'">发送中</td>
+			    			<td ng-if="x.wxPayRecord.status == 'SENT'">已发放待领取</td>
+			    			<td ng-if="x.wxPayRecord.status == 'FAILED'">发放失败</td>
+			    			<td ng-if="x.wxPayRecord.status == 'RECEIVED'">已领取</td>
+			    			<td ng-if="x.wxPayRecord.status == 'RFUND_ING'">退款中</td>
+			    			<td ng-if="x.wxPayRecord.status == 'REFUND'">已退款</td>
 			    		</tr>
 			    	</tbody>
 			    </table>

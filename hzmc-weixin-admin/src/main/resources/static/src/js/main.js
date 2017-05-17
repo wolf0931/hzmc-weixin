@@ -31,23 +31,9 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 		$.ajax({
 			type: 'GET',
 			url: '/WxPayRecord/'+$scope.currPage*10+'/'+($scope.currPage*10+9),
+			async: false,
 			success: function(data){
-		
-				for(var i=0;i<data.data.rows.length;i++){
-					if(data.data.rows[i].wxPayRecord.status == 'SEDING'){
-						data.data.rows[i].wxPayRecord.status = '发放中';
-					}else if(data.data.rows[i].wxPayRecord.status == 'SENT'){
-						data.data.rows[i].wxPayRecord.status = '已发放待领取';
-					}else if(data.data.rows[i].wxPayRecord.status == 'FAILED'){
-						data.data.rows[i].wxPayRecord.status = '发放失败';
-					}else if(data.data.rows[i].wxPayRecord.status == 'RECEIVED'){
-						data.data.rows[i].wxPayRecord.status = '已领取';
-					}else if(data.data.rows[i].wxPayRecord.status == 'RFUND_ING'){
-						data.data.rows[i].wxPayRecord.status = '退款中';
-					}else if(data.data.rows[i].wxPayRecord.status == 'REFUND'){
-						data.data.rows[i].wxPayRecord.status = '已退款';
-					}
-				}
+
 				$scope.list = data;
 				$scope.total = data.data.total;
 				for(var i=0; i<$('.tablePager').length; i++){
