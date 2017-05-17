@@ -1,7 +1,18 @@
 /**
  * Created by DELL on 2016/12/22.
  */
-function login(){
+
+$.ajax({
+	type: 'GET',
+	url: '/login/account/info',
+	success: function(data){
+		if(data.message == 'success'){
+			self.location='view_pc/pages/packetConfirm.html';
+		}
+	}
+});
+
+function login(){	
     $userName=$('#userName').val();
     $userPwd=$('#userPwd').val();
     if($userName == ""||$userPwd == ""){
@@ -20,7 +31,6 @@ function login(){
         	data:JSON.stringify(userTemp),
         	success:function(data){
         		if(data.message == 'success'){
-        			sessionStorage.setItem("username",data.data.username);
         			self.location='view_pc/pages/packetConfirm.html';
         		}else{
         			$('.danger span.wrong').addClass('active');

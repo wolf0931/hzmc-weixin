@@ -10,8 +10,8 @@ function config(){
     $('#number').val('');
     $('#minAccount').val('');
     $('#maxAccount').val('');
-    $('#startDate').val('');
-    $('#endDate').val('');
+    $('#startDate').datebox('setValue','');
+    $('#endDate').datebox('setValue','');
     $('#rate').val('');
     $('#introduce').val('');
     $('#wishing').val('');
@@ -168,7 +168,12 @@ $('#submit').click(function(){
     		if(data.message == "success"){
     			myAlert('设置成功');
     		}
-    	}
+    	},
+    	error:function(data){
+    		if(data.status == 401){
+    			window.location.href='../../index.html';
+    		}
+    	} 
     });
     
     $('body').on('click','.closeDown',function(){
@@ -184,22 +189,52 @@ function update(e){
 		type: 'GET',
 		url: '/WxRedpackTemplet/'+id,
 		success: function(data){
-			var date = new Date(parseInt(data.data.startTime)*1000)
-			var startTime = date.getDate();
-			startTime += '/'+date.getMonth();
-			startTime += '/'+date.getYear();
+
+			var start = new Date(parseInt(data.data.startTime)*1000);
+			var startHour = start.getHours();
+			startHour += ':' + start.getMinutes();
+			startHour += ':' + start.getSeconds();
+			var end = new Date(parseInt(data.data.endTime)*1000);
+			var endHour = end.getHours();
+			endHour += ':' + end.getMinutes();
+			endHour += ':' + end.getSeconds();
 			$('#sendName').val(data.data.sendName);
 		    $('#activeName').val(data.data.actName);
 		    $('#sum').val(data.data.totalAmount);
 		    $('#number').val(data.data.totalNum);
 		    $('#minAccount').val(data.data.minAmount);
 		    $('#maxAccount').val(data.data.maxAmount);
-		    $('#startDate').val();
-		    $('#endDate').val(new Date(parseInt(data.data.endTime)));
+		    $('#startDate').datetimebox({  
+		        required : false,  
+		        onShowPanel:function(){  
+		            $(this).datetimebox("spinner").timespinner("setValue",startHour);  
+		        }  
+		    }); 
+		    $('#startDate').datebox('setValue',data.data.startTime);
+		    $('#endDate').datetimebox({  
+		        required : false,  
+		        onShowPanel:function(){  
+		            $(this).datetimebox("spinner").timespinner("setValue",endHour);  
+		        }  
+		    }); 
+		    $('#endDate').datebox('setValue',data.data.endTime);
 		    $('#rate').val(data.data.winningRate);
 		    $('#introduce').val(data.data.remark);
 		    $('#wishing').val(data.data.wishing);
 		    $('#submit').html('更新');
-		}
+		},
+    	error:function(data){
+    		if(data.status == 401){
+    			window.location.href='../../index.html';
+    		}
+    	} 
 	});
+}
+
+function addZreo(str){
+	if(str < 10){
+		str = '0'+ str;
+		return str;
+	}
+	return str;
 }

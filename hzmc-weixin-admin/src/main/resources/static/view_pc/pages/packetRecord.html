@@ -34,15 +34,17 @@
 				    		<th>openid</th>
 				    		<th>用户昵称</th>
 				    		<th>用户地址</th>
+				    		<th>活动名称</th>
 				    		<th>红包金额/元</th>
 				    		<th>红包状态</th>
 			    		</tr>
 			    	</thead>
 			    	<tbody>
-			    		<tr ng-repeat='x in list.data | limitTo:currPage*10' ng-show="$index>(currPage-1)*9-1">
+			    		<tr ng-repeat='x in list.data.rows'>
 			    			<td>{{x.user.openid}}</td>
 			    			<td>{{x.user.nickname}}</td>
 			    			<td>{{x.user.country}}{{x.user.province}}{{x.user.city}}</td>
+			    			<td>{{x.redPackTem.actName}}</td>
 			    			<td>{{x.wxPayRecord.totalAmount/100}}</td>
 			    			<td>{{x.wxPayRecord.status}}</td>
 			    		</tr>

@@ -18,69 +18,106 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 		url: '/WxRedpackTemplet',
 		success: function(data){
 			$scope.actList = data.data;
-		}
+		},
+    	error:function(data){
+    		if(data.status == 401){
+    			window.location.href='../../index.html';
+    		}
+    	} 
 	});
 	
-	$.ajax({
-		type: 'GET',
-		url: '/WxPayRecord',
-		success: function(data){
-			for(var i=0;i<data.data.length;i++){
-				if(data.data[i].wxPayRecord.status == 'SEDING'){
-					data.data[i].wxPayRecord.status = '发放中';
-				}else if(data.data[i].wxPayRecord.status == 'SENT'){
-					data.data[i].wxPayRecord.status = '已发放待领取';
-				}else if(data.data[i].wxPayRecord.status == 'FAILED'){
-					data.data[i].wxPayRecord.status = '发放失败';
-				}else if(data.data[i].wxPayRecord.status == 'RECEIVED'){
-					data.data[i].wxPayRecord.status = '已领取';
-				}else if(data.data[i].wxPayRecord.status == 'RFUND_ING'){
-					data.data[i].wxPayRecord.status = '退款中';
-				}else if(data.data[i].wxPayRecord.status == 'REFUND'){
-					data.data[i].wxPayRecord.status = '已退款';
+	$scope.currPage=0;
+	
+	getRecord();
+	
+	
+	function getRecord(){
+		$.ajax({
+			type: 'GET',
+			url: '/WxPayRecord/'+$scope.currPage*10+'/'+($scope.currPage*10+9),
+			success: function(data){
+		
+				for(var i=0;i<data.data.length;i++){
+					if(data.data[i].wxPayRecord.status == 'SEDING'){
+						data.data[i].wxPayRecord.status = '发放中';
+					}else if(data.data[i].wxPayRecord.status == 'SENT'){
+						data.data[i].wxPayRecord.status = '已发放待领取';
+					}else if(data.data[i].wxPayRecord.status == 'FAILED'){
+						data.data[i].wxPayRecord.status = '发放失败';
+					}else if(data.data[i].wxPayRecord.status == 'RECEIVED'){
+						data.data[i].wxPayRecord.status = '已领取';
+					}else if(data.data[i].wxPayRecord.status == 'RFUND_ING'){
+						data.data[i].wxPayRecord.status = '退款中';
+					}else if(data.data[i].wxPayRecord.status == 'REFUND'){
+						data.data[i].wxPayRecord.status = '已退款';
+					}
 				}
 				$scope.list = data;
-			}
-			$scope.total = data.data.length;
-			for(var i=0; i<$('.tablePager').length; i++){
-				if($('.tablePager')[i].innerHTML> ($scope.total/10+1)){
-					$($('.tablePager')[i]).parent().addClass('disabled');
+				$scope.total = data.data.total;
+				for(var i=0; i<$('.tablePager').length; i++){
+					if($('.tablePager')[i].innerHTML> ($scope.total/10+1)){
+						$($('.tablePager')[i]).parent().addClass('disabled');
+					}
 				}
-			}
-			if($('.active a').html() == '1'){
-				$('.previous').addClass('disabled');
-			}else{
+				if($('.active a').html() == '1'){
+					$('.previous').addClass('disabled');
+				}
 				$('.previous').click(function(){
-					if($('li.active').parent().index($('li.active') == 1)){
+					if($('li.active').parent().index($('li.active')) == 1){
 						for(var i=0; i<$('.tablePager').length; i++){
-							$('.tablePager').html($('.tablePager').html()-1);
+							$($('.tablePager')[i]).html(parseInt($($('.tablePager')[i]).html())-1);
 						}
-					}else{
-						$('.active').remove('active').prev().addClass('active');
+					}else if($('.active a').html() != 1){
+						$('.active').removeClass('active').prev().addClass('active');
+						$('.latter').removeClass('disabled');
 					}
+					if($('.active a').html() == '1'){
+						$('.previous').addClass('disabled');
+					}	
 					$scope.currPage = $('.active a').html();
+					getRecord();
 				});
-			}
-			if($('.active a').html() == Math.floor($scope.total/10+1)){
-				$('.latter').addClass('disabled');
-			}else{
+	
+				if($('.active a').html() == Math.floor($scope.total/10+1)){
+					$('.latter').addClass('disabled');
+				}
 				$('.latter').click(function(){
-					if($('li.active').parent().index($('li.active') == 5)){
+					if($('li.active').parent().index($('li.active')) == 5){
 						for(var i=0; i<$('.tablePager').length; i++){
-							$('.tablePager').html($('.tablePager').html()+1);
+							$($('.tablePager')[i]).html(parseInt($($('.tablePager')[i]).html())+1);
 						}
-					}else{
-						$('.active').remove('active').next().addClass('active');
+					}else if($('.active a').html() != Math.floor($scope.total/10+1)){
+						$('.active').removeClass('active').next().addClass('active');
+						$('.previous').removeClass('disabled');
+					}
+					if($('.active a').html() == Math.floor($scope.total/10+1)){
+						$('.latter').addClass('disabled');
 					}
 					$scope.currPage = $('.active a').html();
+					getRecord();
 				});
-			}
-			$('.tablePager').click(function(e){
-				$(e.target).parent().addClass('active').siblings('.active').removeClass('active');
-				$scope.currPage = $('.active a').html();
-			});
-			
-			$scope.currPage = $('.active a').html();
-		}
-	});	
+				$('.tablePager').click(function(e){
+					$(e.target).parent().addClass('active').siblings('.active').removeClass('active');
+					$scope.currPage = $('.active a').html()
+					
+					if($('.active a').html() == '1'){
+						$('.previous').addClass('disabled');
+					}else{
+						$('.previous').removeClass('disabled');
+					}
+					if($('.active a').html() == Math.floor($scope.total/10+1)){
+						$('.latter').addClass('disabled');
+					}else{
+						$('.latter').removeClass('disabled');
+					}
+				});
+				
+			},
+	    	error:function(data){
+	    		if(data.status == 401){
+	    			window.location.href='../../index.html';
+	    		}
+	    	} 
+		});	
+	}
 });

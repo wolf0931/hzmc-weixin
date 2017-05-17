@@ -16,12 +16,21 @@
 </nav>
 <script>
 
-	if(window.sessionStorage['username'] == undefined){
-		window.location.href='../../index.html';
-	}else{
-		$('#username').html(window.sessionStorage['username']+'<span class="caret"></span>');
-	}
-	
+$.ajax({
+	type: 'GET',
+	url: '/login/account/info',
+	success: function(data){
+		if(data.message == 'success'){
+			$('#username').html(data.data.username+'<span class="caret"></span>');
+		}
+	},
+	error:function(data){
+		if(data.status == 401){
+			window.location.href='../../index.html';
+		}
+	} 
+});
+
 	
 	
 	$('#quitLogin').on('click',function(){
@@ -33,7 +42,12 @@
 	    			sessionStorage.removeItem('username');
 	    			window.location.href='../../index.html';
 	    		}
-	    	}
+	    	},
+	    	error:function(data){
+	    		if(data.status == 401){
+	    			window.location.href='../../index.html';
+	    		}
+	    	} 
 		});
 	});
 </script>
