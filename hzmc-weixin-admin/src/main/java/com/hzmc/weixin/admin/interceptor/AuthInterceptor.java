@@ -24,11 +24,13 @@ import java.io.PrintWriter;
 public class AuthInterceptor implements HandlerInterceptor {
 	private static Logger LOGGER = Logger.getLogger(ApplicationEventListener.class);
 	public static final String LOGINURL = "/login";
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		boolean authFlag = true;
 		String contextPath = request.getContextPath();
 		String requestUrl = request.getRequestURI().replace(contextPath, "");
+		System.out.println(requestUrl);
 		if (!requestUrl.endsWith("/")) {
 			requestUrl = requestUrl + "/";
 		}
@@ -36,7 +38,16 @@ public class AuthInterceptor implements HandlerInterceptor {
 		/*if (uri.contains("v2") || uri.contains("swagger")){
 			return true;
 		}*/
+		//微信接口认证
+		if (uri.equals("/access")) {
+			return true;
+		}
+		//登录
 		if (LOGINURL.equals(uri)) {
+			return true;
+		}
+		//投票
+		if (uri.equals("/vote")) {
 			return true;
 		}
 		User user = null;

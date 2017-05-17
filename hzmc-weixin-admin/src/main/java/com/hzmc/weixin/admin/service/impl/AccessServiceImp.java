@@ -1,7 +1,9 @@
 package com.hzmc.weixin.admin.service.impl;
 
+import com.hzmc.weixin.admin.dao.model.WxRedpackTemplet;
 import com.hzmc.weixin.admin.dao.model.WxUser;
 import com.hzmc.weixin.admin.service.AccessService;
+import com.hzmc.weixin.admin.service.WxRedpackTempletService;
 import com.hzmc.weixin.admin.service.WxUserService;
 import com.hzmc.weixin.admin.util.MessageUtil;
 import com.hzmc.weixin.common.event.EventType;
@@ -33,6 +35,9 @@ public class AccessServiceImp implements AccessService {
 	@Autowired
 	private WxUserService wxUserService;
 
+	@Autowired
+	private WxRedpackTempletService wxRedpackTempletService;
+
 	@Override
 	public String processRequest(HttpServletRequest request) {
 		LOGGER.info("processRequest");
@@ -40,10 +45,17 @@ public class AccessServiceImp implements AccessService {
 		XmlMessageHeader xmlMessageHeader = MpXmlMessages.fromXml(MessageUtil.parseMsgXml(request));
 		if (xmlMessageHeader instanceof TextRequest) {
 			if (((TextRequest) xmlMessageHeader).getContent().equals("test")) {
-				return sendXml(xmlMessageHeader);
+				WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(1);
+				long curtime = System.currentTimeMillis()/1000;
+				long min = Long.valueOf(wxRedpackTemplet.getStartTime());
+				long max = Long.valueOf(wxRedpackTemplet.getEndTime());
+				if (curtime >= min && curtime <= max) {
+					return sendXml(xmlMessageHeader);
+				}
 			}
 		} else if (xmlMessageHeader instanceof SceneSubEvent) {
 			if (((SceneSubEvent) xmlMessageHeader).getEventType() == EventType.subscribe) {
+				WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(1);
 				String fromUser = xmlMessageHeader.getFromUser();
 				User user = Users.defaultUsers().get(fromUser);
 				WxUser user1 = wxUserService.getWxUserByOpenId(fromUser);
@@ -53,14 +65,26 @@ public class AccessServiceImp implements AccessService {
 				} else {
 					updateDb(user);
 				}
-				return sendXml(xmlMessageHeader);
+				long curtime = System.currentTimeMillis()/1000;
+				long min = Long.valueOf(wxRedpackTemplet.getStartTime());
+				long max = Long.valueOf(wxRedpackTemplet.getEndTime());
+				if (curtime >= min && curtime <= max) {
+					return sendXml(xmlMessageHeader);
+				}
+			} else if (((SceneSubEvent) xmlMessageHeader).getEventType() == EventType.unsubscribe) {
+				String fromUser = xmlMessageHeader.getFromUser();
+				WxUser user1 = wxUserService.getWxUserByOpenId(fromUser);
+				LOGGER.info("取消关注" + user1.toString());
+				if (user1 != null) {
+					wxUserService.deleteByPrimaryKey(user1.getId());
+				}
 			}
 		}
 		return null;
 	}
 
 	private String sendXml(XmlMessageHeader xmlMessageHeader) {
-		String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://79269421.ngrok.io/src/view_mobile/index.html", "snsapi_base");
+		String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://79269421.ngrok.io/view_mobile/index.html", "snsapi_base");
 		//String url  = "http://09d9db0b.ngrok.io/src/view_mobile/index.html";
 		NewsXmlMessage newsXmlMessage = new NewsXmlMessage();
 		News news = new News();
