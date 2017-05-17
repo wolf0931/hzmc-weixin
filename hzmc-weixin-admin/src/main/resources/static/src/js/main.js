@@ -28,10 +28,6 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 	
 	$scope.currPage=0;
 	
-	getRecord();
-	
-	
-	function getRecord(){
 		$.ajax({
 			type: 'GET',
 			url: '/WxPayRecord/'+$scope.currPage*10+'/'+($scope.currPage*10+9),
@@ -119,5 +115,4 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 	    		}
 	    	} 
 		});	
-	}
 });
