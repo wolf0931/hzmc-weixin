@@ -40,7 +40,7 @@ public class WxRedpackTemplet implements Serializable {
      *
      * @mbg.generated
      */
-    private Integer totalAmount;
+    private String totalAmount;
 
     /**
      * 中奖率
@@ -107,11 +107,11 @@ public class WxRedpackTemplet implements Serializable {
         this.totalNum = totalNum;
     }
 
-    public Integer getTotalAmount() {
+    public String getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(Integer totalAmount) {
+    public void setTotalAmount(String totalAmount) {
         this.totalAmount = totalAmount;
     }
 

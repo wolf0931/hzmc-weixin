@@ -8,7 +8,7 @@
         <result column="wishing" jdbcType="VARCHAR" property="wishing"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="total_num" jdbcType="INTEGER" property="totalNum"/>
-        <result column="total_amount" jdbcType="INTEGER" property="totalAmount"/>
+        <result column="total_amount" jdbcType="VARCHAR" property="totalAmount"/>
         <result column="winning_rate" jdbcType="VARCHAR" property="winningRate"/>
         <result column="startTime" jdbcType="VARCHAR" property="startTime"/>
         <result column="endTime" jdbcType="VARCHAR" property="endTime"/>
@@ -129,7 +129,7 @@
         )
         values (#{id,jdbcType=INTEGER}, #{actName,jdbcType=VARCHAR}, #{sendName,jdbcType=VARCHAR},
         #{wishing,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{totalNum,jdbcType=INTEGER},
-        #{totalAmount,jdbcType=INTEGER}, #{winningRate,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR},
+        #{totalAmount,jdbcType=VARCHAR}, #{winningRate,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR},
         #{endTime,jdbcType=VARCHAR}, #{minAmount,jdbcType=VARCHAR}, #{maxAmount,jdbcType=VARCHAR}
         )
     </insert>
@@ -193,7 +193,7 @@
                 #{totalNum,jdbcType=INTEGER},
             </if>
             <if test="totalAmount != null">
-                #{totalAmount,jdbcType=INTEGER},
+                #{totalAmount,jdbcType=VARCHAR},
             </if>
             <if test="winningRate != null">
                 #{winningRate,jdbcType=VARCHAR},
@@ -241,7 +241,7 @@
                 total_num = #{record.totalNum,jdbcType=INTEGER},
             </if>
             <if test="record.totalAmount != null">
-                total_amount = #{record.totalAmount,jdbcType=INTEGER},
+                total_amount = #{record.totalAmount,jdbcType=VARCHAR},
             </if>
             <if test="record.winningRate != null">
                 winning_rate = #{record.winningRate,jdbcType=VARCHAR},
@@ -271,7 +271,7 @@
         wishing = #{record.wishing,jdbcType=VARCHAR},
         remark = #{record.remark,jdbcType=VARCHAR},
         total_num = #{record.totalNum,jdbcType=INTEGER},
-        total_amount = #{record.totalAmount,jdbcType=INTEGER},
+        total_amount = #{record.totalAmount,jdbcType=VARCHAR},
         winning_rate = #{record.winningRate,jdbcType=VARCHAR},
         startTime = #{record.startTime,jdbcType=VARCHAR},
         endTime = #{record.endTime,jdbcType=VARCHAR},
@@ -300,7 +300,7 @@
                 total_num = #{totalNum,jdbcType=INTEGER},
             </if>
             <if test="totalAmount != null">
-                total_amount = #{totalAmount,jdbcType=INTEGER},
+                total_amount = #{totalAmount,jdbcType=VARCHAR},
             </if>
             <if test="winningRate != null">
                 winning_rate = #{winningRate,jdbcType=VARCHAR},
@@ -327,7 +327,7 @@
       wishing = #{wishing,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       total_num = #{totalNum,jdbcType=INTEGER},
-      total_amount = #{totalAmount,jdbcType=INTEGER},
+      total_amount = #{totalAmount,jdbcType=VARCHAR},
       winning_rate = #{winningRate,jdbcType=VARCHAR},
       startTime = #{startTime,jdbcType=VARCHAR},
       endTime = #{endTime,jdbcType=VARCHAR},

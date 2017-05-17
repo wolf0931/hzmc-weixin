@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -59,7 +58,7 @@ public class WxRedpackTempletController extends BaseController {
 			return new Result(ResultConstant.FAILED, "最大金额最多二位小数点");
 		}*/
 
-		Double min = Double.valueOf(wxRedpackTemplet.getMinAmount()) * 100;
+	/*	Double min = Double.valueOf(wxRedpackTemplet.getMinAmount()) * 100;
 		BigDecimal bmin = new BigDecimal(min);
 		min = bmin.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
@@ -69,7 +68,7 @@ public class WxRedpackTempletController extends BaseController {
 
 		wxRedpackTemplet.setTotalAmount(wxRedpackTemplet.getTotalAmount() * 100);
 		wxRedpackTemplet.setMinAmount(min.intValue() + "");
-		wxRedpackTemplet.setMaxAmount(max.intValue() + "");
+		wxRedpackTemplet.setMaxAmount(max.intValue() + "");*/
 		List<WxRedpackTemplet> wxRedpackTempletList = wxRedpackTempletService.getTempletByActName(wxRedpackTemplet.getActName());
 		if (wxRedpackTempletList.size() > 0) {
 			return new Result(ResultConstant.FAILED, "活动名称已经存在");
@@ -107,7 +106,7 @@ public class WxRedpackTempletController extends BaseController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ApiOperation(value = "更新红包模板记录")
 	private Object updateRedPackTemPletList(@RequestBody WxRedpackTemplet wxRedpackTemplet) {
-		Double min = Double.valueOf(wxRedpackTemplet.getMinAmount()) * 100;
+		/*Double min = Double.valueOf(wxRedpackTemplet.getMinAmount()) * 100;
 		BigDecimal bmin = new BigDecimal(min);
 		min = bmin.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
@@ -117,7 +116,7 @@ public class WxRedpackTempletController extends BaseController {
 
 		wxRedpackTemplet.setTotalAmount(wxRedpackTemplet.getTotalAmount() * 100);
 		wxRedpackTemplet.setMinAmount(min.intValue() + "");
-		wxRedpackTemplet.setMaxAmount(max.intValue() + "");
+		wxRedpackTemplet.setMaxAmount(max.intValue() + "");*/
 		int count = wxRedpackTempletService.updateByPrimaryKey(wxRedpackTemplet);
 		if (count == 1) {
 			return new Result(ResultConstant.SUCCESS, count);
