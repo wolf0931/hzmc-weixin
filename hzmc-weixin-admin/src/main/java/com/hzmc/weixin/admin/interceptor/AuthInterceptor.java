@@ -38,16 +38,17 @@ public class AuthInterceptor implements HandlerInterceptor {
 		/*if (uri.contains("v2") || uri.contains("swagger")){
 			return true;
 		}*/
-		//微信接口认证
-		if (uri.equals("/access")) {
+		if ("/access".equals(uri)) {
+			//微信接口认证
 			return true;
-		}
-		//登录
-		if (LOGINURL.equals(uri)) {
+		} else if (LOGINURL.equals(uri)) {
+			//登录
 			return true;
-		}
-		//投票
-		if (uri.equals("/vote")) {
+		} else if ("/vote".equals(uri)) {
+			//投票
+			return true;
+		} else if ("/account/info".equals(uri)) {
+			//获取用户信息
 			return true;
 		}
 		User user = null;

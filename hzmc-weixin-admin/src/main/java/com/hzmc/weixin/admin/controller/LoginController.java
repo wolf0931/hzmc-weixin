@@ -66,4 +66,23 @@ public class LoginController extends BaseController {
 		UserSessionManger.getUserInfoMap().remove(sessionId);
 		return new Result(ResultConstant.SUCCESS, user);
 	}
+
+
+	/**
+	 * .
+	 * 获取登录信息
+	 *
+	 * @param request request
+	 * @return Object
+	 */
+	@RequestMapping(value = "/account/info", method = RequestMethod.GET)
+	public Object getLoginInfo(HttpServletRequest request) {
+		User user = UserSessionManger.get(request.getSession().getId());
+		if (user != null) {
+			return new Result(ResultConstant.SUCCESS, user);
+		} else {
+			return new Result(ResultConstant.FAILED, "用户没有登录");
+		}
+
+	}
 }
