@@ -21,7 +21,7 @@
 		<div class='list col-sm-12'>
 			<ul>
 				<li>
-					<a href='../pages/packetConfirm.html' class="dropdown-toggle" data-toggle="dropdown">红包配置</a>
+					<a href='../pages/packetConfirm.html' class="dropdown-toggle" data-toggle="dropdown" onclick='config()'>红包配置</a>
 					<ul class="dropdown-menu packetComfigList">
 						<li ng-repeat='act in actList'>
 							<a id='{{act.id}}' onclick='update(this)'>{{act.actName}}</a>

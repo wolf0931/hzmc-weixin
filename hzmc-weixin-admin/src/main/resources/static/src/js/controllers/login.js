@@ -20,6 +20,7 @@ function login(){
         	data:JSON.stringify(userTemp),
         	success:function(data){
         		if(data.message == 'success'){
+        			sessionStorage.setItem("username",data.data.username);
         			self.location='view_pc/pages/packetConfirm.html';
         		}else{
         			$('.danger span.wrong').addClass('active');
