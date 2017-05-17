@@ -24,7 +24,7 @@
 					<a href='../pages/packetConfirm.html' class="dropdown-toggle" data-toggle="dropdown">红包配置</a>
 					<ul class="dropdown-menu packetComfigList">
 						<li ng-repeat='act in actList'>
-							<a>{{act.actName}}</a>
+							<a id='{{act.id}}' onclick='update(this)'>{{act.actName}}</a>
 						</li>
 					</ul>
 				</li>

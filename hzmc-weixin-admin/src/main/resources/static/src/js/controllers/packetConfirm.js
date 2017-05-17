@@ -162,3 +162,24 @@ $('#submit').click(function(){
         $('#name').val('');
     });
 });
+
+function update(e){
+	var id = e.id;
+	$.ajax({
+		type: 'GET',
+		url: '/WxRedpackTemplet/'+id,
+		success: function(data){
+			$('#sendName').val(data.data.sendName);
+		    $('#activeName').val(data.data.actName);
+		    $('#sum').val(data.data.totalAmount);
+		    $('#number').val(data.data.totalNum);
+		    $('#minAccount').val(data.data.minAmount);
+		    $('#maxAccount').val(data.data.maxAmount);
+		    $('#startDate').val(data.data.startTime);
+		    $('#endDate').val(data.data.endTime);
+		    $('#rate').val(data.data.winningRate);
+		    $('#introduce').val(data.data.remark);
+		    $('#wishing').val(data.data.wishing);
+		}
+	});
+}
