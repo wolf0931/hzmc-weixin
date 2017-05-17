@@ -191,10 +191,16 @@ function update(e){
 		success: function(data){
 
 			var start = new Date(parseInt(data.data.startTime)*1000);
+			var startDate = start.getMonth()+1;
+			startDate += '/'+start.getDate();
+			startDate += '/'+start.getFullYear();
 			var startHour = start.getHours();
 			startHour += ':' + start.getMinutes();
 			startHour += ':' + start.getSeconds();
 			var end = new Date(parseInt(data.data.endTime)*1000);
+			var endDate = end.getMonth()+1;
+			endDate += '/'+end.getDate();
+			endDate += '/'+end.getFullYear();
 			var endHour = end.getHours();
 			endHour += ':' + end.getMinutes();
 			endHour += ':' + end.getSeconds();
@@ -210,14 +216,14 @@ function update(e){
 		            $(this).datetimebox("spinner").timespinner("setValue",startHour);  
 		        }  
 		    }); 
-		    $('#startDate').datebox('setValue',data.data.startTime);
+		    $('#startDate').datebox('setValue',startDate);
 		    $('#endDate').datetimebox({  
 		        required : false,  
 		        onShowPanel:function(){  
 		            $(this).datetimebox("spinner").timespinner("setValue",endHour);  
 		        }  
 		    }); 
-		    $('#endDate').datebox('setValue',data.data.endTime);
+		    $('#endDate').datebox('setValue',endDate);
 		    $('#rate').val(data.data.winningRate);
 		    $('#introduce').val(data.data.remark);
 		    $('#wishing').val(data.data.wishing);
