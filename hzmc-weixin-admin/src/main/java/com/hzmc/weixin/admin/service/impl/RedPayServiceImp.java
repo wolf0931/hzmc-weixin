@@ -1,5 +1,7 @@
 package com.hzmc.weixin.admin.service.impl;
 
+import com.hzmc.weixin.admin.base.Result;
+import com.hzmc.weixin.admin.constant.ResultConstant;
 import com.hzmc.weixin.admin.dao.model.WxPayRecord;
 import com.hzmc.weixin.admin.dao.model.WxRedpackTemplet;
 import com.hzmc.weixin.admin.dao.model.WxUser;
@@ -8,6 +10,8 @@ import com.hzmc.weixin.admin.service.WxPayRecordService;
 import com.hzmc.weixin.admin.service.WxRedpackTempletService;
 import com.hzmc.weixin.admin.service.WxUserService;
 import com.hzmc.weixin.common.util.RandomStringGenerator;
+import com.hzmc.weixin.mp.user.Users;
+import com.hzmc.weixin.mp.user.bean.User;
 import com.hzmc.weixin.pay.base.PaySetting;
 import com.hzmc.weixin.pay.redpack.RedPacks;
 import com.hzmc.weixin.pay.redpack.bean.RedPackRequest;
@@ -42,15 +46,24 @@ public class RedPayServiceImp implements RedPayService {
 	public Object sendSingleRed(WxUser wxUser, int id) {
 		//单个红包
 		//102 为员工不能发红包 oJvITt-VfGOTCe0dcXsZPCqn1APM
+		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(id);
+		long curtime = System.currentTimeMillis() / 1000;
+		long minTime = Long.valueOf(wxRedpackTemplet.getStartTime());
+		long maxTime = Long.valueOf(wxRedpackTemplet.getEndTime());
+		if (curtime >= minTime && curtime <= maxTime) {
+			new Result(ResultConstant.SUCCESS, "活动已结束");
+		}
 		RedPackRequest redPackRequest = new RedPackRequest();
-		/*User user = Users.defaultUsers().get(wxUser.getOpenid());
+		User user = Users.defaultUsers().get(wxUser.getOpenid());
+		if (user == null){
+			return new Result(ResultConstant.FAILED, "没有关注公众号");
+		}
 		WxUser wxUser1 = userService.getWxUserByOpenId(wxUser.getOpenid());
 		if (user.getGroup() == 102 || wxUser1.getGroupid() == 102) {
 			return new Result(ResultConstant.FAILED, "内部人员不能发红包");
 		} else if (!user.isSubscribed()) {
 			return new Result(ResultConstant.FAILED, "没有关注公众号");
-		}*/
-		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(id);
+		}
 		redPackRequest.setAppId(PaySetting.defaultSetting().getAppId());
 		redPackRequest.setActivityName(wxRedpackTemplet.getActName());
 		Random random = new Random();
