@@ -36,19 +36,23 @@ public class AuthInterceptor implements HandlerInterceptor {
 		}
 		String uri = request.getRequestURI();
 		/*if (uri.contains("v2") || uri.contains("swagger")){
+			//接口列表
 			return true;
 		}*/
 		if ("/access".equals(uri)) {
-			//微信接口认证
+			//微信接口认证接口
 			return true;
 		} else if (LOGINURL.equals(uri)) {
-			//登录
+			//登录接口
 			return true;
 		} else if ("/vote".equals(uri)) {
-			//投票
+			//投票接口
 			return true;
 		} else if ("/account/info".equals(uri)) {
-			//获取用户信息
+			//获取用户信息接口
+			return true;
+		} else if("/wx/pay".equals(uri)){
+			//发红包接口
 			return true;
 		}
 		User user = null;
