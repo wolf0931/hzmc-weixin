@@ -75,7 +75,7 @@ function jugeAction(){
 function payPacket(user,group){
 	$.ajax({
 		type: 'POST',
-		url: '/wx/pay/1/'+group,
+		url: '/pay/1/'+group,
 		data: user,
 		success: function(data){
 			if(data.message == 'success'){
