@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by wph on 2017/4/19.
  */
 @RestController
-@RequestMapping("/wx/pay")
+@RequestMapping("/pay")
 @Api(value = "发红包控制器", description = "发红包控制器")
 public class PayController {
 
