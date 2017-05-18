@@ -44,7 +44,7 @@ $('.vote-button-chi').click(function(){
 });
 
 function judge(group){
-//	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
+	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
 	var $user =jugeAction();
 //	myAlert('1');
 
@@ -55,7 +55,7 @@ function judge(group){
 function jugeAction(){
 	$.ajax({
 		type: 'GET',
-    	url: '/oauth/oJvITt-VfGOTCe0dcXsZPCqn1APM',
+    	url: '/oauth/'+openId,
     	success:function(data){
     		if(data.message == 'faild'){
     			myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA3MTUzNzcwMg==&scene=124#wechat_redirect">先关注才能参与活动</a>');
