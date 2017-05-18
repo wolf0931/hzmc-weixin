@@ -59,7 +59,6 @@ public class RedPayServiceImp implements RedPayService {
 		if (curtime >= minTime && curtime <= maxTime) {
 			new Result(ResultConstant.SUCCESS, "活动已结束");
 		}
-		RedPackRequest redPackRequest = new RedPackRequest();
 		User user = Users.defaultUsers().get(wxUser.getOpenid());
 		if (user == null) {
 			return new Result(ResultConstant.FAILED, "没有关注公众号");
@@ -77,14 +76,20 @@ public class RedPayServiceImp implements RedPayService {
 			} else {
 				GlobalCache.right.add(wxUser.getOpenid());
 			}
-			Map<String, Integer> re = new HashedMap();
+			Map<String, Object> re = new HashedMap();
+			RedPackResponse redPackResponse = sendRed(wxUser, wxRedpackTemplet);
 			re.put("left", GlobalCache.getLeft().size());
 			re.put("right", GlobalCache.getRight().size());
+			re.put("redPackResponse", redPackResponse);
 			return new Result(ResultConstant.SUCCESS, re);
 		} else if (GlobalCache.CACHE_MAP.get(wxUser.getOpenid()) != null) {
 			return new Result(ResultConstant.FAILED, "已投票成功");
 		}
+		return null;
+	}
 
+	private RedPackResponse sendRed(WxUser wxUser, WxRedpackTemplet wxRedpackTemplet) {
+		RedPackRequest redPackRequest = new RedPackRequest();
 		redPackRequest.setAppId(PaySetting.defaultSetting().getAppId());
 		redPackRequest.setActivityName(wxRedpackTemplet.getActName());
 		Random random = new Random();
