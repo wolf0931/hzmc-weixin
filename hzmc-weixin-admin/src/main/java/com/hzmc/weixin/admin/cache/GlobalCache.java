@@ -11,33 +11,49 @@ package com.hzmc.weixin.admin.cache;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class GlobalCache {
 
-    /**
-     * cache map.
-     */
-    public static final Map<String, Object> CACHE_MAP =
-            new ConcurrentHashMap<String, Object>();
+	/**
+	 * cache map.
+	 */
+	public static final Map<String, Object> CACHE_MAP =
+			new ConcurrentHashMap<String, Object>();
 
-    /**
-     * add element.
-     * @param key key
-     * @param value value
-     */
-    public void addElement(String key, Object value) {
-        CACHE_MAP.put(key, value);
-    }
+	public static final List<String> left = new ArrayList<>();
 
-    /**
-     * get element by key.
-     * @param key key
-     * @return value
-     */
-    public Object getElement(String key) {
-        return CACHE_MAP.get(key);
-    }
+	public static final List<String> right = new ArrayList<>();
+
+	/**
+	 * add element.
+	 *
+	 * @param key   key
+	 * @param value value
+	 */
+	public void addElement(String key, Object value) {
+		CACHE_MAP.put(key, value);
+	}
+
+	/**
+	 * get element by key.
+	 *
+	 * @param key key
+	 * @return value
+	 */
+	public Object getElement(String key) {
+		return CACHE_MAP.get(key);
+	}
+
+	public static List<String> getLeft() {
+		return left;
+	}
+
+	public static List<String> getRight() {
+		return right;
+	}
 }

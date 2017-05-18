@@ -9,7 +9,7 @@ import com.hzmc.weixin.pay.redpack.bean.RedPackResponse;
  */
 public interface RedPayService {
 
-	Object sendSingleRed(WxUser wxUser, int id);
+	Object sendSingleRed(WxUser wxUser, int id, int voteId);
 
 
 	RedPackResponse sendGroupRed(RedPackRequest redPackRequest);

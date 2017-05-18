@@ -11,26 +11,50 @@
 
 
 </head>
-<body data-role="page">
-
-    <div id="introduction">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores atque consectetur consequatur consequuntur deserunt 
-        doloribus ducimus ipsam, itaque iusto laudantium magni minus nemo optio placeat quae repellat sapiente vitae voluptatibus?
+<body>
+	<div class="header">
+        <div class="vote">
+            <div>
+                <div class="vote-button vote-button-su"></div>
+                <div class="vote-count vote-count-su">12</div>
+            </div>
+            <div>
+                <div class="vote-button vote-button-chi"></div>
+                <div class="vote-count vote-count-chi">568</div>
+            </div>
+        </div>            
     </div>
-	
-	<div class="adaptive-circle circle1">
-		<a class="layout middle" id="open1">
-			点击投我一票
-		</a>
-	</div>
-	<div class="adaptive-circle circle2">
-		<a class="layout middle" id="open2">
-			点击投我一票
-		</a>
-	</div>
+    <div class="clean"></div>
+    <div class="introduction">
+        <div class="item">
+        
+            <h4>活动时间</h4>
+            <span>2017年5月26日（周五）  09:30 - 16:30</span>
+            <span id='actTime'></span>
+        </div>
+        <div class="item">
+            <h4>活动内容</h4>
+            <span>端午佳节，你是“吃货派”还是“民俗派”？</span>
+            <span>在四海八荒的“吃货派”眼里，端午就是一个“粽子节”，</span>
+            <span>甜粽、咸粽、肉粽、蛋黄粽......</span>
+            <span>而在天南地北的“民俗派”心中，端午是一个“活动日”，</span>
+            <span>赛龙舟、挂艾草、放风筝......</span>
+            <span>吃货or民俗，动动手指，站好队列，</span>
+            <span>还有意外现金红包哦！~</span>
+            <span id='actContainer'></span>
+        </div>
+        <div class="item">
+            <h4>参与方式</h4>
+            <span>请点击上方“吃货派or民俗派”按钮</span>
+            <span>选择你支持的队伍</span>
+            <span>微信后台将根据你所在的队伍，自动发放随机红包</span>
+            <span id='actJoin'></span>
+        </div>
+    </div>
+    <div class="clean"></div>
+    <div class="footer"></div>
 
 	<script src="../src/js/lib/jquery_1.11.3.min.js"></script>
     <script src="../src/js/main_mobile.js"></script>
-    <script src="../src/js/main.js"></script>
 </body>
 </html>

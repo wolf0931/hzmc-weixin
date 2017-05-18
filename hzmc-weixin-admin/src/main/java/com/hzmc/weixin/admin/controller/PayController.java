@@ -19,17 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by wph on 2017/4/19.
  */
 @RestController
-@RequestMapping("/wx/pay")
+@RequestMapping("/pay")
 @Api(value = "发红包控制器", description = "发红包控制器")
 public class PayController {
 
 	@Autowired
 	private RedPayService redPayService;
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{id}/{voteId}", method = RequestMethod.POST)
 	@ApiOperation(value = "根据红包模板ID发红包")
-	public Object pay(@RequestBody WxUser wxUser, @PathVariable int id) {
-		return redPayService.sendSingleRed(wxUser, id);
+	public Object pay(@RequestBody WxUser wxUser, @PathVariable int id, @PathVariable int voteId) {
+		return redPayService.sendSingleRed(wxUser, id, voteId);
 	}
 
 	@RequestMapping(value = "/query/{billNumber}", method = RequestMethod.GET)

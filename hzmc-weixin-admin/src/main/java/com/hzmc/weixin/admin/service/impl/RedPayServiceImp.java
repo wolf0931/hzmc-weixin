@@ -1,6 +1,7 @@
 package com.hzmc.weixin.admin.service.impl;
 
 import com.hzmc.weixin.admin.base.Result;
+import com.hzmc.weixin.admin.cache.GlobalCache;
 import com.hzmc.weixin.admin.constant.ResultConstant;
 import com.hzmc.weixin.admin.dao.model.WxPayRecord;
 import com.hzmc.weixin.admin.dao.model.WxRedpackTemplet;
@@ -16,6 +17,7 @@ import com.hzmc.weixin.pay.base.PaySetting;
 import com.hzmc.weixin.pay.redpack.RedPacks;
 import com.hzmc.weixin.pay.redpack.bean.RedPackRequest;
 import com.hzmc.weixin.pay.redpack.bean.RedPackResponse;
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -43,19 +46,22 @@ public class RedPayServiceImp implements RedPayService {
 	private WxRedpackTempletService wxRedpackTempletService;
 
 	@Override
-	public Object sendSingleRed(WxUser wxUser, int id) {
+	public Object sendSingleRed(WxUser wxUser, int id, int voteId) {
 		//单个红包
 		//102 为员工不能发红包 oJvITt-VfGOTCe0dcXsZPCqn1APM
 		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(id);
 		long curtime = System.currentTimeMillis() / 1000;
 		long minTime = Long.valueOf(wxRedpackTemplet.getStartTime());
 		long maxTime = Long.valueOf(wxRedpackTemplet.getEndTime());
+		if (wxRedpackTemplet == null) {
+			return new Result(ResultConstant.FAILED, "红包模板不存在");
+		}
 		if (curtime >= minTime && curtime <= maxTime) {
 			new Result(ResultConstant.SUCCESS, "活动已结束");
 		}
 		RedPackRequest redPackRequest = new RedPackRequest();
 		User user = Users.defaultUsers().get(wxUser.getOpenid());
-		if (user == null){
+		if (user == null) {
 			return new Result(ResultConstant.FAILED, "没有关注公众号");
 		}
 		WxUser wxUser1 = userService.getWxUserByOpenId(wxUser.getOpenid());
@@ -64,6 +70,21 @@ public class RedPayServiceImp implements RedPayService {
 		} else if (!user.isSubscribed()) {
 			return new Result(ResultConstant.FAILED, "没有关注公众号");
 		}
+		if (GlobalCache.CACHE_MAP.get(wxUser.getOpenid()) == null) {
+			GlobalCache.CACHE_MAP.put(wxUser.getOpenid(), wxRedpackTemplet);
+			if (voteId == 1) {
+				GlobalCache.left.add(wxUser.getOpenid());
+			} else {
+				GlobalCache.right.add(wxUser.getOpenid());
+			}
+			Map<String, Integer> re = new HashedMap();
+			re.put("left", GlobalCache.getLeft().size());
+			re.put("right", GlobalCache.getRight().size());
+			return new Result(ResultConstant.SUCCESS, re);
+		} else if (GlobalCache.CACHE_MAP.get(wxUser.getOpenid()) != null) {
+			return new Result(ResultConstant.FAILED, "已投票成功");
+		}
+
 		redPackRequest.setAppId(PaySetting.defaultSetting().getAppId());
 		redPackRequest.setActivityName(wxRedpackTemplet.getActName());
 		Random random = new Random();

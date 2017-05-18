@@ -1,57 +1,80 @@
 /**
  * Created by DELL on 2017/4/25.
  */
-var foodCount=0,customCount=0;
-$('#open1').click(function(){
-    foodCount+=1;
-    judge();
-    redPacket();
-});
-$('#open2').click(function(){
-    customCount+=1;
-    judge();
-    redPacket();
+
+function myAlert(str){
+	 var alert='  <div class="cover"> </div><div class="add-container no-padding">';		
+	 alert += '<div class="navbar clear"><span class="right close closeDown"></span><h4 class="left">提示</h4></div>';
+	 alert += '<div class="add-main">'+str+'</div>';
+	 alert += '<div class="alert-footer"><div class="btn-event right closeDown"><span>确认</span></div></div></div>';
+	 
+	 $('body').append(alert);
+}
+
+$('body').on('click','.closeDown',function($scope){
+    $('.cover').remove();
+    $('.add-container').remove();
 });
 
-function judge(){
-	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
-	
-//	myAlert('1');
-	
+
+$(function($){  
+	init();
+});
+
+function init(){
 	$.ajax({
 		type: 'GET',
-    	url: '',
-    	success:function(){
-    		if(data.massage == 'success'){
-    			return;
+		url: '/WxRedpackTemplet/1',
+		success: function(data){
+			if(data.message == 'success'){
+				$('#vote-count-su').html(data.data.count1);
+				$('#vote-count-chi').html(data.data.count2);
+				$('actTime').html(data.data.count2);
+			}
+		}
+	});
+}
+
+$('.vote-button-su').click(function(){
+    judge(1);
+});
+$('.vote-button-chi').click(function(){
+    judge(2);
+});
+
+function judge(group){
+//	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
+	var $user;
+//	myAlert('1');
+
+	
+	//判断用户是否关注公众号
+	$.ajax({
+		type: 'GET',
+    	url: '/oauth/oJvITt-VfGOTCe0dcXsZPCqn1APM',
+    	success:function(data){
+    		if(data.message == 'faild'){
+    			myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA3MTUzNzcwMg==&scene=124#wechat_redirect">先关注才能参与活动</a>');
+    			return ;
+    		}else if(data.message == 'success'){
+    			$user = data.data.user;
     		}
     	}
 	});
 	
-    $.ajax({
-    	type: 'GET',
-    	url: '/oauth/'+openId,
-    	success:function(data){
-    		if(data.message == 'success'){
-    	        myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz='+data.data.appId+'==#wechat_redirect">先关注才能参与活动</a>');
-    	        
-    	    }
-    	}
-    });
+	//发送红包
+	$.ajax({
+		type: 'POST',
+		url: '/wx/pay/1'+group,
+		data: $user,
+		success: function(data){
+			if(data.message == 'success'){
+				myAlert('恭喜获得红包，退出到聊天窗口领取');
+			}else{
+				myAlert(data);
+			}
+		}
+	});
 }
 
-function redPacket(){
-    $.ajax({
-    	type: 'GET',
-    	url: '/WxRedpackTemplet',
-    	success: function(data){
-    		$rate = data.winningRate;
-    	}
-    });
-    if(Math.random() < $rate){
-    	
-	    myAlert('恭喜获得红包，请退回聊天窗口领取');
-    }else{	
-	    myAlert('好遗憾，没有获得红包哦');
-    }
-}
+

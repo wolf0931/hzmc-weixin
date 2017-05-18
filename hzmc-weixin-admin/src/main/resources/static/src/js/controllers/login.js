@@ -2,14 +2,14 @@
  * Created by DELL on 2016/12/22.
  */
 
-$.ajax({
-	type: 'GET',
-	url: '/login/account/info',
-	success: function(data){
-		if(data.message == 'success'){
-			self.location='view_pc/pages/packetConfirm.html';
-		}
-	}
+ $.ajax({
+	 type: 'GET',
+	 url: '/login/account/info',
+	 success: function(data){
+	 	if(data.message == 'success'){
+	 		self.location='view_pc/pages/packetConfirm.html';
+	    }
+	 }
 });
 
 function login(){	

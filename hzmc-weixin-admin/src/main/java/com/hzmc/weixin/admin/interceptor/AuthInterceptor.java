@@ -38,12 +38,13 @@ public class AuthInterceptor implements HandlerInterceptor {
 			//接口列表
 			return true;
 		}
-		if ("/access".equals(uri) ||
+		if ("/error".equals(uri) ||
+				"/access".equals(uri) ||
 				"/login".equals(uri) ||
-				"/vote".equals(uri) ||
-				"/account/info".equals(uri) ||
-				uri.contains("/wx/pay/") ||
-				"/error".equals(uri)) {
+				"/login/exit".equals(uri) ||
+				"/oauth/".contains(uri) ||
+				"/login/account/info".equals(uri) ||
+				uri.contains("/pay/")) {
 			return true;
 		}
 		User user = null;
