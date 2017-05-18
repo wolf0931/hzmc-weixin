@@ -97,3 +97,36 @@ body{
 	background-size: 100% 100%;
     height: 15rem;
 }
+
+.cover{
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top:0;
+    z-index: 10;
+    background: #2a2d31;
+    opacity: .8;
+}
+.add-container{
+    background: #fff;
+    z-index: 20;
+    position: absolute;
+    top: 20%;
+}
+.close{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("../images/close.png");
+    margin-right: 30px;
+    margin-top: 15px;
+}
+.add-main{
+	font-size: 20px;
+	text-align: center;
+    margin:30px 40px 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: #fafafa;
+    border:2px solid #D7DBDE;
+}

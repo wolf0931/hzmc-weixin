@@ -2,6 +2,7 @@
  * Created by DELL on 2016/12/22.
  */
 
+var $modelId;
 
 function config(){
 	$('#sendName').val('');
@@ -85,7 +86,8 @@ $('#update').click(function(){
     		"endTime": $endDate,
     		"winningRate": $rate,
     		"remark": $introduce,
-    		"wishing": $wishing
+    		"wishing": $wishing,
+    		"id": $modelId 
     };
     $.ajax({
     	type:'post',
@@ -102,6 +104,9 @@ $('#update').click(function(){
     		}
     	},
     	error:function(data){
+    		if(data.message == "faild"){
+    			myAlert('更新失败');
+    		}
     		if(data.status == 401){
     			window.location.href='../../index.html';
     		}
@@ -112,6 +117,7 @@ $('#update').click(function(){
 
 function update(e){
 	var id = e.id;
+	$modelId = id; 
 	$.ajax({
 		type: 'GET',
 		url: '/WxRedpackTemplet/'+id,

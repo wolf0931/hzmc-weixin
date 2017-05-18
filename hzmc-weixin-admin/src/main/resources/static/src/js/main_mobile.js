@@ -11,6 +11,10 @@ function myAlert(str){
 	 $('body').append(alert);
 }
 
+$('body').on('click','.closeDown',function($scope){
+    $('.cover').remove();
+    $('.add-container').remove();
+});
 
 var foodCount=0,customCount=0;
 
@@ -34,6 +38,8 @@ function judge(){
     			myAlert('此活动已经结束');
     		}else if(data.data == '没有关注公众号'){
     			myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz='+data.data.appId+'==#wechat_redirect">先关注才能参与活动</a>');
+    		}else if(data.data == '已投票成功'){
+    			myAlert('您已经参与过活动啦');
     		}else if(data.data == '内部人员不能发红包'){
     			myAlert('内部人员不能领取红包');
     		}else if(typeof(data.data) == object){
