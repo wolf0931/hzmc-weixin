@@ -50,7 +50,7 @@ public class AccessServiceImp implements AccessService {
 				long min = Long.valueOf(wxRedpackTemplet.getStartTime());
 				long max = Long.valueOf(wxRedpackTemplet.getEndTime());
 				if (curtime >= min && curtime <= max) {
-					return sendXml(xmlMessageHeader);
+					return sendXml(xmlMessageHeader,wxRedpackTemplet);
 				}
 			}
 		} else if (xmlMessageHeader instanceof SceneSubEvent) {
@@ -69,7 +69,7 @@ public class AccessServiceImp implements AccessService {
 				long min = Long.valueOf(wxRedpackTemplet.getStartTime());
 				long max = Long.valueOf(wxRedpackTemplet.getEndTime());
 				if (curtime >= min && curtime <= max) {
-					return sendXml(xmlMessageHeader);
+					return sendXml(xmlMessageHeader,wxRedpackTemplet);
 				}
 			} else if (((SceneSubEvent) xmlMessageHeader).getEventType() == EventType.unsubscribe) {
 				String fromUser = xmlMessageHeader.getFromUser();
@@ -83,14 +83,14 @@ public class AccessServiceImp implements AccessService {
 		return null;
 	}
 
-	private String sendXml(XmlMessageHeader xmlMessageHeader) {
+	private String sendXml(XmlMessageHeader xmlMessageHeader,WxRedpackTemplet wxRedpackTemplet) {
 		String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://79269421.ngrok.io/view_mobile/index.html", "snsapi_base");
 		//String url  = "http://09d9db0b.ngrok.io/src/view_mobile/index.html";
 		NewsXmlMessage newsXmlMessage = new NewsXmlMessage();
 		News news = new News();
 		Article article1 = new Article();
-		article1.setTitle("红包主题");
-		article1.setDescription("红包主题。");
+		article1.setTitle(wxRedpackTemplet.getActName());
+		article1.setDescription(wxRedpackTemplet.getRemark());
 		article1.setUrl(url);
 		news.add(article1);
 		newsXmlMessage.setNews(news);

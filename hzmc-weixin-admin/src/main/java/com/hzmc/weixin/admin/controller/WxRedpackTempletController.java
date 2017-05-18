@@ -5,6 +5,7 @@ import com.baidu.unbiz.fluentvalidator.FluentValidator;
 import com.baidu.unbiz.fluentvalidator.ResultCollectors;
 import com.hzmc.weixin.admin.base.BaseController;
 import com.hzmc.weixin.admin.base.Result;
+import com.hzmc.weixin.admin.cache.GlobalCache;
 import com.hzmc.weixin.admin.constant.ResultConstant;
 import com.hzmc.weixin.admin.dao.model.WxRedpackTemplet;
 import com.hzmc.weixin.admin.dao.model.WxRedpackTempletExample;
@@ -12,6 +13,7 @@ import com.hzmc.weixin.admin.service.WxRedpackTempletService;
 import com.hzmc.weixin.admin.util.validator.NotNullValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * WxRedpackTempletcontroller
@@ -81,7 +84,11 @@ public class WxRedpackTempletController extends BaseController {
 	@ApiOperation(value = "根据Id查找红包模板记录")
 	private Object getRedPackTemPletList(@PathVariable Integer id) {
 		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(id);
-		return new Result(ResultConstant.SUCCESS, wxRedpackTemplet);
+		Map<String, Object> re = new HashedMap();
+		re.put("left", GlobalCache.getLeft().size());
+		re.put("right", GlobalCache.getRight().size());
+		re.put("wxRedpackTemplet", wxRedpackTemplet);
+		return new Result(ResultConstant.SUCCESS, re);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -106,17 +113,6 @@ public class WxRedpackTempletController extends BaseController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ApiOperation(value = "更新红包模板记录")
 	private Object updateRedPackTemPletList(@RequestBody WxRedpackTemplet wxRedpackTemplet) {
-		/*Double min = Double.valueOf(wxRedpackTemplet.getMinAmount()) * 100;
-		BigDecimal bmin = new BigDecimal(min);
-		min = bmin.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-
-		Double max = Double.valueOf(wxRedpackTemplet.getMaxAmount()) * 100;
-		BigDecimal bmax = new BigDecimal(max);
-		max = bmax.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-
-		wxRedpackTemplet.setTotalAmount(wxRedpackTemplet.getTotalAmount() * 100);
-		wxRedpackTemplet.setMinAmount(min.intValue() + "");
-		wxRedpackTemplet.setMaxAmount(max.intValue() + "");*/
 		int count = wxRedpackTempletService.updateByPrimaryKey(wxRedpackTemplet);
 		if (count == 1) {
 			return new Result(ResultConstant.SUCCESS, count);

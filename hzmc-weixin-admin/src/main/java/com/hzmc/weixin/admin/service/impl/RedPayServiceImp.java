@@ -17,6 +17,7 @@ import com.hzmc.weixin.pay.base.PaySetting;
 import com.hzmc.weixin.pay.redpack.RedPacks;
 import com.hzmc.weixin.pay.redpack.bean.RedPackRequest;
 import com.hzmc.weixin.pay.redpack.bean.RedPackResponse;
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -44,7 +46,7 @@ public class RedPayServiceImp implements RedPayService {
 	private WxRedpackTempletService wxRedpackTempletService;
 
 	@Override
-	public Object sendSingleRed(WxUser wxUser, int id) {
+	public Object sendSingleRed(WxUser wxUser, int id, int voteId) {
 		//单个红包
 		//102 为员工不能发红包 oJvITt-VfGOTCe0dcXsZPCqn1APM
 		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(id);
@@ -70,7 +72,15 @@ public class RedPayServiceImp implements RedPayService {
 		}
 		if (GlobalCache.CACHE_MAP.get(wxUser.getOpenid()) == null) {
 			GlobalCache.CACHE_MAP.put(wxUser.getOpenid(), wxRedpackTemplet);
-			return new Result(ResultConstant.SUCCESS, "投票成功");
+			if (voteId == 1) {
+				GlobalCache.left.add(wxUser.getOpenid());
+			} else {
+				GlobalCache.right.add(wxUser.getOpenid());
+			}
+			Map<String, Integer> re = new HashedMap();
+			re.put("left", GlobalCache.getLeft().size());
+			re.put("right", GlobalCache.getRight().size());
+			return new Result(ResultConstant.SUCCESS, re);
 		} else if (GlobalCache.CACHE_MAP.get(wxUser.getOpenid()) != null) {
 			return new Result(ResultConstant.FAILED, "已投票成功");
 		}

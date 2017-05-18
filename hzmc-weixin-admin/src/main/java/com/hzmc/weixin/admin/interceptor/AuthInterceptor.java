@@ -42,7 +42,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 				"/access".equals(uri) ||
 				"/login".equals(uri) ||
 				"/login/exit".equals(uri) ||
-				"/vote".equals(uri) ||
+				"/oauth/".contains(uri) ||
 				"/login/account/info".equals(uri) ||
 				uri.contains("/pay/")) {
 			return true;

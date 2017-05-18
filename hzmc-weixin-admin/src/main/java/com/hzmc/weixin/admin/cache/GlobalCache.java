@@ -25,9 +25,9 @@ public class GlobalCache {
 	public static final Map<String, Object> CACHE_MAP =
 			new ConcurrentHashMap<String, Object>();
 
-	public static final List<Integer> left = new ArrayList<>();
+	public static final List<String> left = new ArrayList<>();
 
-	public static final List<Integer> right = new ArrayList<>();
+	public static final List<String> right = new ArrayList<>();
 
 	/**
 	 * add element.
@@ -49,11 +49,11 @@ public class GlobalCache {
 		return CACHE_MAP.get(key);
 	}
 
-	public static List<Integer> getLeft() {
+	public static List<String> getLeft() {
 		return left;
 	}
 
-	public static List<Integer> getRight() {
+	public static List<String> getRight() {
 		return right;
 	}
 }
