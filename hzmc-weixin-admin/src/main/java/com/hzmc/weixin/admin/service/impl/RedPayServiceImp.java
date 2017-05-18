@@ -57,7 +57,7 @@ public class RedPayServiceImp implements RedPayService {
 			return new Result(ResultConstant.FAILED, "红包模板不存在");
 		}
 		if (curtime >= minTime && curtime <= maxTime) {
-			return new Result(ResultConstant.SUCCESS, "活动已结束");
+			return new Result(ResultConstant.FAILED, "活动已结束");
 		}
 		User user = Users.defaultUsers().get(wxUser.getOpenid());
 		if (user == null) {
@@ -81,7 +81,11 @@ public class RedPayServiceImp implements RedPayService {
 			re.put("left", GlobalCache.getLeft().size());
 			re.put("right", GlobalCache.getRight().size());
 			re.put("redPackResponse", redPackResponse);
-			return new Result(ResultConstant.SUCCESS, re);
+			if (redPackResponse.success()){
+				return new Result(ResultConstant.SUCCESS, re);
+			}else{
+				return new Result(ResultConstant.FAILED, redPackResponse.getReturnMessage());
+			}
 		} else if (GlobalCache.CACHE_MAP.get(wxUser.getOpenid()) != null) {
 			return new Result(ResultConstant.FAILED, "已投票成功");
 		}
