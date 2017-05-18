@@ -27,9 +27,8 @@ function init(){
 		url: '/WxRedpackTemplet/1',
 		success: function(data){
 			if(data.message == 'success'){
-				$('#vote-count-su').html(data.data.count1);
-				$('#vote-count-chi').html(data.data.count2);
-				$('actTime').html(data.data.count2);
+				$('#vote-count-su').html(data.data.left);
+				$('#vote-count-chi').html(data.data.right);
 			}
 		}
 	});
@@ -46,11 +45,14 @@ $('.vote-button-chi').click(function(){
 
 function judge(group){
 //	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
-	var $user;
+	var $user =jugeAction();
 //	myAlert('1');
 
-	
-	//判断用户是否关注公众号
+	payPacket($user,group);	
+}
+
+//判断用户是否关注公众号
+function jugeAction(){
 	$.ajax({
 		type: 'GET',
     	url: '/oauth/oJvITt-VfGOTCe0dcXsZPCqn1APM',
@@ -59,16 +61,21 @@ function judge(group){
     			myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA3MTUzNzcwMg==&scene=124#wechat_redirect">先关注才能参与活动</a>');
     			return ;
     		}else if(data.message == 'success'){
-    			$user = data.data.user;
+    			return data.data.user;
+    		}else if(data.status == 500){
+    			myAlert('您已经参与过活动');
     		}
     	}
 	});
 	
-	//发送红包
+}
+
+//发送红包
+function payPacket(user,group){
 	$.ajax({
 		type: 'POST',
-		url: '/wx/pay/1'+group,
-		data: $user,
+		url: '/wx/pay/1/'+group,
+		data: user,
 		success: function(data){
 			if(data.message == 'success'){
 				myAlert('恭喜获得红包，退出到聊天窗口领取');
