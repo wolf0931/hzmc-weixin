@@ -75,7 +75,6 @@ function jugeAction(openId,group){
 //发送红包
 function payPacket(user,group){
 	var tem = 1;
-	user.openid = "oJvITt-VfGOTCe0dcXsZPCqn1APM";
 	$.ajax({
 		type: 'POST',
 		url: '/pay/'+tem +"/"+group,
@@ -90,7 +89,7 @@ function payPacket(user,group){
 			if(data.message == 'success'){
 				myAlert('恭喜获得红包，退出到聊天窗口领取');
 			}else{
-				myAlert(data);
+				myAlert(data.data);
 			}
 		}
 	});
