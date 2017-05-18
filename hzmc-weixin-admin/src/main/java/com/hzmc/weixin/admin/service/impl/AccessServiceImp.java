@@ -1,5 +1,6 @@
 package com.hzmc.weixin.admin.service.impl;
 
+import com.hzmc.weixin.admin.cache.GlobalCache;
 import com.hzmc.weixin.admin.dao.model.WxRedpackTemplet;
 import com.hzmc.weixin.admin.dao.model.WxUser;
 import com.hzmc.weixin.admin.service.AccessService;
@@ -46,11 +47,11 @@ public class AccessServiceImp implements AccessService {
 		if (xmlMessageHeader instanceof TextRequest) {
 			if (((TextRequest) xmlMessageHeader).getContent().equals("test")) {
 				WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(1);
-				long curtime = System.currentTimeMillis()/1000;
+				long curtime = System.currentTimeMillis() / 1000;
 				long min = Long.valueOf(wxRedpackTemplet.getStartTime());
 				long max = Long.valueOf(wxRedpackTemplet.getEndTime());
 				if (curtime >= min && curtime <= max) {
-					return sendXml(xmlMessageHeader,wxRedpackTemplet);
+					return sendXml(xmlMessageHeader, wxRedpackTemplet);
 				}
 			}
 		} else if (xmlMessageHeader instanceof SceneSubEvent) {
@@ -65,11 +66,14 @@ public class AccessServiceImp implements AccessService {
 				} else {
 					updateDb(user);
 				}
-				long curtime = System.currentTimeMillis()/1000;
+				if (GlobalCache.CACHE_MAP.get(fromUser) != null) {
+					return null;
+				}
+				long curtime = System.currentTimeMillis() / 1000;
 				long min = Long.valueOf(wxRedpackTemplet.getStartTime());
 				long max = Long.valueOf(wxRedpackTemplet.getEndTime());
 				if (curtime >= min && curtime <= max) {
-					return sendXml(xmlMessageHeader,wxRedpackTemplet);
+					return sendXml(xmlMessageHeader, wxRedpackTemplet);
 				}
 			} else if (((SceneSubEvent) xmlMessageHeader).getEventType() == EventType.unsubscribe) {
 				String fromUser = xmlMessageHeader.getFromUser();
@@ -83,7 +87,7 @@ public class AccessServiceImp implements AccessService {
 		return null;
 	}
 
-	private String sendXml(XmlMessageHeader xmlMessageHeader,WxRedpackTemplet wxRedpackTemplet) {
+	private String sendXml(XmlMessageHeader xmlMessageHeader, WxRedpackTemplet wxRedpackTemplet) {
 		String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://79269421.ngrok.io/view_mobile/index.html", "snsapi_base");
 		//String url  = "http://09d9db0b.ngrok.io/src/view_mobile/index.html";
 		NewsXmlMessage newsXmlMessage = new NewsXmlMessage();
