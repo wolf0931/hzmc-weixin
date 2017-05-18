@@ -17,35 +17,65 @@ $('body').on('click','.closeDown',function($scope){
 });
 
 
-$('.vote-button-su').click(function(){
-    judge();
-});
-$('.vote-button-ch').click(function(){
-    judge();
+$(function($){  
+	init();
 });
 
-function judge(){
-//	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
-	
-//	myAlert('1');
-
-	//MzAxOTY2OTE0OA
+function init(){
 	$.ajax({
 		type: 'GET',
-    	url: '/vote/1/oJvITt-VfGOTCe0dcXsZPCqn1APM',
+		url: '/WxRedpackTemplet/1',
+		success: function(data){
+			if(data.message == 'success'){
+				$('#vote-count-su').html(data.data.count1);
+				$('#vote-count-chi').html(data.data.count2);
+				$('actTime').html(data.data.count2);
+			}
+		}
+	});
+}
+
+$('.vote-button-su').click(function(){
+	$('#vote-count-su').html(parseInt($('#vote-count-su').html())+1);
+    judge(1);
+});
+$('.vote-button-chi').click(function(){
+	$('#vote-count-chi').html(parseInt($('#vote-count-chi').html())+1);
+    judge(2);
+});
+
+function judge(group){
+//	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
+	var $user;
+//	myAlert('1');
+
+	
+	//判断用户是否关注公众号
+	$.ajax({
+		type: 'GET',
+    	url: '/oauth/oJvITt-VfGOTCe0dcXsZPCqn1APM',
     	success:function(data){
-    		if(data.data == '活动已结束'){
-    			myAlert('此活动已经结束');
-    		}else if(data.data == '没有关注公众号'){
+    		if(data.message == 'faild'){
     			myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA3MTUzNzcwMg==&scene=124#wechat_redirect">先关注才能参与活动</a>');
-    		}else if(data.data == '已投票成功'){
-    			myAlert('您已经参与过活动啦');
-    		}else if(data.data == '内部人员不能发红包'){
-    			myAlert('内部人员不能领取红包');
-    		}else if(typeof(data.data) == object){
-    			myAlert('恭喜获得红包，请退回聊天窗口领取');
+    			return ;
+    		}else if(data.message == 'success'){
+    			$user = data.data.user;
     		}
     	}
+	});
+	
+	//发送红包
+	$.ajax({
+		type: 'POST',
+		url: '/wx/pay/1'+group,
+		data: $user,
+		success: function(data){
+			if(data.message == 'success'){
+				myAlert('恭喜获得红包，退出到聊天窗口领取');
+			}else{
+				myAlert(data);
+			}
+		}
 	});
 }
 

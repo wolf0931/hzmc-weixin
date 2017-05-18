@@ -311,6 +311,7 @@ form input{
 }
 textarea{
 	margin-left: 10px;
+	vertical-align: middle;
 }
 .no-padding{
     padding: 0;
