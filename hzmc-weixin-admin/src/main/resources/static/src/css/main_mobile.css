@@ -121,29 +121,31 @@ body{
 }
 @media screen and (min-width:968px){
 	.add-container{
-	    left: 40%
+		width: 28%;
+	    left: 36%
 	}
 }
 @media screen and (min-width:768px) and (max-width:968px){
 	.add-container{
-	    left: 36%
+		width: 33%;
+	    left: 33%
 	}
 }
 @media screen and (min-width:600px) and (max-width:768px){
 	.add-container{
-		max-width: 40%;
+		width: 40%;
 	    left: 30%
 	}
 }
 @media screen and (min-width:410px) and (max-width:600px){
 	.add-container{
-		max-width: 60%;
+		width: 60%;
 	    left: 20%
 	}
 }
 @media screen and (max-width:410px){
 	.add-container{
-		max-width: 74%;
+		width: 74%;
 	    left: 13%
 	}
 }
