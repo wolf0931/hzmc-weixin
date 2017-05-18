@@ -11,6 +11,12 @@ body{
 .clean{
 	clear: both;
 }
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
 
 /* 各类型设备做字体自适应，需要结合font-size：rem实现 */
 @media screen and (max-width:320px){html{font-size:10px}}
@@ -113,20 +119,68 @@ body{
     position: absolute;
     top: 20%;
 }
+@media screen and (min-width:968px){
+	.add-container{
+	    left: 40%
+	}
+}
+@media screen and (min-width:768px) and (max-width:968px){
+	.add-container{
+	    left: 36%
+	}
+}
+@media screen and (min-width:600px) and (max-width:768px){
+	.add-container{
+	    left: 30%
+	}
+}
+@media screen and (min-width:410px) and (max-width:600px){
+	.add-container{
+	    left: 20%
+	}
+}
+@media screen and (max-width:410px){
+	.add-container{
+	    left: 13%
+	}
+}
 .close{
     display: inline-block;
     width: 16px;
     height: 16px;
     background: url("../images/close.png");
+    background-size: 100%;
     margin-right: 30px;
     margin-top: 15px;
 }
 .add-main{
 	font-size: 20px;
 	text-align: center;
-    margin:30px 40px 0;
+    margin:20px 40px 10px;
     padding-top: 15px;
     padding-bottom: 15px;
     background: #fafafa;
     border:2px solid #D7DBDE;
+}
+div.navbar{
+    height: 50px;
+    background: #5097F7;
+    border-radius: 0;
+}
+div.navbar h4{
+    font-size: 18px;
+    margin-left: 30px;
+    margin-top: 15px;
+}
+.btn-event{
+    width: 100px;
+    height: 30px;
+    background-color: #5097F7;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+.btn-event span{
+    line-height: 30px;
 }
