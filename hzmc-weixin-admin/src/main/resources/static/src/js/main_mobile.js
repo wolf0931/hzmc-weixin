@@ -64,7 +64,7 @@ function jugeAction(openId,group){
     		}else if(data.message == 'success'){
     			payPacket(data.data.user,group);
     		}else if(data.status == 500){
-    			myAlert('您已经参与过活动');
+    			myAlert('对不起，您已经参与过活动');
     		}
     	}
 	});
@@ -88,8 +88,10 @@ function payPacket(user,group){
 		success: function(data){
 			if(data.message == 'success'){
 				myAlert('恭喜获得红包，退出到聊天窗口领取');
-			}else{
-				myAlert(data);
+			}else if(data.data == '活动已结束'){
+				myAlert('对不起，活动已结束');
+			}else if(data.data == '内部人员不能发红包'){
+				myAlert('对不起，内部人员不能领取红包');
 			}
 		}
 	});

@@ -123,26 +123,26 @@ function update(e){
 		url: '/WxRedpackTemplet/'+id,
 		success: function(data){
 
-			var start = new Date(parseInt(data.data.startTime)*1000);
+			var start = new Date(parseInt(data.data.wxRedpackTemplet.startTime)*1000);
 			var startDate = start.getMonth()+1;
 			startDate += '/'+start.getDate();
 			startDate += '/'+start.getFullYear();
 			var startHour = start.getHours();
 			startHour += ':' + start.getMinutes();
 			startHour += ':' + start.getSeconds();
-			var end = new Date(parseInt(data.data.endTime)*1000);
+			var end = new Date(parseInt(data.data.wxRedpackTemplet.endTime)*1000);
 			var endDate = end.getMonth()+1;
 			endDate += '/'+end.getDate();
 			endDate += '/'+end.getFullYear();
 			var endHour = end.getHours();
 			endHour += ':' + end.getMinutes();
 			endHour += ':' + end.getSeconds();
-			$('#sendName').val(data.data.sendName);
-		    $('#activeName').val(data.data.actName);
-		    $('#sum').val(data.data.totalAmount);
-		    $('#number').val(data.data.totalNum);
-		    $('#minAccount').val(data.data.minAmount);
-		    $('#maxAccount').val(data.data.maxAmount);
+			$('#sendName').val(data.data.wxRedpackTemplet.sendName);
+		    $('#activeName').val(data.data.wxRedpackTemplet.actName);
+		    $('#sum').val(data.data.wxRedpackTemplet.totalAmount);
+		    $('#number').val(data.data.wxRedpackTemplet.totalNum);
+		    $('#minAccount').val(data.data.wxRedpackTemplet.minAmount);
+		    $('#maxAccount').val(data.data.wxRedpackTemplet.maxAmount);
 		    $('#startDate').datetimebox({  
 		        required : false,  
 		        onShowPanel:function(){  
@@ -157,9 +157,9 @@ function update(e){
 		        }  
 		    }); 
 		    $('#endDate').datebox('setValue',endDate);
-		    $('#rate').val(data.data.winningRate);
-		    $('#introduce').val(data.data.remark);
-		    $('#wishing').val(data.data.wishing);
+		    $('#rate').val(data.data.wxRedpackTemplet.winningRate);
+		    $('#introduce').val(data.data.wxRedpackTemplet.remark);
+		    $('#wishing').val(data.data.wxRedpackTemplet.wishing);
 		    $('#submit').addClass('display');
 		    $('#update').removeClass('display');
 		},
