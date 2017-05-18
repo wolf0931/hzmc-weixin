@@ -45,14 +45,14 @@ $('.vote-button-chi').click(function(){
 
 function judge(group){
 	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
-	jugeAction();
+	jugeAction(openId,group);
 //	myAlert('1');
 
 		
 }
 
 //判断用户是否关注公众号
-function jugeAction(){
+function jugeAction(openId,group){
 	$.ajax({
 		type: 'GET',
     	url: '/oauth/'+openId,
@@ -62,6 +62,7 @@ function jugeAction(){
     			myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA3MTUzNzcwMg==&scene=124#wechat_redirect">先关注才能参与活动</a>');
     			return ;
     		}else if(data.message == 'success'){
+
     			payPacket(data.data.user,group);
     		}else if(data.status == 500){
     			myAlert('您已经参与过活动');
@@ -73,10 +74,18 @@ function jugeAction(){
 
 //发送红包
 function payPacket(user,group){
+	var tem = 1;
+	user.openid = "oJvITt-VfGOTCe0dcXsZPCqn1APM";
 	$.ajax({
 		type: 'POST',
-		url: '/wx/pay/1/'+group,
-		data: user,
+		url: '/pay/'+tem +"/"+group,
+		//data: user,
+		dataType: "json",
+		headers:{
+			Accept:"application/json",
+			"Content-Type":"application/json"
+		},
+		data:JSON.stringify(user),
 		success: function(data){
 			if(data.message == 'success'){
 				myAlert('恭喜获得红包，退出到聊天窗口领取');

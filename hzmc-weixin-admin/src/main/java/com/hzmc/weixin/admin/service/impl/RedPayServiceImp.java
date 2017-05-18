@@ -57,7 +57,7 @@ public class RedPayServiceImp implements RedPayService {
 			return new Result(ResultConstant.FAILED, "红包模板不存在");
 		}
 		if (curtime >= minTime && curtime <= maxTime) {
-			new Result(ResultConstant.SUCCESS, "活动已结束");
+			return new Result(ResultConstant.SUCCESS, "活动已结束");
 		}
 		User user = Users.defaultUsers().get(wxUser.getOpenid());
 		if (user == null) {
