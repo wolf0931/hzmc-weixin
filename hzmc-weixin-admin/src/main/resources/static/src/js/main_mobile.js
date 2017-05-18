@@ -45,14 +45,14 @@ $('.vote-button-chi').click(function(){
 
 function judge(group){
 	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
-	jugeAction();
+	jugeAction(openId,group);
 //	myAlert('1');
 
 		
 }
 
 //判断用户是否关注公众号
-function jugeAction(){
+function jugeAction(openId,group){
 	$.ajax({
 		type: 'GET',
     	url: '/oauth/'+openId,
@@ -73,10 +73,18 @@ function jugeAction(){
 
 //发送红包
 function payPacket(user,group){
+	var tem = 1;
+	user.openid = "oJvITt-VfGOTCe0dcXsZPCqn1APM";
 	$.ajax({
 		type: 'POST',
-		url: '/pay/1/'+group,
-		data: user,
+		url: '/pay/'+tem +"/"+group,
+		//data: user,
+		dataType: "json",
+		headers:{
+			Accept:"application/json",
+			"Content-Type":"application/json"
+		},
+		data:JSON.stringify(user),
 		success: function(data){
 			if(data.message == 'success'){
 				myAlert('恭喜获得红包，退出到聊天窗口领取');
