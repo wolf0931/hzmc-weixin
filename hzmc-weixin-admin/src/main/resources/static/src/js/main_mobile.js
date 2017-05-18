@@ -45,10 +45,10 @@ $('.vote-button-chi').click(function(){
 
 function judge(group){
 	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
-	var $user =jugeAction();
+	jugeAction();
 //	myAlert('1');
 
-	payPacket($user,group);	
+		
 }
 
 //判断用户是否关注公众号
@@ -56,12 +56,13 @@ function jugeAction(){
 	$.ajax({
 		type: 'GET',
     	url: '/oauth/'+openId,
+    	async: false,
     	success:function(data){
     		if(data.message == 'faild'){
     			myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA3MTUzNzcwMg==&scene=124#wechat_redirect">先关注才能参与活动</a>');
     			return ;
     		}else if(data.message == 'success'){
-    			return data.data.user;
+    			payPacket(data.data.user,group);
     		}else if(data.status == 500){
     			myAlert('您已经参与过活动');
     		}
