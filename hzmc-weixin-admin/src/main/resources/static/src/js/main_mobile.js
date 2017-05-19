@@ -31,19 +31,19 @@ function init(){
 				$('.vote-count-chi').html(data.data.right);
 				var start = new Date(parseInt(data.data.wxRedpackTemplet.startTime)*1000);
 				var startDate = start.getFullYear();
-				startDate += '/' + (parseInt(start.getMonth())+1);
-				startDate += '/' + start.getDate();
-				startDate += ' ' + start.getHours();
+				startDate += '年' + (parseInt(start.getMonth())+1);
+				startDate += '月' + start.getDate();
+				startDate += '日 ' + start.getHours();
 				startDate += ':' + start.getMinutes();
 				startDate += ':' + start.getSeconds();
 				var end = new Date(parseInt(data.data.wxRedpackTemplet.endTime)*1000);
 				var endDate = end.getFullYear();
-				endDate += '/' + (parseInt(end.getMonth())+1);
-				endDate += '/' + end.getDate();
-				endDate += ' ' + end.getHours();
+				endDate += '年' + (parseInt(end.getMonth())+1);
+				endDate += '月' + end.getDate();
+				endDate += '日 ' + end.getHours();
 				endDate += ':' + end.getMinutes();
 				endDate += ':' + end.getSeconds();
-				$('#actTime').html(startDate+'至'+endDate);
+				$('#actTime').html(startDate+' 至  '+endDate);
 			}
 		}
 	});
