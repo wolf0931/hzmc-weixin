@@ -34,7 +34,8 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 	    	} 
 		});
 	}
-	
+
+
 		
 	function PayRecord(){
 		$.ajax({
@@ -67,7 +68,7 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 						$('.previous').addClass('disabled');
 					}	
 					$scope.currPage = $('.active a').html();
-					getRecord();
+					PayRecord();
 				});
 	
 				if($('.active a').html() == Math.floor($scope.total/10+1)){
@@ -86,12 +87,13 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 						$('.latter').addClass('disabled');
 					}
 					$scope.currPage = $('.active a').html();
-					getRecord();
+					PayRecord();
 				});
 				$('.tablePager').click(function(e){
 					$(e.target).parent().addClass('active').siblings('.active').removeClass('active');
 					$scope.currPage = $('.active a').html()
-					
+
+					PayRecord();
 					if($('.active a').html() == '1'){
 						$('.previous').addClass('disabled');
 					}else{

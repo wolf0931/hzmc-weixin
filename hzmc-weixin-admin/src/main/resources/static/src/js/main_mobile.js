@@ -77,11 +77,10 @@ function jugeAction(openId,group){
     		}else if(data.message == 'failed' && data.data == '已经投票'){
 				myAlert('对不起，您已经参与过活动');
 			}else if(data.message == 'success'){
-				init();
     			payPacket(data.data.user,group);
-    		}else if(data.status == 500){
-    			myAlert('对不起，您已经参与过活动');
-    		}
+    		}else{
+				myAlert(data.data);
+			}
     	}
 	});
 	
@@ -104,10 +103,7 @@ function payPacket(user,group){
 		success: function(data){
 			if(data.message == 'success'){
 				myAlert('恭喜获得红包，退出到聊天窗口领取');
-			}else if(data.data == '活动已结束'){
-				myAlert('对不起，活动已结束');
-			}else if(data.data == '内部人员不能发红包'){
-				myAlert('对不起，内部人员不能领取红包');
+				init();
 			}else{
 				myAlert(data.data);
 			}
