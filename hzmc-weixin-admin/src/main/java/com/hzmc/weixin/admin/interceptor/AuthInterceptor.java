@@ -42,8 +42,9 @@ public class AuthInterceptor implements HandlerInterceptor {
 				"/access".equals(uri) ||
 				"/login".equals(uri) ||
 				"/login/exit".equals(uri) ||
-				"/oauth/".contains(uri) ||
 				"/login/account/info".equals(uri) ||
+				uri.contains("/oauth/") ||
+				uri.contains("/WxRedpackTemplet/") ||
 				uri.contains("/pay/")) {
 			return true;
 		}

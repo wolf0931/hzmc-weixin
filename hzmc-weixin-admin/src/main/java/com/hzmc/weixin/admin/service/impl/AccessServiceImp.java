@@ -42,7 +42,6 @@ public class AccessServiceImp implements AccessService {
 	@Override
 	public String processRequest(HttpServletRequest request) {
 		LOGGER.info("processRequest");
-		//String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://09d9db0b.ngrok.io/wx/oauth/", "snsapi_base");
 		XmlMessageHeader xmlMessageHeader = MpXmlMessages.fromXml(MessageUtil.parseMsgXml(request));
 		if (xmlMessageHeader instanceof TextRequest) {
 			if (((TextRequest) xmlMessageHeader).getContent().equals("test")) {
@@ -88,14 +87,14 @@ public class AccessServiceImp implements AccessService {
 	}
 
 	private String sendXml(XmlMessageHeader xmlMessageHeader, WxRedpackTemplet wxRedpackTemplet) {
-		String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://79269421.ngrok.io/view_mobile/index.html", "snsapi_base");
-		//String url  = "http://09d9db0b.ngrok.io/src/view_mobile/index.html";
+		String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://wx.hzmc.com.cn/view_mobile/index.html", "snsapi_base");
+		String testurl = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://79269421.ngrok.io/view_mobile/index.html", "snsapi_base");
 		NewsXmlMessage newsXmlMessage = new NewsXmlMessage();
 		News news = new News();
 		Article article1 = new Article();
 		article1.setTitle(wxRedpackTemplet.getActName());
 		article1.setDescription(wxRedpackTemplet.getRemark());
-		article1.setUrl(url);
+		article1.setUrl(testurl);
 		news.add(article1);
 		newsXmlMessage.setNews(news);
 		newsXmlMessage.setFromUser(xmlMessageHeader.getToUser());

@@ -57,18 +57,18 @@ public class RedPayServiceImp implements RedPayService {
 			return new Result(ResultConstant.FAILED, "红包模板不存在");
 		}
 		if (curtime >= minTime && curtime <= maxTime) {
-			new Result(ResultConstant.SUCCESS, "活动已结束");
+			return new Result(ResultConstant.SUCCESS, "活动已结束");
 		}
 		User user = Users.defaultUsers().get(wxUser.getOpenid());
 		if (user == null) {
 			return new Result(ResultConstant.FAILED, "没有关注公众号");
 		}
-		WxUser wxUser1 = userService.getWxUserByOpenId(wxUser.getOpenid());
+		/*WxUser wxUser1 = userService.getWxUserByOpenId(wxUser.getOpenid());
 		if (user.getGroup() == 102 || wxUser1.getGroupid() == 102) {
 			return new Result(ResultConstant.FAILED, "内部人员不能发红包");
 		} else if (!user.isSubscribed()) {
 			return new Result(ResultConstant.FAILED, "没有关注公众号");
-		}
+		}*/
 		if (GlobalCache.CACHE_MAP.get(wxUser.getOpenid()) == null) {
 			GlobalCache.CACHE_MAP.put(wxUser.getOpenid(), wxRedpackTemplet);
 			if (voteId == 1) {
@@ -114,6 +114,7 @@ public class RedPayServiceImp implements RedPayService {
 			LOGGER.info("红包发送成功，插入红包记录");
 			WxPayRecord wxPayRecord = new WxPayRecord();
 			wxPayRecord.setMchBillno(redPackResponse.getBillNumber());
+			wxPayRecord.setRedpacktemid(wxRedpackTemplet.getId());
 			wxPayRecord.setOpenid(redPackResponse.getOpenId());
 			wxPayRecord.setMchId(PaySetting.defaultSetting().getMchId());
 			wxPayRecord.setSendListid(redPackResponse.getSendListId());
