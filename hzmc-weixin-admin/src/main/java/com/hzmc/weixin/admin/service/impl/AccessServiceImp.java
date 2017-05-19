@@ -49,7 +49,7 @@ public class AccessServiceImp implements AccessService {
 				long curtime = System.currentTimeMillis() / 1000;
 				long min = Long.valueOf(wxRedpackTemplet.getStartTime());
 				long max = Long.valueOf(wxRedpackTemplet.getEndTime());
-				if (!(curtime >= min && curtime <= max)) {
+				if (curtime >= min && curtime <= max) {
 					return sendXml(xmlMessageHeader, wxRedpackTemplet);
 				}
 			}
@@ -71,7 +71,7 @@ public class AccessServiceImp implements AccessService {
 				long curtime = System.currentTimeMillis() / 1000;
 				long min = Long.valueOf(wxRedpackTemplet.getStartTime());
 				long max = Long.valueOf(wxRedpackTemplet.getEndTime());
-				if (!(curtime >= min && curtime <= max)) {
+				if (curtime >= min && curtime <= max) {
 					return sendXml(xmlMessageHeader, wxRedpackTemplet);
 				}
 			} else if (((SceneSubEvent) xmlMessageHeader).getEventType() == EventType.unsubscribe) {
