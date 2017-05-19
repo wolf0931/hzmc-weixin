@@ -89,7 +89,7 @@ function jugeAction(openId,group){
 //发送红包
 function payPacket(user,group){
 	var tem = 1;
-	user.openid = "oJvITt-VfGOTCe0dcXsZPCqn1APM";
+	//user.openid = "oJvITt-VfGOTCe0dcXsZPCqn1APM";
 	$.ajax({
 		type: 'POST',
 		url: '/pay/'+tem +"/"+group,
@@ -107,6 +107,8 @@ function payPacket(user,group){
 				myAlert('对不起，活动已结束');
 			}else if(data.data == '内部人员不能发红包'){
 				myAlert('对不起，内部人员不能领取红包');
+			}else{
+				myAlert(data.data);
 			}
 		}
 	});

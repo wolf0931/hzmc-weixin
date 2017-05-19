@@ -56,8 +56,8 @@ public class RedPayServiceImp implements RedPayService {
 		if (wxRedpackTemplet == null) {
 			return new Result(ResultConstant.FAILED, "红包模板不存在");
 		}
-		if (curtime >= minTime && curtime <= maxTime) {
-			return new Result(ResultConstant.SUCCESS, "活动已结束");
+		if (!(curtime >= minTime && curtime <= maxTime)) {
+			return new Result(ResultConstant.FAILED, "活动已结束");
 		}
 		User user = Users.defaultUsers().get(wxUser.getOpenid());
 		if (user == null) {
@@ -70,18 +70,22 @@ public class RedPayServiceImp implements RedPayService {
 			return new Result(ResultConstant.FAILED, "没有关注公众号");
 		}*/
 		if (GlobalCache.CACHE_MAP.get(wxUser.getOpenid()) == null) {
-			GlobalCache.CACHE_MAP.put(wxUser.getOpenid(), wxRedpackTemplet);
-			if (voteId == 1) {
-				GlobalCache.left.add(wxUser.getOpenid());
-			} else {
-				GlobalCache.right.add(wxUser.getOpenid());
-			}
 			Map<String, Object> re = new HashedMap();
 			RedPackResponse redPackResponse = sendRed(wxUser, wxRedpackTemplet);
-			re.put("left", GlobalCache.getLeft().size());
-			re.put("right", GlobalCache.getRight().size());
-			re.put("redPackResponse", redPackResponse);
-			return new Result(ResultConstant.SUCCESS, re);
+			if (redPackResponse.success()) {
+				GlobalCache.CACHE_MAP.put(wxUser.getOpenid(), wxRedpackTemplet);
+				if (voteId == 1) {
+					GlobalCache.left.add(wxUser.getOpenid());
+				} else {
+					GlobalCache.right.add(wxUser.getOpenid());
+				}
+				re.put("left", GlobalCache.getLeft().size());
+				re.put("right", GlobalCache.getRight().size());
+				re.put("redPackResponse", redPackResponse);
+				return new Result(ResultConstant.SUCCESS, re);
+			} else {
+				return new Result(ResultConstant.FAILED, redPackResponse.getReturnMessage());
+			}
 		} else if (GlobalCache.CACHE_MAP.get(wxUser.getOpenid()) != null) {
 			return new Result(ResultConstant.FAILED, "已投票成功");
 		}
