@@ -44,7 +44,7 @@ public class AccessServiceImp implements AccessService {
 		LOGGER.info("processRequest");
 		XmlMessageHeader xmlMessageHeader = MpXmlMessages.fromXml(MessageUtil.parseMsgXml(request));
 		if (xmlMessageHeader instanceof TextRequest) {
-			if (((TextRequest) xmlMessageHeader).getContent().equals("test")) {
+			/*if (((TextRequest) xmlMessageHeader).getContent().equals("test")) {
 				WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(1);
 				long curtime = System.currentTimeMillis() / 1000;
 				long min = Long.valueOf(wxRedpackTemplet.getStartTime());
@@ -52,7 +52,7 @@ public class AccessServiceImp implements AccessService {
 				if (curtime >= min && curtime <= max) {
 					return sendXml(xmlMessageHeader, wxRedpackTemplet);
 				}
-			}
+			}*/
 		} else if (xmlMessageHeader instanceof SceneSubEvent) {
 			if (((SceneSubEvent) xmlMessageHeader).getEventType() == EventType.subscribe) {
 				WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(1);
@@ -78,9 +78,9 @@ public class AccessServiceImp implements AccessService {
 				String fromUser = xmlMessageHeader.getFromUser();
 				WxUser user1 = wxUserService.getWxUserByOpenId(fromUser);
 				LOGGER.info("取消关注" + user1.toString());
-				if (user1 != null) {
+				/*if (user1 != null) {
 					wxUserService.deleteByPrimaryKey(user1.getId());
-				}
+				}*/
 			}
 		}
 		return null;
@@ -151,7 +151,8 @@ public class AccessServiceImp implements AccessService {
 		user3.setSex(user.getSex().getCode());
 		user3.setOpenid(user.getOpenId());
 		user3.setSubscribeTime(user.getSubscribedTime());
-		user3.setGroupid(user.getGroup());
+		//更新不需要跟新组ID
+		//user3.setGroupid(user.getGroup());
 		StringBuilder sb = new StringBuilder();
 		if (user.getTags() != null) {
 			for (Integer tag : user.getTags()) {
