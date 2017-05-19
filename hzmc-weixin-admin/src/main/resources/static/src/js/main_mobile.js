@@ -71,7 +71,7 @@ function jugeAction(openId,group){
     	url: '/oauth/'+openId,
     	async: false,
     	success:function(data){
-    		if(data.message == 'failed' && data.status == '没有关注'){
+    		if(data.message == 'failed' && data.data.status == '没有关注'){
     			myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA3MTUzNzcwMg==&scene=124#wechat_redirect">先关注才能参与活动</a>');
     			return ;
     		}else if(data.message == 'failed' && data.data == '已经投票'){
