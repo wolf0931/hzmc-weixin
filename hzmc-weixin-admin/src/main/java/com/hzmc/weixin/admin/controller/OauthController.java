@@ -2,7 +2,9 @@ package com.hzmc.weixin.admin.controller;
 
 import com.hzmc.weixin.admin.base.Result;
 import com.hzmc.weixin.admin.constant.ResultConstant;
+import com.hzmc.weixin.admin.dao.model.WxRedpackTemplet;
 import com.hzmc.weixin.admin.service.AccessService;
+import com.hzmc.weixin.admin.service.WxRedpackTempletService;
 import com.hzmc.weixin.common.AccessToken;
 import com.hzmc.weixin.common.exception.WxRuntimeException;
 import com.hzmc.weixin.mp.base.AppSetting;
@@ -13,6 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,9 +33,19 @@ public class OauthController {
 
 	private static Logger LOGGER = Logger.getLogger(AccessService.class);
 
+	@Autowired
+	private WxRedpackTempletService wxRedpackTempletService;
+
 	@RequestMapping(value = "/{code}", method = RequestMethod.GET)
 	@ApiOperation(value = "根据code判断用户是否关注")
 	private Object getOAuthData(@PathVariable String code) {
+		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(1);
+		long curtime = System.currentTimeMillis() / 1000;
+		long minTime = Long.valueOf(wxRedpackTemplet.getStartTime());
+		long maxTime = Long.valueOf(wxRedpackTemplet.getEndTime());
+		if (!(curtime >= minTime && curtime <= maxTime)) {
+			return new Result(ResultConstant.FAILED, "活动已结束");
+		}
 		LOGGER.info(code);
 		AccessToken token = null;
 		try {
