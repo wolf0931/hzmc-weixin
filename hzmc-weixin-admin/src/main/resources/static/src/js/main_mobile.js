@@ -27,19 +27,34 @@ function init(){
 		url: '/WxRedpackTemplet/1',
 		success: function(data){
 			if(data.message == 'success'){
-				$('#vote-count-su').html(data.data.left);
-				$('#vote-count-chi').html(data.data.right);
+				$('.vote-count-su').html(data.data.left);
+				$('.vote-count-chi').html(data.data.right);
+				var start = new Date(parseInt(data.data.wxRedpackTemplet.startTime)*1000);
+				var startDate = start.getFullYear();
+				startDate += '/' + (parseInt(start.getMonth())+1);
+				startDate += '/' + start.getDate();
+				startDate += ' ' + start.getHours();
+				startDate += ':' + start.getMinutes();
+				startDate += ':' + start.getSeconds();
+				var end = new Date(parseInt(data.data.wxRedpackTemplet.endTime)*1000);
+				var endDate = end.getFullYear();
+				endDate += '/' + (parseInt(end.getMonth())+1);
+				endDate += '/' + end.getDate();
+				endDate += ' ' + end.getHours();
+				endDate += ':' + end.getMinutes();
+				endDate += ':' + end.getSeconds();
+				$('#actTime').html(startDate+'至'+endDate);
 			}
 		}
 	});
 }
 
 $('.vote-button-su').click(function(){
-	$('#vote-count-su').html(parseInt($('#vote-count-su').html())+1);
+	$('.vote-count-su').html(parseInt($('.vote-count-su').html())+1);
     judge(1);
 });
 $('.vote-button-chi').click(function(){
-	$('#vote-count-chi').html(parseInt($('#vote-count-chi').html())+1);
+	$('.vote-count-chi').html(parseInt($('.vote-count-chi').html())+1);
     judge(2);
 });
 
