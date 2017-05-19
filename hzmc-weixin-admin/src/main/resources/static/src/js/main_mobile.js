@@ -77,6 +77,7 @@ function jugeAction(openId,group){
     		}else if(data.message == 'faild' && data.data == '已经投票'){
 				myAlert('对不起，您已经参与过活动');
 			}else if(data.message == 'success'){
+				init();
     			payPacket(data.data.user,group);
     		}else if(data.status == 500){
     			myAlert('对不起，您已经参与过活动');

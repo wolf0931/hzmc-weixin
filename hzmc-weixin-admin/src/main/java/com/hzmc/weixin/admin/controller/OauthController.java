@@ -51,7 +51,7 @@ public class OauthController {
 		} else {
 			map.put("status", "没有关注");
 			map.put("appId", AppSetting.defaultSettings().getAppId());
-			return new Result(ResultConstant.FAILED, AppSetting.defaultSettings().getAppId());
+			return new Result(ResultConstant.FAILED, map);
 		}
 
 	}
