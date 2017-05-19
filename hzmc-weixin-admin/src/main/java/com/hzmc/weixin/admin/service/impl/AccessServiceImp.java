@@ -49,7 +49,7 @@ public class AccessServiceImp implements AccessService {
 				long curtime = System.currentTimeMillis() / 1000;
 				long min = Long.valueOf(wxRedpackTemplet.getStartTime());
 				long max = Long.valueOf(wxRedpackTemplet.getEndTime());
-				if (curtime >= min && curtime <= max) {
+				if (!(curtime >= min && curtime <= max)) {
 					return sendXml(xmlMessageHeader, wxRedpackTemplet);
 				}
 			}
@@ -71,7 +71,7 @@ public class AccessServiceImp implements AccessService {
 				long curtime = System.currentTimeMillis() / 1000;
 				long min = Long.valueOf(wxRedpackTemplet.getStartTime());
 				long max = Long.valueOf(wxRedpackTemplet.getEndTime());
-				if (curtime >= min && curtime <= max) {
+				if (!(curtime >= min && curtime <= max)) {
 					return sendXml(xmlMessageHeader, wxRedpackTemplet);
 				}
 			} else if (((SceneSubEvent) xmlMessageHeader).getEventType() == EventType.unsubscribe) {
@@ -87,7 +87,7 @@ public class AccessServiceImp implements AccessService {
 	}
 
 	private String sendXml(XmlMessageHeader xmlMessageHeader, WxRedpackTemplet wxRedpackTemplet) {
-		String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://wx.hzmc.com.cn/view_mobile/index.html", "snsapi_base");
+		String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://wx.mchz.com.cn/view_mobile/index.html", "snsapi_base");
 		String testurl = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://79269421.ngrok.io/view_mobile/index.html", "snsapi_base");
 		NewsXmlMessage newsXmlMessage = new NewsXmlMessage();
 		News news = new News();
