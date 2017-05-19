@@ -63,12 +63,12 @@ public class RedPayServiceImp implements RedPayService {
 		if (user == null) {
 			return new Result(ResultConstant.FAILED, "没有关注公众号");
 		}
-		/*WxUser wxUser1 = userService.getWxUserByOpenId(wxUser.getOpenid());
+		WxUser wxUser1 = userService.getWxUserByOpenId(wxUser.getOpenid());
 		if (user.getGroup() == 102 || wxUser1.getGroupid() == 102) {
 			return new Result(ResultConstant.FAILED, "内部人员不能发红包");
 		} else if (!user.isSubscribed()) {
 			return new Result(ResultConstant.FAILED, "没有关注公众号");
-		}*/
+		}
 		if (GlobalCache.CACHE_MAP.get(wxUser.getOpenid()) == null) {
 			Map<String, Object> re = new HashedMap();
 			RedPackResponse redPackResponse = sendRed(wxUser, wxRedpackTemplet);

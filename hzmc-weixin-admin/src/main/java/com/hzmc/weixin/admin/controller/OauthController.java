@@ -4,6 +4,7 @@ import com.hzmc.weixin.admin.base.Result;
 import com.hzmc.weixin.admin.constant.ResultConstant;
 import com.hzmc.weixin.admin.service.AccessService;
 import com.hzmc.weixin.common.AccessToken;
+import com.hzmc.weixin.common.exception.WxRuntimeException;
 import com.hzmc.weixin.mp.base.AppSetting;
 import com.hzmc.weixin.mp.oauth2.MpOAuth2s;
 import com.hzmc.weixin.mp.user.Users;
@@ -33,7 +34,12 @@ public class OauthController {
 	@ApiOperation(value = "根据code判断用户是否关注")
 	private Object getOAuthData(@PathVariable String code) {
 		LOGGER.info(code);
-		AccessToken token = MpOAuth2s.defaultOAuth2s().getAccessToken(code);
+		AccessToken token = null;
+		try {
+			 token = MpOAuth2s.defaultOAuth2s().getAccessToken(code);
+		}catch (WxRuntimeException wx){
+			return new Result(ResultConstant.FAILED, "已经投票");
+		}
 		String openId = token.getOpenid();
 		User user = Users.defaultUsers().get(openId);
 		Map<String, Object> map = new HashedMap();

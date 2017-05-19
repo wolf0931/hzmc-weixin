@@ -88,13 +88,13 @@ public class AccessServiceImp implements AccessService {
 
 	private String sendXml(XmlMessageHeader xmlMessageHeader, WxRedpackTemplet wxRedpackTemplet) {
 		String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://wx.mchz.com.cn/view_mobile/index.html", "snsapi_base");
-		String testurl = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://79269421.ngrok.io/view_mobile/index.html", "snsapi_base");
+		//String testurl = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://79269421.ngrok.io/view_mobile/index.html", "snsapi_base");
 		NewsXmlMessage newsXmlMessage = new NewsXmlMessage();
 		News news = new News();
 		Article article1 = new Article();
 		article1.setTitle(wxRedpackTemplet.getActName());
 		article1.setDescription(wxRedpackTemplet.getRemark());
-		article1.setUrl(testurl);
+		article1.setUrl(url);
 		news.add(article1);
 		newsXmlMessage.setNews(news);
 		newsXmlMessage.setFromUser(xmlMessageHeader.getToUser());

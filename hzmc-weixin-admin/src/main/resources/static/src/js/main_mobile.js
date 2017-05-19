@@ -71,10 +71,12 @@ function jugeAction(openId,group){
     	url: '/oauth/'+openId,
     	async: false,
     	success:function(data){
-    		if(data.message == 'faild'){
+    		if(data.message == 'faild' && data.status == '没有关注'){
     			myAlert('<a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA3MTUzNzcwMg==&scene=124#wechat_redirect">先关注才能参与活动</a>');
     			return ;
-    		}else if(data.message == 'success'){
+    		}else if(data.message == 'faild' && data.data == '已经投票'){
+				myAlert('对不起，您已经参与过活动');
+			}else if(data.message == 'success'){
     			payPacket(data.data.user,group);
     		}else if(data.status == 500){
     			myAlert('对不起，您已经参与过活动');
