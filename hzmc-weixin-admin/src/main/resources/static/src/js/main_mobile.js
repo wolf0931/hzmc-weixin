@@ -50,11 +50,9 @@ function init(){
 }
 
 $('.vote-button-su').click(function(){
-	$('.vote-count-su').html(parseInt($('.vote-count-su').html())+1);
     judge(1);
 });
 $('.vote-button-chi').click(function(){
-	$('.vote-count-chi').html(parseInt($('.vote-count-chi').html())+1);
     judge(2);
 });
 
