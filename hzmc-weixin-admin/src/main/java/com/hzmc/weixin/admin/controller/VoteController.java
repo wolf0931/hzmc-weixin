@@ -6,6 +6,7 @@ import com.hzmc.weixin.admin.cache.GlobalCache;
 import com.hzmc.weixin.admin.constant.ResultConstant;
 import com.hzmc.weixin.admin.dao.model.WxRedpackTemplet;
 import com.hzmc.weixin.admin.service.WxRedpackTempletService;
+import com.hzmc.weixin.mp.oauth2.MpOAuth2s;
 import com.hzmc.weixin.mp.user.Users;
 import com.hzmc.weixin.mp.user.bean.User;
 import io.swagger.annotations.Api;
@@ -46,5 +47,11 @@ public class VoteController extends BaseController {
 		} else {
 			return new Result(ResultConstant.FAILED, "已投票成功");
 		}
+	}
+
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	private Object url() {
+		String url = MpOAuth2s.defaultOAuth2s().authenticationUrl("http://wx.mchz.com.cn/view_mobile/index.html", "snsapi_base");
+		return url;
 	}
 }
