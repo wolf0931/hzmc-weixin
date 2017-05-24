@@ -4,7 +4,7 @@
 
 function myAlert(str){
 	 var alert='  <div class="cover"> </div><div class="add-container no-padding">';		
-	 alert += '<div class="navbar clear"><span class="right close closeDown"></span><h4 class="left">提示</h4></div>';
+	 alert += '<div class="navbar clear"><h4 class="left">提示</h4></div>';
 	 alert += '<div class="add-main">'+str+'</div>';
 	 alert += '<div class="alert-footer"><div class="btn-event right closeDown"><span>确认</span></div></div></div>';
 	 
@@ -23,8 +23,8 @@ $(function($){
 });
 
 function url(){
-	var url=decodeURI(location.search).split('?')[1];
-	if(url == undefined){
+	var urlData=decodeURI(location.search).split('?')[1];
+	if(urlData == undefined){
 		$.ajax({
 			type: 'GET',
 			url: '/vote',
