@@ -21,6 +21,19 @@ $(function($){
 	init();
 });
 
+function url(){
+	var url=decodeURI(location.search).split('?')[1];
+	if(url == undefined){
+		$.ajax({
+			type: 'GET',
+			url: '/vote',
+			success: function(data){
+				window.location.href = data;
+			}
+		});
+	}
+}
+
 function init(){
 	$.ajax({
 		type: 'GET',
