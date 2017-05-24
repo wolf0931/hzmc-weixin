@@ -3,8 +3,10 @@ package com.hzmc.weixin.admin.controller;
 import com.hzmc.weixin.admin.base.Result;
 import com.hzmc.weixin.admin.constant.ResultConstant;
 import com.hzmc.weixin.admin.dao.model.WxRedpackTemplet;
+import com.hzmc.weixin.admin.dao.model.WxUser;
 import com.hzmc.weixin.admin.service.AccessService;
 import com.hzmc.weixin.admin.service.WxRedpackTempletService;
+import com.hzmc.weixin.admin.service.WxUserService;
 import com.hzmc.weixin.common.AccessToken;
 import com.hzmc.weixin.common.exception.WxRuntimeException;
 import com.hzmc.weixin.mp.base.AppSetting;
@@ -36,10 +38,14 @@ public class OauthController {
 	@Autowired
 	private WxRedpackTempletService wxRedpackTempletService;
 
+	@Autowired
+	private WxUserService userService;
+
 	@RequestMapping(value = "/{code}", method = RequestMethod.GET)
 	@ApiOperation(value = "根据code判断用户是否关注")
 	private Object getOAuthData(@PathVariable String code) {
 		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(1);
+		System.out.println(wxRedpackTemplet.toString());
 		long curtime = System.currentTimeMillis() / 1000;
 		long minTime = Long.valueOf(wxRedpackTemplet.getStartTime());
 		long maxTime = Long.valueOf(wxRedpackTemplet.getEndTime());
@@ -55,6 +61,10 @@ public class OauthController {
 		}
 		String openId = token.getOpenid();
 		User user = Users.defaultUsers().get(openId);
+		WxUser wxUser1 = userService.getWxUserByOpenId(openId);
+		if (user.getGroup() == 102 || wxUser1.getGroupid() == 102) {
+			return new Result(ResultConstant.FAILED, "内部人员不能发红包");
+		}
 		Map<String, Object> map = new HashedMap();
 		if (user.isSubscribed()) {
 			map.put("status", "已经关注");
@@ -67,5 +77,12 @@ public class OauthController {
 			return new Result(ResultConstant.FAILED, map);
 		}
 
+	}
+
+	@RequestMapping(value = "/refreshToken/{code}", method = RequestMethod.GET)
+	@ApiOperation(value = "得到code")
+	private Object getOAuthCode(@PathVariable String code) {
+		AccessToken token =  MpOAuth2s.defaultOAuth2s().refreshToken(code);;
+		return new Result(ResultConstant.FAILED, token);
 	}
 }
