@@ -20,6 +20,78 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 		PayRecord();
 	});
 	
+	
+	function disable(){
+		for(var i=0; i<$('.tablePager').length; i++){
+			if($('.tablePager')[i].innerHTML> ($scope.total/10+1)){
+				$($('.tablePager')[i]).parent().addClass('disabled');
+			}
+		}
+		
+		if($('.active a').html() == '1'){
+			$('.previous').addClass('disabled');
+		}
+		
+		if($('.active a').html() == Math.floor($scope.total/10+1)){
+			$('.latter').addClass('disabled');
+		}
+	}
+	
+	
+	
+	$('.previous').click(function(){
+		if($('li.active').parent().index($('li.active')) == 1){
+			for(var i=0; i<$('.tablePager').length; i++){
+				$($('.tablePager')[i]).html(parseInt($($('.tablePager')[i]).html())-1);
+			}
+		}else if($('.active a').html() != 1){
+			$('.active').removeClass('active').prev().addClass('active');
+			$('.latter').removeClass('disabled');
+		}
+		if($('.active a').html() == '1'){
+			$('.previous').addClass('disabled');
+		}	
+		$scope.currPage = $('.active a').html();
+		disable();
+		PayRecord();
+	});
+
+	
+	$('.latter').click(function(){
+		if($('li.active').parent().index($('li.active')) == 5){
+			for(var i=0; i<$('.tablePager').length; i++){
+				$($('.tablePager')[i]).html(parseInt($($('.tablePager')[i]).html())+1);
+			}
+		}else if($('.active a').html() != Math.floor($scope.total/10+1)){
+			$('.active').removeClass('active').next().addClass('active');
+			$('.previous').removeClass('disabled');
+		}
+		if($('.active a').html() == Math.floor($scope.total/10+1)){
+			$('.latter').addClass('disabled');
+		}
+		$scope.currPage = $('.active a').html();
+		disable();
+		PayRecord();
+	});
+	
+	$('.tablePager').click(function(e){
+		$(e.target).parent().addClass('active').siblings('.active').removeClass('active');
+		$scope.currPage = $('.active a').html()
+
+		PayRecord();
+		if($('.active a').html() == '1'){
+			$('.previous').addClass('disabled');
+		}else{
+			$('.previous').removeClass('disabled');
+		}
+		if($('.active a').html() == Math.floor($scope.total/10+1)){
+			$('.latter').addClass('disabled');
+		}else{
+			$('.latter').removeClass('disabled');
+		}
+	});
+	
+	
 	function redpackTemplet(){
 		$.ajax({
 			type: 'GET',
@@ -33,6 +105,7 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 	    		}
 	    	} 
 		});
+		
 	}
 
 
@@ -45,70 +118,9 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 
 				$scope.list = data;
 				
-				
 				$scope.total = data.data.total;
-				for(var i=0; i<$('.tablePager').length; i++){
-					if($('.tablePager')[i].innerHTML> ($scope.total/10+1)){
-						$($('.tablePager')[i]).parent().addClass('disabled');
-					}
-				}
-				if($('.active a').html() == '1'){
-					$('.previous').addClass('disabled');
-				}
-				$('.previous').click(function(){
-					if($('li.active').parent().index($('li.active')) == 1){
-						for(var i=0; i<$('.tablePager').length; i++){
-							$($('.tablePager')[i]).html(parseInt($($('.tablePager')[i]).html())-1);
-						}
-					}else if($('.active a').html() != 1){
-						$('.active').removeClass('active').prev().addClass('active');
-						$('.latter').removeClass('disabled');
-					}
-					if($('.active a').html() == '1'){
-						$('.previous').addClass('disabled');
-					}	
-					$scope.currPage = $('.active a').html();
-					PayRecord();
-				});
-	
-				if($('.active a').html() == Math.floor($scope.total/10+1)){
-					$('.latter').addClass('disabled');
-				}
-				$('.latter').click(function(){
-					if($('li.active').parent().index($('li.active')) == 5){
-						for(var i=0; i<$('.tablePager').length; i++){
-							$($('.tablePager')[i]).html(parseInt($($('.tablePager')[i]).html())+1);
-						}
-					}else if($('.active a').html() != Math.floor($scope.total/10+1)){
-						$('.active').removeClass('active').next().addClass('active');
-						$('.previous').removeClass('disabled');
-					}
-					if($('.active a').html() == Math.floor($scope.total/10+1)){
-						$('.latter').addClass('disabled');
-					}
-					$scope.currPage = $('.active a').html();
-					PayRecord();
-				});
-				$('.tablePager').click(function(e){
-					$(e.target).parent().addClass('active').siblings('.active').removeClass('active');
-					$scope.currPage = $('.active a').html()
-
-					PayRecord();
-					if($('.active a').html() == '1'){
-						$('.previous').addClass('disabled');
-					}else{
-						$('.previous').removeClass('disabled');
-					}
-					if($('.active a').html() == Math.floor($scope.total/10+1)){
-						$('.latter').addClass('disabled');
-					}else{
-						$('.latter').removeClass('disabled');
-					}
-				});
 				
 				$scope.$apply($scope.list);
-				
-				
 			},
 	    	error:function(data){
 	    		if(data.status == 401){
