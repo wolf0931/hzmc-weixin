@@ -18,6 +18,7 @@ $('body').on('click','.closeDown',function($scope){
 
 
 $(function($){  
+	url();
 	init();
 });
 
