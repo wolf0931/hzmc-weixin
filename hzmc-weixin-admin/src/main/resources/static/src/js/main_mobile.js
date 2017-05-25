@@ -16,10 +16,12 @@ $('body').on('click','.closeDown',function($scope){
     $('.add-container').remove();
 });
 
+var userId;
 
 $(function($){  
 	url();
 	init();
+	getId();
 });
 
 function url(){
@@ -63,6 +65,17 @@ function init(){
 	});
 }
 
+function getId(){
+	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
+	$.ajax({
+		type: 'GET',
+		url: '/oauth/code/'+openId,
+		success: function(data){
+			userId = data;
+		}
+	});
+}
+
 $('.vote-button-su').click(function(){
     judge(1);
 });
@@ -71,11 +84,8 @@ $('.vote-button-chi').click(function(){
 });
 
 function judge(group){
-	var openId=decodeURI(location.search).split('=')[1].split('&')[0];
-	jugeAction(openId,group);
-//	myAlert('1');
-
-		
+	jugeAction(userId,group);
+//	myAlert('1');	
 }
 
 //判断用户是否关注公众号
