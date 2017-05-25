@@ -41,7 +41,7 @@ public class OauthController {
 	private WxUserService userService;
 
 	@RequestMapping(value = "/{openId}", method = RequestMethod.GET)
-	@ApiOperation(value = "根据code判断用户是否关注")
+	@ApiOperation(value = "根据openId判断用户是否关注")
 	private Object getOAuthData(@PathVariable String openId) {
 		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(1);
 		long curtime = System.currentTimeMillis() / 1000;
@@ -73,6 +73,6 @@ public class OauthController {
 	@ApiOperation(value = "根据code返回openId")
 	private Object getOAuthCode(@PathVariable String code) {
 		AccessToken token = MpOAuth2s.defaultOAuth2s().getAccessToken(code);
-		return new Result(ResultConstant.SUCCESS, token);
+		return new Result(ResultConstant.SUCCESS, token.getOpenid());
 	}
 }
