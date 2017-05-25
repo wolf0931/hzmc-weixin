@@ -43,6 +43,9 @@ public class AccessServiceImp implements AccessService {
 	public String processRequest(HttpServletRequest request) {
 		LOGGER.info("processRequest");
 		XmlMessageHeader xmlMessageHeader = MpXmlMessages.fromXml(MessageUtil.parseMsgXml(request));
+		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(1);
+		System.out.println(xmlMessageHeader.toString());
+		System.out.println(wxRedpackTemplet.toString());
 		if (xmlMessageHeader instanceof TextRequest) {
 			/*if (((TextRequest) xmlMessageHeader).getContent().equals("test")) {
 				WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(1);
@@ -55,7 +58,6 @@ public class AccessServiceImp implements AccessService {
 			}*/
 		} else if (xmlMessageHeader instanceof SceneSubEvent) {
 			if (((SceneSubEvent) xmlMessageHeader).getEventType() == EventType.subscribe) {
-				WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(1);
 				String fromUser = xmlMessageHeader.getFromUser();
 				User user = Users.defaultUsers().get(fromUser);
 				WxUser user1 = wxUserService.getWxUserByOpenId(fromUser);

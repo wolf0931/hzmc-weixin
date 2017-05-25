@@ -8,7 +8,6 @@ import com.hzmc.weixin.admin.service.AccessService;
 import com.hzmc.weixin.admin.service.WxRedpackTempletService;
 import com.hzmc.weixin.admin.service.WxUserService;
 import com.hzmc.weixin.common.AccessToken;
-import com.hzmc.weixin.common.exception.WxRuntimeException;
 import com.hzmc.weixin.mp.base.AppSetting;
 import com.hzmc.weixin.mp.oauth2.MpOAuth2s;
 import com.hzmc.weixin.mp.user.Users;
@@ -41,25 +40,16 @@ public class OauthController {
 	@Autowired
 	private WxUserService userService;
 
-	@RequestMapping(value = "/{code}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{openId}", method = RequestMethod.GET)
 	@ApiOperation(value = "根据code判断用户是否关注")
-	private Object getOAuthData(@PathVariable String code) {
+	private Object getOAuthData(@PathVariable String openId) {
 		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(1);
-		System.out.println(wxRedpackTemplet.toString());
 		long curtime = System.currentTimeMillis() / 1000;
 		long minTime = Long.valueOf(wxRedpackTemplet.getStartTime());
 		long maxTime = Long.valueOf(wxRedpackTemplet.getEndTime());
 		if (!(curtime >= minTime && curtime <= maxTime)) {
 			return new Result(ResultConstant.FAILED, "活动已结束");
 		}
-		LOGGER.info(code);
-		AccessToken token = null;
-		try {
-			 token = MpOAuth2s.defaultOAuth2s().getAccessToken(code);
-		}catch (WxRuntimeException wx){
-			return new Result(ResultConstant.FAILED, "已经投票");
-		}
-		String openId = token.getOpenid();
 		User user = Users.defaultUsers().get(openId);
 		WxUser wxUser1 = userService.getWxUserByOpenId(openId);
 		if (user.getGroup() == 102 || wxUser1.getGroupid() == 102) {
@@ -79,10 +69,10 @@ public class OauthController {
 
 	}
 
-	@RequestMapping(value = "/refreshToken/{code}", method = RequestMethod.GET)
-	@ApiOperation(value = "得到code")
+	@RequestMapping(value = "/code/{code}", method = RequestMethod.GET)
+	@ApiOperation(value = "根据code返回openId")
 	private Object getOAuthCode(@PathVariable String code) {
-		AccessToken token =  MpOAuth2s.defaultOAuth2s().refreshToken(code);;
-		return new Result(ResultConstant.FAILED, token);
+		AccessToken token = MpOAuth2s.defaultOAuth2s().getAccessToken(code);
+		return new Result(ResultConstant.SUCCESS, token);
 	}
 }

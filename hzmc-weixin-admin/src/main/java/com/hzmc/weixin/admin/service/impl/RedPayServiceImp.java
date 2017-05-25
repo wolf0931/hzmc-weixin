@@ -50,6 +50,7 @@ public class RedPayServiceImp implements RedPayService {
 		//单个红包
 		//102 为员工不能发红包 oJvITt-VfGOTCe0dcXsZPCqn1APM
 		WxRedpackTemplet wxRedpackTemplet = wxRedpackTempletService.selectByPrimaryKey(id);
+		System.out.println(wxRedpackTemplet.toString());
 		long curtime = System.currentTimeMillis() / 1000;
 		long minTime = Long.valueOf(wxRedpackTemplet.getStartTime());
 		long maxTime = Long.valueOf(wxRedpackTemplet.getEndTime());

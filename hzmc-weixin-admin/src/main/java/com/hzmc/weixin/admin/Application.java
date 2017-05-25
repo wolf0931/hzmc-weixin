@@ -15,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.List;
 
@@ -35,14 +36,14 @@ public class Application extends SpringBootServletInitializer {
 	}
 
 
-	//@Scheduled(fixedRate = 60 * 1000)
+	@Scheduled(fixedRate = 10 * 60 * 1000)
 	private void initGroupDate() {
-		//insertGroupDb();
+		insertGroupDb();
 	}
 
-	//@Scheduled(fixedRate = 60 * 1000)
+	@Scheduled(fixedRate = 5 * 60 * 1000)
 	private void initUserDate() {
-		//insertUserDb();
+		insertUserDb();
 	}
 
 	private void insertGroupDb() {
@@ -68,50 +69,48 @@ public class Application extends SpringBootServletInitializer {
 		int count = userPagination.getCount();
 		WxUserExample userExample = new WxUserExample();
 		int sqlCount = wxUserService.countByExample(userExample);
-		if (count > sqlCount) {
-			List<String> users = userPagination.getUsers();
-			for (String opeonId : users) {
-				com.hzmc.weixin.mp.user.bean.User user = Users.defaultUsers().get(opeonId);
-				WxUser wxUser = new WxUser();
-				wxUser.setOpenid(user.getOpenId());
-				wxUser.setProvince(user.getProvince());
-				wxUser.setCity(user.getCity());
-				wxUser.setCountry(user.getCountry());
-				wxUser.setHeadimgurl(user.getHeadImgUrl());
-				wxUser.setGroupid(user.getGroup());
-				wxUser.setNickname(user.getNickName());
-				wxUser.setRemark(user.getRemark());
-				wxUser.setSex(user.getSex().getCode());
-				if (user.getUnionId() != null) {
-					wxUser.setUnionid(Integer.valueOf(user.getUnionId()));
-				}
-				if (user.isSubscribed()) {
-					wxUser.setSubscribe(1);
-				} else {
-					wxUser.setSubscribe(0);
-				}
-				wxUser.setSubscribeTime(user.getSubscribedTime());
-				StringBuilder sb = new StringBuilder();
-				if (user.getTags() != null) {
-					for (Integer tag : user.getTags()) {
-						sb.append(tag);
-						sb.append(",");
-					}
-				}
-				wxUser.setTagidList(sb.toString());
-				LOGGER.info(wxUser.toString());
-				WxUser wxUser1 = wxUserService.getWxUserByOpenId(opeonId);
-				if (wxUser1 != null) {
-					LOGGER.info("数据已存在");
-					wxUserService.updateByPrimaryKey(wxUser1);
-				} else {
-					LOGGER.info("添加数据"+wxUser.toString());
-					wxUser.setNickname(wxUser.getNickname().replaceAll("[\\x{10000}-\\x{10FFFF}]", ""));
-					wxUserService.insertSelective(wxUser);
-				}
-
+		List<String> users = userPagination.getUsers();
+		for (String opeonId : users) {
+			com.hzmc.weixin.mp.user.bean.User user = Users.defaultUsers().get(opeonId);
+			WxUser wxUser = new WxUser();
+			wxUser.setOpenid(user.getOpenId());
+			wxUser.setProvince(user.getProvince());
+			wxUser.setCity(user.getCity());
+			wxUser.setCountry(user.getCountry());
+			wxUser.setHeadimgurl(user.getHeadImgUrl());
+			wxUser.setGroupid(user.getGroup());
+			wxUser.setNickname(user.getNickName());
+			wxUser.setRemark(user.getRemark());
+			wxUser.setSex(user.getSex().getCode());
+			if (user.getUnionId() != null) {
+				wxUser.setUnionid(Integer.valueOf(user.getUnionId()));
 			}
+			if (user.isSubscribed()) {
+				wxUser.setSubscribe(1);
+			} else {
+				wxUser.setSubscribe(0);
+			}
+			wxUser.setSubscribeTime(user.getSubscribedTime());
+			StringBuilder sb = new StringBuilder();
+			if (user.getTags() != null) {
+				for (Integer tag : user.getTags()) {
+					sb.append(tag);
+					sb.append(",");
+				}
+			}
+			wxUser.setTagidList(sb.toString());
+			LOGGER.info(wxUser.toString());
+			WxUser wxUser1 = wxUserService.getWxUserByOpenId(opeonId);
+			wxUser.setNickname(wxUser.getNickname().replaceAll("[\\x{10000}-\\x{10FFFF}]", ""));
+			if (wxUser1 != null) {
+				LOGGER.info("数据已存在");
+				wxUser.setId(wxUser1.getId());
+				wxUserService.updateByPrimaryKey(wxUser);
+			} else {
+				LOGGER.info("添加数据" + wxUser.toString());
+				wxUserService.insertSelective(wxUser);
+			}
+			System.out.println("用户信息" + wxUser.toString());
 		}
-
 	}
 }
