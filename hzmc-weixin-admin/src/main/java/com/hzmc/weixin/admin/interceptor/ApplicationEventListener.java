@@ -3,7 +3,7 @@ package com.hzmc.weixin.admin.interceptor;
 import com.hzmc.weixin.admin.dao.model.WxGroup;
 import com.hzmc.weixin.admin.dao.model.WxUser;
 import com.hzmc.weixin.admin.dao.model.WxUserExample;
-import com.hzmc.weixin.admin.service.GroupService;
+import com.hzmc.weixin.admin.service.WxGroupService;
 import com.hzmc.weixin.admin.service.WxUserService;
 import com.hzmc.weixin.mp.user.Groups;
 import com.hzmc.weixin.mp.user.Users;
@@ -44,7 +44,7 @@ public class ApplicationEventListener implements ApplicationListener {
 				@Override
 				public void run() {
 					LOGGER.info("开始插入数据");
-					insertGroupDb();
+					//insertGroupDb();
 					insertUserDb();
 				}
 			}).start();
@@ -54,16 +54,16 @@ public class ApplicationEventListener implements ApplicationListener {
 	}
 
 	private void insertGroupDb() {
-		GroupService groupService = getBean(GroupService.class);
+		WxGroupService groupService = getBean(WxGroupService.class);
 		List<Group> groups = Groups.defaultGroups().list();
 		for (Group g : groups) {
 			com.hzmc.weixin.admin.dao.model.WxGroup wxGroup = new com.hzmc.weixin.admin.dao.model.WxGroup();
 			wxGroup.setId(g.getId());
 			wxGroup.setCount(g.getCount());
 			wxGroup.setName(g.getName());
-			WxGroup wxGroup1 = groupService.getGroupByName(g.getName());
-			if (groupService.getGroupByName(g.getName()) != null) {
-				groupService.updateByPrimaryKey(wxGroup1);
+			WxGroup wxGroup1 = groupService.selectByPrimaryKey(g.getId());
+			if (wxGroup1 != null) {
+				groupService.updateByPrimaryKey(wxGroup);
 			} else {
 				groupService.insert(wxGroup);
 			}

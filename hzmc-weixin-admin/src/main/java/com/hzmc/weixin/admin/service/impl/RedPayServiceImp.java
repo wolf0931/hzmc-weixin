@@ -82,7 +82,9 @@ public class RedPayServiceImp implements RedPayService {
 				re.put("right", GlobalCache.getRight().size());
 				re.put("redPackResponse", redPackResponse);
 				return new Result(ResultConstant.SUCCESS, re);
-			} else {
+			} else if (redPackResponse.getErrorCode().equals("NOTENOUGH")){
+				return new Result(ResultConstant.FAILED, "活动已结束");
+			}else{
 				return new Result(ResultConstant.FAILED, redPackResponse.getReturnMessage());
 			}
 		} else if (GlobalCache.CACHE_MAP.get(wxUser.getOpenid()) != null) {
@@ -126,6 +128,12 @@ public class RedPayServiceImp implements RedPayService {
 			wxPayRecord.setWxappid(PaySetting.defaultSetting().getAppId());
 			wxPayRecord.setCtime(String.valueOf(System.currentTimeMillis()));
 			wxPayRecordService.insert(wxPayRecord);
+		}
+		if(redPackResponse.getErrorCode().equals("NOTENOUGH")){
+			System.out.println("更新时间");
+			long curtime = System.currentTimeMillis() / 1000;
+			wxRedpackTemplet.setEndTime(String.valueOf(curtime));
+			wxRedpackTempletService.updateByPrimaryKey(wxRedpackTemplet);
 		}
 		return redPackResponse;
 	}

@@ -38,10 +38,10 @@ public class Application extends SpringBootServletInitializer {
 
 	@Scheduled(fixedRate = 10 * 60 * 1000)
 	private void initGroupDate() {
-		insertGroupDb();
+		//insertGroupDb();
 	}
 
-	@Scheduled(fixedRate = 5 * 60 * 1000)
+	@Scheduled(fixedRate = 60 * 1000)
 	private void initUserDate() {
 		insertUserDb();
 	}
@@ -54,9 +54,9 @@ public class Application extends SpringBootServletInitializer {
 			wxGroup.setId(g.getId());
 			wxGroup.setCount(g.getCount());
 			wxGroup.setName(g.getName());
-			WxGroup wxGroup1 = groupService.getGroupByName(g.getName());
-			if (groupService.getGroupByName(g.getName()) != null) {
-				groupService.updateByPrimaryKey(wxGroup1);
+			WxGroup wxGroup1 = groupService.selectByPrimaryKey(g.getId());
+			if (wxGroup1 != null) {
+				groupService.updateByPrimaryKey(wxGroup);
 			} else {
 				groupService.insert(wxGroup);
 			}
@@ -103,14 +103,15 @@ public class Application extends SpringBootServletInitializer {
 			WxUser wxUser1 = wxUserService.getWxUserByOpenId(opeonId);
 			wxUser.setNickname(wxUser.getNickname().replaceAll("[\\x{10000}-\\x{10FFFF}]", ""));
 			if (wxUser1 != null) {
-				LOGGER.info("数据已存在");
 				wxUser.setId(wxUser1.getId());
+				if (wxUser1.getGroupid() != 102){
+					wxUserService.updateByPrimaryKey(wxUser);
+				}
 				wxUserService.updateByPrimaryKey(wxUser);
 			} else {
 				LOGGER.info("添加数据" + wxUser.toString());
 				wxUserService.insertSelective(wxUser);
 			}
-			System.out.println("用户信息" + wxUser.toString());
 		}
 	}
 }

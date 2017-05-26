@@ -20,8 +20,8 @@ var userId;
 
 $(function($){  
 	url();
-	init();
 	getId();
+	init();
 });
 
 function url(){
@@ -71,7 +71,7 @@ function getId(){
 		type: 'GET',
 		url: '/oauth/code/'+openId,
 		success: function(data){
-			userId = data;
+			userId = data.data;
 		}
 	});
 }
@@ -84,6 +84,10 @@ $('.vote-button-chi').click(function(){
 });
 
 function judge(group){
+	/*if (userId == undefined ){
+		// getId();
+		myAlert("加载中...");
+	}*/
 	jugeAction(userId,group);
 //	myAlert('1');	
 }

@@ -29,6 +29,8 @@ public class GlobalCache {
 
 	public static final List<String> right = new ArrayList<>();
 
+	public static final List<String> oponId = new ArrayList<>();
+
 	/**
 	 * add element.
 	 *
@@ -55,5 +57,9 @@ public class GlobalCache {
 
 	public static List<String> getRight() {
 		return right;
+	}
+
+	public static List<String> getOponId() {
+		return oponId;
 	}
 }
