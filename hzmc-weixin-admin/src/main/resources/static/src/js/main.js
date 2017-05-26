@@ -40,7 +40,7 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 	
 	
 	$('.previous').click(function(){
-		if($('li.active').parent().index($('li.active')) == 1){
+		if($('.pagination li').index($('li.active')) == 1){
 			for(var i=0; i<$('.tablePager').length; i++){
 				$($('.tablePager')[i]).html(parseInt($($('.tablePager')[i]).html())-1);
 			}
@@ -58,7 +58,7 @@ angular.module('myApp',[]).controller('myCtrl',function($scope){
 
 	
 	$('.latter').click(function(){
-		if($('li.active').parent().index($('li.active')) == 5){
+		if($('.pagination li').index($('li.active')) == 5){
 			for(var i=0; i<$('.tablePager').length; i++){
 				$($('.tablePager')[i]).html(parseInt($($('.tablePager')[i]).html())+1);
 			}
