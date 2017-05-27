@@ -1,0 +1,8 @@
+-<AppSetting>
+-    <appId>xxxxxxxxx</appId>
+-    <mchId>xxxxxx</mchId>
+-    <key>xxxxxxxxxxxxxxxx</key>
+-    <certPath>/usr/local/tomcat7/webapps/xxx.p12</certPath>
+-   <!-- <certPath>/Users/wupenghui/Downloads/cert/apiclient_cert.p12</certPath>-->
+-    <certPassword>xxxxxx</certPassword>
+-</AppSetting> 

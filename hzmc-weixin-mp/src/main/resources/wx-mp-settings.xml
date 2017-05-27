@@ -1,8 +1,8 @@
 <AppSetting>
-    <appId>wx535dc2a26c1e921f</appId>
-    <secret>fb193bdd0451a96630363a5a30e808b4</secret>
-    <token>hzmcweixin</token>
-    <aesKey>pIAyDZaSODq3eAwyx5gClhVP2S0v6hHESZZPNh2rMQS</aesKey>
+    <appId>xxxxx</appId>
+    <secret>xxxxxxx</secret>
+    <token>xxxx</token>
+    <aesKey>xxxxxxxx</aesKey>
     <!-- 可以指定自己的tokenHolderClass，继承com.riversoft.weixin.common.AccessTokenHolder
     <tokenHolderClass>com.abc.Abc</tokenHolderClass>
     -->
