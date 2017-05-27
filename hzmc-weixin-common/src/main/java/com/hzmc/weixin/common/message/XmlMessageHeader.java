@@ -72,4 +72,13 @@ public class XmlMessageHeader implements Serializable {
 		return this;
 	}
 
+	@Override
+	public String toString() {
+		return "XmlMessageHeader{" +
+				"msgType=" + msgType +
+				", toUser='" + toUser + '\'' +
+				", fromUser='" + fromUser + '\'' +
+				", createTime=" + createTime +
+				'}';
+	}
 }

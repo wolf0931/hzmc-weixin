@@ -37,6 +37,7 @@ public class MpXmlMessages {
     private static EventRequest toEvent(String xml) {
         try {
             EventRequest eventRequest = XmlObjectMapper.defaultMapper().fromXml(xml, EventRequest.class);
+            System.out.println("事件类型"+eventRequest.getEventType());
             switch (eventRequest.getEventType()) {
                 case subscribe:
                 case unsubscribe:

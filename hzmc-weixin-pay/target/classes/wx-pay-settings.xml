@@ -2,6 +2,7 @@
     <appId>wx535dc2a26c1e921f</appId>
     <mchId>1310292801</mchId>
     <key>815d0a9fdb26a29f3c20a7c739d95246</key>
-    <certPath>/Users/wupenghui/Downloads/cert/apiclient_cert.p12</certPath>
+    <certPath>/usr/local/tomcat7/webapps/apiclient_cert.p12</certPath>
+   <!-- <certPath>/Users/wupenghui/Downloads/cert/apiclient_cert.p12</certPath>-->
     <certPassword>1310292801</certPassword>
 </AppSetting>
